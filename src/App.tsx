@@ -1,26 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import SplashScreen from "./Demo/SplashScreen"
+import ModeSelect from './Demo/Modes';
+import SongSelect from './Demo/Songs'
+import { HashRouter } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router';
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <HashRouter>
+      <div className="centered">
+        <Routes>
+          <Route path="/"             element={<SplashScreen/>}></Route>
+          <Route path='/ModeSelect/*'   element={<ModeSelect/>}></Route>
+          <Route path='/SongSelect/*'   element={<SongSelect/>}></Route>
+        </Routes>
+      </div>
+    </HashRouter>
   );
 }
-
 export default App;

@@ -1,0 +1,58 @@
+.song-card{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	background-color: rgba(217, 217, 217, 0.2);
+	height: 310px;
+	width: 240px;
+	border-radius: 16px;
+	border: 5px solid white;
+	margin: 20px;
+	box-shadow: rgba(0, 0, 0, 0.1) 0px 8px 24px;
+}
+
+.song-card:hover{
+	background-color: rgba(255, 255, 255, 0.3);
+}
+
+.song-select{
+	display: grid;
+	padding-top: 300px;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr; /* Three equal columns */
+    grid-gap: 10px; /* Gap between grid items */
+}
+
+h1 {
+    font-size: 30px;
+    font-weight: 700;
+    padding-top: 6px;
+	white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+h2 {
+    font-family: "Inter", sans-serif;
+	font-weight: 500;
+    margin-top: 0px;
+	margin-bottom: 0px;
+	color: white;
+	font-size: 18px;
+}
+
+h3 {
+    font-family: "Inter", sans-serif;
+	font-weight: 300;
+    margin-top: 2px;
+	margin-bottom: 0px;
+	color: white;
+	font-size: 14px;
+}
+
+img {
+    margin-top: 16px;
+    height: 160px;
+    width: 160px;
+    border-radius: 6px;
+}
