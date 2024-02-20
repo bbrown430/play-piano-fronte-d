@@ -10,6 +10,8 @@
 	border: 5px solid white;
 	margin: 20px;
 	box-shadow: rgba(0, 0, 0, 0.1) 0px 8px 24px;
+	cursor: pointer;
+	transition: background-color 0.2s ease;
 }
 
 .song-card:hover{
@@ -18,7 +20,7 @@
 
 .song-select{
 	display: grid;
-	padding-top: 300px;
+	padding-top: 1560px;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr; /* Three equal columns */
     grid-gap: 10px; /* Gap between grid items */
 }
@@ -55,4 +57,5 @@ img {
     height: 160px;
     width: 160px;
     border-radius: 6px;
+	box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
