@@ -4,8 +4,8 @@
 	align-items: center;
 	text-align: center;
 	background-color: rgba(217, 217, 217, 0.2);
-	height: 310px;
-	width: 240px;
+	height: 20%;
+	width: 80%;
 	border-radius: 16px;
 	border: 5px solid white;
 	margin: 20px;
@@ -19,11 +19,22 @@
 }
 
 .song-select{
-	display: grid;
-	padding-top: 1560px;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr; /* Three equal columns */
+	align-items: center;
+	height: 90%;
+	width: 100%;
+
+	/*display: grid;*/ 
+	/*padding-top: 1560px;*/
+    /*grid-template-columns: 1fr 1fr 1fr 1fr 1fr; /* Three equal columns */
     grid-gap: 10px; /* Gap between grid items */
 }
+
+.song-screen{
+	height: 100%;
+	width: 100%;
+
+}
+
 
 h1 {
     font-size: 30px;

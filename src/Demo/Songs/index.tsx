@@ -18,4 +18,12 @@ function SongSelect() {
     );
 }
 
+export function SongPage() {
+    return (
+        <div className='song-page'>
+            {SongSelect()}
+        </div>
+    )
+}
+
 export default SongSelect;
