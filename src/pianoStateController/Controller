@@ -1,0 +1,41 @@
+
+
+export type State = 'Learn' | 'Play' | 'Free' | 'Magic' | undefined;
+export type PianoSound = 'Grand' | 'Digital' | 'Organ' | undefined;
+
+type PianoSettings = {
+  pianoSound : PianoSound
+  //menu sound
+  // background music?
+  toggle : boolean
+  
+}
+
+
+type SongSettings = {
+  tempo : number; //percentage increment by 10? 10>= to <=100;
+  hands : 'left' | 'right' | 'both';
+}
+
+export default class PlayPianoController {
+  private state : State = undefined;
+  private settings : PianoSettings;
+  private songSettings : SongSettings;
+
+
+  getState() : State {
+    return this.state;
+  }
+
+  setState(state : State) {
+    this.state = state;
+  } 
+
+  resetState(){
+    this.state = undefined;
+  }
+
+  // state to json or w/e to send to backend;
+
+ 
+}
