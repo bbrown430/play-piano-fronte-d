@@ -4,31 +4,31 @@ import {faQuestion } from '@fortawesome/free-solid-svg-icons';
 
 import "./index.css"
 import "../../App.css"
-import { Link } from "react-router-dom"
 import { ReactComponentElement, ReactNode } from 'react';
+import PlayPianoController from '../../pianoStateController/PlayPianoController';
 
+type Statefunction = () => void;
 
-interface ModeCardProps {
+interface MenuButtonProps {
+  controller : PlayPianoController;
   title: string | undefined;
   icon: IconDefinition | undefined;
   text: string | undefined;
-  link: string | undefined;
+  action: Statefunction | undefined;
 }
 
 
-function ModeCard({title, icon, text, link} : ModeCardProps) : JSX.Element {
+function MenuButton( {controller,title, icon, text, action} : MenuButtonProps) : JSX.Element {
   // for testing 
 
-  link = link ? link : "../SongSelect";
+  action = action ? action : ()=>{};
   title = title ? title : "Untitled";
   icon = icon ? icon : faQuestion;
   text = text ? text : "placeholder text for a play piano menu button";
 
   return (
-    <div className="mode-card">
-      <Link to={link}>
-        <FontAwesomeIcon icon={icon} className="mode-icon" />
-      </Link>
+    <div className="menu-button" onClick={()=>{if (action){action()}}}>
+      <FontAwesomeIcon icon={icon}  className="mode-icon" />
       <h1>{title}</h1>
       <p>
         {text}
@@ -37,4 +37,4 @@ function ModeCard({title, icon, text, link} : ModeCardProps) : JSX.Element {
   );
 }
 
-export default ModeCard;
+export default MenuButton;
