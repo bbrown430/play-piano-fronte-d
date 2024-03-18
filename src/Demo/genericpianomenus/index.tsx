@@ -1,33 +1,33 @@
-import MenuButton from './button';
-import {faGamepad, faChalkboardTeacher, faBullseye, faMagicWandSparkles } from '@fortawesome/free-solid-svg-icons';
 import "./index.css"
+import PlayPianoController from '../../pianoStateController/PlayPianoController';
+import { PauseMenu } from './PauseMenu';
 
-//move to the page for modes, buttons select the mode function buttonAction = {}=>
-
-function PianoMenu() {
-  return (
-    <div className="menu-wrapper">
-      <MenuButton 
-                />
-
-      <menuButton title="Play" 
-                icon={faGamepad}
-                text=''
-                link=''
-                />
-
-      <menuButton title="Free" 
-                icon={faBullseye}
-                text='Free play mode'
-                link=''
-                 />
-
-      <menuButton title="Magic" 
-                icon={faMagicWandSparkles} 
-                text='select song, and watch the piano magically playing itself' 
-                link=''/>
-    </div>
-  );
+export interface MenuProps{
+  controller: PlayPianoController;
 }
 
-export default PianoMenu;
+export function Debug({controller} : MenuProps){
+  return (
+    <div className="menu-wrapper">
+      <title>debug</title>
+      <ol>
+        <li>{`current game state information`}</li>
+        <li>{`${controller.mode}`}</li>
+        <li>{`${controller.status}`}</li>
+        <li>{`${controller.settings.pianoSound}`}</li>
+        <li>{`song = ${controller.songSettings.song} tempo = ${controller.songSettings.tempo}`}</li>
+
+        
+
+
+      </ol>
+              
+
+    </div>
+  );
+
+
+}
+
+
+export default PauseMenu;

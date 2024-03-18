@@ -27,6 +27,12 @@ export type State = {
 
 export default class PlayPianoController {
   private _state : State;
+  unPause() {
+    throw new Error('Method not implemented.');
+  }
+  restartSong() {
+    throw new Error('Method not implemented.');
+  }
 
 constructor(){
   this._state = {mode: undefined,

@@ -6,9 +6,11 @@ import "./index.css"
 import "../../App.css"
 import { Link } from "react-router-dom"
 import { ReactComponentElement, ReactNode } from 'react';
+import PlayPianoController from '../../pianoStateController/PlayPianoController';
 
 
 interface ModeCardProps {
+  controller: PlayPianoController
   title: string | undefined;
   icon: IconDefinition | undefined;
   text: string | undefined;
@@ -16,7 +18,7 @@ interface ModeCardProps {
 }
 
 
-function ModeCard({title, icon, text, link} : ModeCardProps) : JSX.Element {
+function ModeCard({controller, title, icon, text, link} : ModeCardProps) : JSX.Element {
   // for testing 
 
   link = link ? link : "../SongSelect";
