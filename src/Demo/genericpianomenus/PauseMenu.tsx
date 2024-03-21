@@ -1,8 +1,11 @@
 import MenuButton from './button';
 import { faArrowCircleUp, faPlay, faWrench } from '@fortawesome/free-solid-svg-icons';
-import { MenuProps } from '.';
+import { Link } from 'react-router-dom';
+import { usePlayPianoController } from '../../App';
 
-export function PauseMenu({ controller }: MenuProps) {
+export function PauseMenu() {
+  const controller = usePlayPianoController();
+
   let restart = () => { controller.restartSong(); };
   let unpause = () => { controller.unPause(); };
   return (
@@ -12,24 +15,28 @@ export function PauseMenu({ controller }: MenuProps) {
         <p>Paused</p>
         </div>
 
-      <MenuButton controller={controller}
+      <MenuButton
         title='restart'
         icon={faArrowCircleUp}
         text=''
         action={restart} />
-      <MenuButton controller={controller}
+      <MenuButton
         title='unpause'
         icon={faPlay}
         text=''
         action={unpause} />
-      <MenuButton controller={controller}
+      <Link to ='./'>
+      <MenuButton 
       
         title='settings'
         icon={faWrench}
         text=''
-        action={unpause} />
+        action={unpause}/>
+        </Link>
 
 
     </div>
   );
 }
+
+

@@ -20,18 +20,17 @@ export const controllerContext = React.createContext<PlayPianoController>(new Pl
 
 
 function App() {
-  const controller = usePlayPianoController();
 
   return (
     <HashRouter>
       <div className="centered">
         <Routes>
           <Route path="/"             element={<SplashScreen/>}></Route>
-          <Route path='/ModeSelect/*'   element={<ModeSelect controller={controller}/>}></Route>
-          <Route path='/Paused/*' element={<PauseMenu controller={controller}/>}></Route>
+          <Route path='/ModeSelect/*'   element={<ModeSelect/>}></Route>
+          <Route path='/Paused/*' element={<PauseMenu/>}></Route>
           <Route path='/SongSelect/*'   element={<SongSelect/>}></Route>
-          <Route path='/debug/*'   element={<Debug controller = {controller}/>}></Route>
-          <Route path='/Settings/*' element={<Settings controller = {controller}/>}></Route>
+          <Route path='/debug/*'   element={<Debug/>}></Route>
+          <Route path='/Settings/*' element={<Settings/>}></Route>
 
         </Routes>
       </div>

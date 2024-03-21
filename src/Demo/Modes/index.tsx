@@ -4,35 +4,32 @@ import "./index.css"
 import PlayPianoController from '../../pianoStateController/PlayPianoController';
 
 //move to the page for modes, buttons select the mode function buttonAction = {}=>
-interface ModeSelectProps{
-  controller : PlayPianoController
-}
 
-function ModeSelect({controller}:ModeSelectProps) {
+function ModeSelect() {
   return (
     <div className="mode-select">
-      <ModeCard controller={controller}
+      <ModeCard 
                 title="Learn"
                 icon={faChalkboardTeacher}
                 text="Learn to play by following the led board"
                 link='' 
                 />
 
-      <ModeCard controller={controller}
+      <ModeCard 
                 title="Play" 
                 icon={faGamepad}
                 text=''
                 link=''
                 />
 
-      <ModeCard controller={controller}
+      <ModeCard 
                 title="Free" 
                 icon={faBullseye}
                 text='Free play mode'
                 link=''
                  />
 
-      <ModeCard controller={controller}
+      <ModeCard
                 title="Magic" 
                 icon={faMagicWandSparkles} 
                 text='select song, and watch the piano magically playing itself' 
@@ -40,5 +37,6 @@ function ModeSelect({controller}:ModeSelectProps) {
     </div>
   );
 }
+
 
 export default ModeSelect;

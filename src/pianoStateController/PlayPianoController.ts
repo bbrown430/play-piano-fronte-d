@@ -1,3 +1,4 @@
+import { title } from 'process';
 import { PlayPianoEventHandler, PianoEventMap } from './PlayPianoEventHandler';
 
  export type PianoMode = 'Learn' | 'Play' | 'Free' | 'Magic' | undefined;
@@ -21,8 +22,8 @@ import { PlayPianoEventHandler, PianoEventMap } from './PlayPianoEventHandler';
 
 
  export type SongSettings = {
-  song : string;
-  tempo : number; //percentage 
+  title : string;
+ // tempo : number; //percentage 
   //hands : 'left' | 'right' | 'both';
 }
 
@@ -41,7 +42,7 @@ export default class PlayPianoController{
     this.eventHandler = new PlayPianoEventHandler()
     this._state = {mode: undefined,
                    settings:{pianoSound : 'Grand'},
-                   songSettings : {song : '???????', tempo : 100},
+                   songSettings : {title : '???????'},
                    status: undefined,
                   }
   
@@ -56,44 +57,42 @@ export default class PlayPianoController{
   }
   set pianoSound(pianoSound : PianoSound){
     this._state.settings.pianoSound = pianoSound;
+    console.log('sound change called');
+    this.emit('soundChange',this.pianoSound);
   }
+
   //gets the current 
   changeSoundMode() {
     switch(this._state.settings.pianoSound){
       case 'Digital' :
-        this._state.settings.pianoSound='Organ'
+        this.pianoSound = 'Organ'
         break;
       case 'Organ' :
-        this._state.settings.pianoSound='Grand'
+        this.pianoSound = 'Grand'
         break;
       case 'Grand' :
-        this._state.settings.pianoSound='Digital'
+        this.pianoSound = 'Digital'
         break;
 
       }
     //emit that change
   }
-  unPause() {
-    throw new Error('Method not implemented.');
-  }
-
-  restartSong() {
-    throw new Error('Method not implemented.');
-  }
 
 
 
   //gets the current 
-  get mode() : PianoMode {
+  get pianoMode() : PianoMode {
     return this._state.mode;
   }
 
-  set mode(mode : PianoMode) {
+  set pianoMode(mode : PianoMode) {
+    if(this.pianoMode !== mode){
     this._state.mode = mode;
+    this.emit('pianoModeChange',this.pianoMode)}
   } 
 
   resetMode(){
-    this._state.mode = undefined;
+    this.pianoMode = undefined;
   }
 
   get settings() : PianoSettings {
@@ -102,6 +101,7 @@ export default class PlayPianoController{
 
   set settings(settings : PianoSettings) {
     this._state.settings = settings;
+    
   }
 
   get status() : PianoState{
@@ -112,15 +112,53 @@ export default class PlayPianoController{
     this._state.status = status;
   }
 
-  get songSettings() : SongSettings {
-    return this._state.songSettings;
+
+  isPaused() : boolean 
+  {
+    return this._state.status === 'Paused';
+
+  }
+  unPause() {
+    if(this.isPaused()){
+      this._state.status = 'inProgress';
+    }
   }
 
-  set songSettings(songSettings : SongSettings) {
-    this._state.songSettings = songSettings;
+    /**
+   * returns the current piano sound mode.
+   * @returns 
+   */
+    get songTitle() : string {
+      return this._state.settings.pianoSound;
+    }
+    set songTitle(title : string) {
+
+      if(this.songTitle===title){
+        return;
+      } 
+      this.emit('songChange', this.songTitle)
+      this._state.songSettings.title = title;
+      
+    }
+  
+
+  restartSong() {
+    //todo await send song to play to dev
+    throw new Error('Method not implemented.');
   }
 
 
+
+
+
+
+
+
+
+
+
+
+  // needed to use listener from outside this class
   public addListener<E extends keyof PianoEventMap>(
     event: E,
     listener: PianoEventMap[E],
@@ -141,6 +179,7 @@ export default class PlayPianoController{
     event: E,
     ...args: Parameters<PianoEventMap[E]>
   ): boolean {
+    console.log(`${this._state}`)
     return this.eventHandler.emit(event,...args);
   }
   

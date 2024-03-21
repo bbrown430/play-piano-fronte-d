@@ -10,7 +10,6 @@ import PlayPianoController from '../../pianoStateController/PlayPianoController'
 
 
 interface ModeCardProps {
-  controller: PlayPianoController
   title: string | undefined;
   icon: IconDefinition | undefined;
   text: string | undefined;
@@ -18,7 +17,12 @@ interface ModeCardProps {
 }
 
 
-function ModeCard({controller, title, icon, text, link} : ModeCardProps) : JSX.Element {
+/**
+ * 
+ * @param controller @type {PlayPianoController} to display into for
+ * @returns 
+ */
+function ModeCard( {title, icon, text, link} : ModeCardProps) : JSX.Element {
   // for testing 
 
   link = link ? link : "../SongSelect";
@@ -28,6 +32,7 @@ function ModeCard({controller, title, icon, text, link} : ModeCardProps) : JSX.E
 
   return (
     <div className="mode-card">
+      
       <Link to={link}>
         <FontAwesomeIcon icon={icon} className="mode-icon" />
       </Link>

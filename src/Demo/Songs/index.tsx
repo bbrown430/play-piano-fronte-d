@@ -18,10 +18,16 @@ function SongSelect() {
     );
 }
 
+function SongSelectControls(): import("react").ReactNode {
+    throw new Error('Function not implemented.');
+}
+
 export function SongPage() {
+
     return (
         <div className='song-page'>
             {SongSelect()}
+            {SongSelectControls()}
         </div>
     )
 }

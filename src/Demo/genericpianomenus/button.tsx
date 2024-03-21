@@ -10,7 +10,6 @@ import PlayPianoController from '../../pianoStateController/PlayPianoController'
 type Statefunction = () => void;
 
 interface MenuButtonProps {
-  controller : PlayPianoController;
   title: string | undefined;
   icon: IconDefinition | undefined;
   text: string | undefined;
@@ -18,7 +17,8 @@ interface MenuButtonProps {
 }
 
 
-function MenuButton( {controller,title, icon, text, action} : MenuButtonProps) : JSX.Element {
+function MenuButton( {title, icon, text, action} : MenuButtonProps) : JSX.Element {
+  
   // for testing 
 
   action = action ? action : ()=>{};

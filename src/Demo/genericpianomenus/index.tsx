@@ -1,21 +1,38 @@
 import "./index.css"
-import PlayPianoController from '../../pianoStateController/PlayPianoController';
 import { PauseMenu } from './PauseMenu';
+import { useEffect, useState } from "react";
+import { log } from "console";
+import { usePlayPianoController } from "../../App";
 
-export interface MenuProps{
-  controller: PlayPianoController;
-}
 
-export function Debug({controller} : MenuProps){
+export function Debug(){
+
+  const controller = usePlayPianoController()
+
+
+  const [pianoSound, setPianoSound] = useState(controller.pianoSound);
+
+  useEffect(() => {
+    console.log('effect run')
+    const updateSoundListener = () => {
+      setPianoSound(controller.pianoSound);
+    };
+    controller.addListener('soundChange',updateSoundListener);
+    return () => {
+      console.log('debug exit')
+      controller.removeListener('soundChange',updateSoundListener)
+    };
+  }, [controller, controller.pianoSound]);
+
   return (
     <div className="menu-wrapper">
       <title>debug</title>
       <ol>
         <li>{`current game state information`}</li>
-        <li>{`${controller.mode}`}</li>
+        <li>{`${controller.pianoMode}`}</li>
         <li>{`${controller.status}`}</li>
-        <li>{`${controller.settings.pianoSound}`}</li>
-        <li>{`song = ${controller.songSettings.song} tempo = ${controller.songSettings.tempo}`}</li>
+        <li>{`${pianoSound}`}</li>
+        <li>{`song = ${4}`}</li>
 
         
 
