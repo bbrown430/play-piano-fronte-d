@@ -45,7 +45,6 @@ export default class PlayPianoController{
                    songSettings : {title : '???????'},
                    status: undefined,
                   }
-  
   }
 
   /**
@@ -55,6 +54,7 @@ export default class PlayPianoController{
   get pianoSound() : PianoSound {
     return this._state.settings.pianoSound;
   }
+
   set pianoSound(pianoSound : PianoSound){
     this._state.settings.pianoSound = pianoSound;
     console.log('sound change called');
@@ -140,9 +140,19 @@ export default class PlayPianoController{
       this._state.songSettings.title = title;
       
     }
+
+
+  
+  async startSong() : Promise<boolean>{
+    return true;
+    //throw new Error("Method not implemented.");
+  }
+
+    
   
 
-  restartSong() {
+  async restartSong() : Promise<boolean> {
+    return true;
     //todo await send song to play to dev
     throw new Error('Method not implemented.');
   }
@@ -175,7 +185,7 @@ export default class PlayPianoController{
     return this;
   }
 
-  public emit<E extends keyof PianoEventMap>(
+  private emit<E extends keyof PianoEventMap>(
     event: E,
     ...args: Parameters<PianoEventMap[E]>
   ): boolean {

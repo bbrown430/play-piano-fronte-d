@@ -1,6 +1,6 @@
 import { usePlayPianoController } from "../../App";
 
- export default function ProgressPage() {
+ export default function PlayPage() {
     const controller = usePlayPianoController();
 
     return ( 

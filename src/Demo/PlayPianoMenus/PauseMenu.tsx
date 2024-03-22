@@ -6,8 +6,8 @@ import { usePlayPianoController } from '../../App';
 export function PauseMenu() {
   const controller = usePlayPianoController();
 
-  let restart = () => { controller.restartSong(); };
-  let unpause = () => { controller.unPause(); };
+  let restart = () => {controller.restartSong(); };
+  let unpause = () => {controller.unPause(); };
   return (
     <div className="menu-wrapper">
 

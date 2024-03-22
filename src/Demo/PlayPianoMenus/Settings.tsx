@@ -1,8 +1,9 @@
 import MenuButton from './button';
-import { faMusic, faPlay, faWrench } from '@fortawesome/free-solid-svg-icons';
+import { faCross, faMusic, faPlay, faWrench } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from 'react';
 import { PianoSound, PianoState } from '../../pianoStateController/PlayPianoController';
-import { usePlayPianoController } from '../../App';
+import { PPPATH, usePlayPianoController } from '../../App';
+import { useNavigate } from 'react-router';
 
 
 
@@ -10,14 +11,13 @@ export function Settings() {
   const controller = usePlayPianoController();
 
   const [pianoSound, setPianoSound] = useState<PianoSound>(controller.pianoSound);
-  const [pianoState, setPianoState] = useState<PianoState>(controller.status);
+  const nav = useNavigate();
 
 
 
 
   return (
     <div className="menu-wrapper">
-
       <div className='menu-header'>
         <p>Settings</p>
       </div>
@@ -32,12 +32,11 @@ export function Settings() {
           />
 
       <MenuButton 
-        title='unpause'
-        icon={faPlay}
-        text=''
+        title='Exit'
+        icon={faCross}
+        text='Exit to main menu'
         action={()=>{
-          controller.status = 'inProgress'; 
-          setPianoState(controller.status);
+        nav(PPPATH.MODESELECT);
 
         }} />
 

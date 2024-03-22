@@ -11,6 +11,7 @@ export function Debug(){
 
 
   const [pianoSound, setPianoSound] = useState(controller.pianoSound);
+  const [songTitle,setSongTitle] = useState(controller.songTitle);
 
   useEffect(() => {
     console.log('effect run')
@@ -19,7 +20,6 @@ export function Debug(){
     };
     controller.addListener('soundChange',updateSoundListener);
     return () => {
-      console.log('debug exit')
       controller.removeListener('soundChange',updateSoundListener)
     };
   }, [controller, controller.pianoSound]);
@@ -32,7 +32,7 @@ export function Debug(){
         <li>{`${controller.pianoMode}`}</li>
         <li>{`${controller.status}`}</li>
         <li>{`${pianoSound}`}</li>
-        <li>{`song = ${4}`}</li>
+        <li>{`song = ${songTitle}`}</li>
 
         
 
