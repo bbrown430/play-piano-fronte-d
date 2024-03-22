@@ -12,25 +12,31 @@ export function Debug(){
 
   const [pianoSound, setPianoSound] = useState(controller.pianoSound);
   const [songTitle,setSongTitle] = useState(controller.songTitle);
+  const [pianoMode,setPianoMode] = useState(controller.pianoMode);
+  const [pianoStatus,setPianoStatus] = useState(controller.status);
+
 
   useEffect(() => {
     console.log('effect run')
-    const updateSoundListener = () => {
+    const updatePageListener = () => {
       setPianoSound(controller.pianoSound);
+      setSongTitle(controller.songTitle);
+      setPianoMode(controller.pianoMode);
+      setPianoStatus(controller.status);
     };
-    controller.addListener('soundChange',updateSoundListener);
+    controller.addListener('soundChange',updatePageListener);
     return () => {
-      controller.removeListener('soundChange',updateSoundListener)
+      controller.removeListener('soundChange',updatePageListener)
     };
-  }, [controller, controller.pianoSound]);
+  }, [controller, controller.pianoSound,controller.pianoMode,controller.status,controller.songTitle]);
 
   return (
     <div className="menu-wrapper">
       <title>debug</title>
       <ol>
         <li>{`current game state information`}</li>
-        <li>{`${controller.pianoMode}`}</li>
-        <li>{`${controller.status}`}</li>
+        <li>{`${pianoMode}`}</li>
+        <li>{`${pianoStatus}`}</li>
         <li>{`${pianoSound}`}</li>
         <li>{`song = ${songTitle}`}</li>
 

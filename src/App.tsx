@@ -21,12 +21,12 @@ export const controllerContext = React.createContext<PlayPianoController>(new Pl
 
 export enum PPPATH {
   SPLASHSCREEN = '/',
-  MODESELECT = '/ModeSelect/*',
-  PAUSED = '/Paused/*',
-  SONGSELECT = '/SongSelect/*',
-  DEBUG = '/debug/*',
+  MODESELECT = '/ModeSelect',
+  PAUSED = '/Paused',
+  SONGSELECT = '/SongSelect',
+  DEBUG = '/debug',
   PLAY = '/Play',
-  SETTINGS = '/Settings/*',
+  SETTINGS = '/Settings',
 }
 
 function App() {

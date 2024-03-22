@@ -2,7 +2,7 @@ import { title } from 'process';
 import { PlayPianoEventHandler, PianoEventMap } from './PlayPianoEventHandler';
 
  export type PianoMode = 'Learn' | 'Play' | 'Free' | 'Magic' | undefined;
- export type PianoState = 'Menus' | 'Paused' | 'inProgress' | 'Over' | undefined;
+ export type PianoState = 'Menus' | 'Paused' | 'inProgress' | 'Over';
 
  export type PianoSound = 'Grand' | 'Digital' | 'Organ';
 
@@ -43,7 +43,7 @@ export default class PlayPianoController{
     this._state = {mode: undefined,
                    settings:{pianoSound : 'Grand'},
                    songSettings : {title : '???????'},
-                   status: undefined,
+                   status: 'Menus',
                   }
   }
 
@@ -75,7 +75,6 @@ export default class PlayPianoController{
         break;
 
       }
-    //emit that change
   }
 
 
@@ -88,21 +87,13 @@ export default class PlayPianoController{
   set pianoMode(mode : PianoMode) {
     if(this.pianoMode !== mode){
     this._state.mode = mode;
-    this.emit('pianoModeChange',this.pianoMode)}
+    this.emit('pianoModeChange',this.pianoMode);}
   } 
 
   resetMode(){
     this.pianoMode = undefined;
   }
 
-  get settings() : PianoSettings {
-    return this._state.settings;
-  }
-
-  set settings(settings : PianoSettings) {
-    this._state.settings = settings;
-    
-  }
 
   get status() : PianoState{
     return this._state.status;
@@ -129,8 +120,9 @@ export default class PlayPianoController{
    * @returns 
    */
     get songTitle() : string {
-      return this._state.settings.pianoSound;
+      return this._state.songSettings.title;
     }
+
     set songTitle(title : string) {
 
       if(this.songTitle===title){
