@@ -1,4 +1,3 @@
-import { title } from 'process';
 import { PlayPianoEventHandler, PianoEventMap } from './PlayPianoEventHandler';
 
  export type PianoMode = 'Learn' | 'Play' | 'Free' | 'Magic' | undefined;
@@ -21,7 +20,7 @@ import { PlayPianoEventHandler, PianoEventMap } from './PlayPianoEventHandler';
 }
 
 
- export type SongSettings = {
+export interface SongState {
   title : string;
  // tempo : number; //percentage 
   //hands : 'left' | 'right' | 'both';
@@ -31,7 +30,7 @@ export type State = {
   mode : PianoMode;
   status : PianoState;
   settings : PianoSettings;
-  songSettings : SongSettings;
+  songSettings : SongState;
 
 }
 
@@ -125,7 +124,7 @@ export default class PlayPianoController{
 
     set songTitle(title : string) {
 
-      if(this.songTitle===title){
+      if(this.songTitle === title){
         return;
       } 
       this.emit('songChange', this.songTitle)
