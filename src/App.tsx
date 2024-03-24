@@ -4,7 +4,7 @@ import ModeSelect from './Demo/ModePage';
 import SongSelect from './Demo/SongPage';
 import { HashRouter } from 'react-router-dom';
 import { Routes, Route, Navigate } from 'react-router';
-import { Debug } from './Demo/PlayPianoMenus';
+import { Debug } from './Demo/PlayPianoMenus/Debug';
 import {PauseMenu} from './Demo/PlayPianoMenus/PauseMenu';
 import PlayPianoController from './pianoStateController/PlayPianoController';
 import { Settings } from './Demo/PlayPianoMenus/Settings';

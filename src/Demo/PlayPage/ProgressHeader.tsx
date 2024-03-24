@@ -15,11 +15,11 @@ export function ProgressHeader({progress}:ProgressHeaderProps){
     const [songTitle,setSongTitle] = useState(controller.songTitle);
 
 
+
     return (
         <div className = "progress-header">
         <div className = "song-title"></div>
         <div className = "progress-bar"></div>
-
         </div>
     )
 }
