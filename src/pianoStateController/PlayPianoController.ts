@@ -1,9 +1,12 @@
-import { PlayPianoEventHandler, PianoEventMap } from './PlayPianoEventHandler';
+import { assert, error } from 'console';
+import { PlayPianoEventHandler, PianoEventMap, PPEvents } from './PlayPianoEventHandler';
+import { sleep } from './utils';
 
  export type PianoMode = 'Learn' | 'Play' | 'Free' | 'Magic' | undefined;
- export type PianoState = 'Menus' | 'Paused' | 'inProgress' | 'Over';
+ export type PianoState = 'Menus' |'Waiting' | 'Paused' | 'inProgress' | 'Over';
 
  export type PianoSound = 'Grand' | 'Digital' | 'Organ';
+
 
 
 
@@ -21,16 +24,17 @@ import { PlayPianoEventHandler, PianoEventMap } from './PlayPianoEventHandler';
 
 
 export interface SongState {
-  title : string;
+  title? : string;
  // tempo : number; //percentage 
-  //hands : 'left' | 'right' | 'both';
+  progress?: number
+  end?: number;
 }
 
 export type State = {
-  mode : PianoMode;
+  mode? : PianoMode;
   status : PianoState;
   settings : PianoSettings;
-  songSettings : SongState;
+  currentSongState : SongState;
 
 }
 
@@ -39,10 +43,9 @@ export default class PlayPianoController{
   private _state : State;
   constructor(){
     this.eventHandler = new PlayPianoEventHandler()
-    this._state = {mode: undefined,
-                   settings:{pianoSound : 'Grand'},
-                   songSettings : {title : '???????'},
+    this._state = {settings:{pianoSound : 'Grand'},
                    status: 'Menus',
+                   currentSongState: {}
                   }
   }
 
@@ -78,20 +81,20 @@ export default class PlayPianoController{
 
 
 
+
+
   //gets the current 
-  get pianoMode() : PianoMode {
+  get pianoMode() : PianoMode  {
+
     return this._state.mode;
   }
 
   set pianoMode(mode : PianoMode) {
     if(this.pianoMode !== mode){
     this._state.mode = mode;
-    this.emit('pianoModeChange',this.pianoMode);}
+    this.emit(PPEvents.MODE,mode);}
   } 
 
-  resetMode(){
-    this.pianoMode = undefined;
-  }
 
 
   get status() : PianoState{
@@ -100,6 +103,7 @@ export default class PlayPianoController{
 
   set status(status : PianoState) {
     this._state.status = status;
+    this.emit(PPEvents.STATUS,status)
   }
 
 
@@ -118,31 +122,65 @@ export default class PlayPianoController{
    * returns the current piano sound mode.
    * @returns 
    */
-    get songTitle() : string {
-      return this._state.songSettings.title;
+    get songTitle() : string | undefined{
+      if(this._state.currentSongState){
+
+      return this._state.currentSongState.title;}
+      return undefined;
     }
 
-    set songTitle(title : string) {
+    set currentSong( newSong : SongState) {
 
-      if(this.songTitle === title){
-        return;
-      } 
-      this.emit('songChange', this.songTitle)
-      this._state.songSettings.title = title;
+      this._state.currentSongState = newSong;
       
+      this.emit(PPEvents.SONG, newSong);
+      
+    }
+    get currentSong() : SongState {
+      return this._state.currentSongState;
     }
 
 
   
-  async startSong() : Promise<boolean>{
+   startSong() : boolean{
+
+    this.status = 'inProgress'
+    this.playCurrentSong();
+
+
     return true;
     //throw new Error("Method not implemented.");
   }
+
+  private async playCurrentSong() {
+
+    if(!this.currentSong.progress || !this.currentSong.end ){
+      throw Error('song cannot be played before a song is selected.')
+    }
+
+    //simulate progress moving
+    while (this.currentSong.progress < this.currentSong.end ) {
+      if(this.status === 'Paused'){
+       break;
+        
+      }
+      // TODO use http get 
+      await sleep(500);
+      this.currentSong.progress++
+
+    }
+
+    return;
+    
+  }
+
 
     
   
 
   async restartSong() : Promise<boolean> {
+    this._state.currentSongState.progress = 0
+    this.status = 'Waiting'
     return true;
     //todo await send song to play to dev
     throw new Error('Method not implemented.');
@@ -193,3 +231,18 @@ export default class PlayPianoController{
 
  
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
