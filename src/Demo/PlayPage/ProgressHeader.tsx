@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { PPPATH, usePlayPianoController } from "../../App";
 import { PPEvents } from "../../pianoStateController/PlayPianoEventHandler";
 import { useNavigate } from "react-router";
-
+import "./playpageformatting.css"
 
 export function ProgressHeader(){
     const controller = usePlayPianoController();
@@ -43,19 +43,16 @@ export function ProgressHeader(){
     
 
 
-
-
-
     return (
         <div className = "progress-header">
 
          <div className = "song-title">{songTitle}</div>
         
          <div className = "progress-bar">
-              <progress 
-              value={progress}
-              max={controller.currentSong.end}>
-                </progress></div>
+        
+           {`you are ${((progress ?? 0)/(controller.currentSong.end ?? 0) * 100).toFixed()}  % finished with song`}
+     </div>
+
      </div>
     )
 }

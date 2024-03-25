@@ -1,6 +1,7 @@
 import { assert, error } from 'console';
 import { PlayPianoEventHandler, PianoEventMap, PPEvents } from './PlayPianoEventHandler';
 import { sleep } from './utils';
+import { BoundingBox } from '../Demo/PlayPage/songdata';
 
  export type PianoMode = 'Learn' | 'Play' | 'Free' | 'Magic' | undefined;
  export type PianoState = 'Menus' |'Waiting' | 'Paused' | 'inProgress' | 'Over';
@@ -28,6 +29,7 @@ export interface SongState {
  // tempo : number; //percentage 
   progress?: number
   end?: number;
+  boundingBoxes?: BoundingBox[];
 }
 
 export type State = {
@@ -152,18 +154,19 @@ export default class PlayPianoController{
 
   private async playCurrentSong() {
 
-    if(!this.currentSong.progress || !this.currentSong.end ){
+    if(undefined === this.currentSong.progress || undefined === this.currentSong.end ){
+      console.log(`${this.currentSong.progress}`)
       throw Error('song cannot be played before a song is selected.')
     }
 
     //simulate progress moving
     while (this.currentSong.progress < this.currentSong.end ) {
-      if(this.status === 'Paused'){
+      if(this.status !== 'inProgress'){
        break;
         
       }
       // TODO use http get 
-      await sleep(500);
+      await sleep(1000);
       this.currentSong.progress++;
       this.emit(PPEvents.NOTEPLAYED,this.currentSong.progress)
 

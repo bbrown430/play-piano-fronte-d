@@ -1,11 +1,31 @@
 import { usePlayPianoController } from "../../App";
 import { ProgressHeader } from "./ProgressHeader";
 import "./playpageformatting.css"
+import hcbsheetmusic from "../../assets/SheetMusic/hot-cross-buns-midi/hot-cross-buns-midi.jpg"
+import { useEffect, useState } from "react";
+import { PPEvents } from "../../pianoStateController/PlayPianoEventHandler";
+import { BoundingBox, getSongBoundingBoxes } from "./songdata";
+import PlayPianoController from "../../pianoStateController/PlayPianoController";
+
 
 
  export default function PlayPage() {
+    const controller = usePlayPianoController();
+
+    const  startdisplaytest = () => {
+        controller.status='Over';
+        controller.currentSong = {boundingBoxes: getSongBoundingBoxes(),title: 'hot cross buns', progress : 0, end : 80};
+        controller.startSong();
+    
+    
+    }
+    
     return ( 
-        <div className = "inProgress-container">
+        <div className = "inProgress-container"
+
+        onClick = {startdisplaytest}
+
+        >
             <ProgressHeader />
             <SheetMusic/>
 
@@ -13,10 +33,34 @@ import "./playpageformatting.css"
     );
 }
 
-export function SheetMusic(){
+function SheetMusic(){
+    const controller = usePlayPianoController();
+
+    const [boundingBox,setBoundingbox] = useState<BoundingBox|undefined>(undefined);
+
+
+
+    useEffect(()=>{
+        const notePlayedListener = () => {
+            if(controller.currentSong.boundingBoxes && controller.currentSong.progress){
+            setBoundingbox(controller.currentSong.boundingBoxes[controller.currentSong.progress]);}
+            console.log(`${boundingBox?.x},${boundingBox?.y},${boundingBox?.width},${boundingBox?.height}`)
+          };
+
+          controller.addListener(PPEvents.NOTEPLAYED,notePlayedListener);
+
+          return () => {
+            controller.removeListener(PPEvents.NOTEPLAYED,notePlayedListener)
+          }
+
+    },[controller.currentSong.progress, controller])
 
     return (
-        <div className="sheet-music"></div>
+
+            <div className= "sheet-music" style={{backgroundImage: `url(${hcbsheetmusic}`, width: "100%"}}>
+                {boundingBox? <div className="note-overlay"
+                    style={{top:boundingBox.y,left:boundingBox.x,width:boundingBox.width,height:boundingBox.height}}></div> : <></>}
+            </div>
     )
 
 }

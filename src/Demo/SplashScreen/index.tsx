@@ -6,11 +6,12 @@ function SplashScreen() {
     return ( 
         <div className="splash-container">
             <Link to={"ModeSelect"}>
+                <div className="logo">
                 <img
                 src={logo}
                 className="piano-logo"
                 alt="logo"
-            />
+            /></div>
             </Link>
             <h2 className='splash-text'>Play any key to start!</h2>
         </div>
