@@ -1,8 +1,7 @@
-import { number } from 'yargs'
 import hotcrossbunsBB from '../../assets/SheetMusic/hot-cross-buns-midi/bounding_boxes.json'
 import hotcrossbunsSheets from '../../assets/SheetMusic/hot-cross-buns-midi/hot-cross-buns-midi.jpg'
 
-interface BoundingBox{
+export type BoundingBox ={
     x : number,
     y : number,
    width : number,
@@ -10,14 +9,13 @@ interface BoundingBox{
 }
 
 
-export function getSongDisplay() {
-    const bblist : BoundingBox[] = [];
+export function getSongBoundingBoxes() {
+    let bblist : BoundingBox[] =[];
 
-    for (let index = 0; Object.keys(hotcrossbunsBB).length; index++) {
-        bblist[index] = Object.values(hotcrossbunsBB)[index]
-        
-        
-    }
+    for (let index = 0; index < Object.keys(hotcrossbunsBB).length; index++) {
+        bblist.push(Object.values(hotcrossbunsBB)[index])
+
+     }
    // const bblist : BoundingBox[];
 
     

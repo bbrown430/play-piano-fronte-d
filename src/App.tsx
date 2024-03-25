@@ -3,7 +3,7 @@ import SplashScreen from "./Demo/SplashScreen";
 import ModeSelect from './Demo/ModePage';
 import SongSelect from './Demo/SongPage';
 import { HashRouter } from 'react-router-dom';
-import { Routes, Route, Navigate } from 'react-router';
+import { Routes, Route } from 'react-router';
 import { Debug } from './Demo/PlayPianoMenus/Debug';
 import {PauseMenu} from './Demo/PlayPianoMenus/PauseMenu';
 import PlayPianoController from './pianoStateController/PlayPianoController';

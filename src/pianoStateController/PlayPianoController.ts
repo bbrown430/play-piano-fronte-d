@@ -109,8 +109,7 @@ export default class PlayPianoController{
 
   isPaused() : boolean 
   {
-    return this._state.status === 'Paused';
-
+    return this._state.status === 'Paused'; 
   }
   unPause() {
     if(this.isPaused()){
@@ -123,10 +122,9 @@ export default class PlayPianoController{
    * @returns 
    */
     get songTitle() : string | undefined{
-      if(this._state.currentSongState){
 
-      return this._state.currentSongState.title;}
-      return undefined;
+      return this._state.currentSongState.title;
+     
     }
 
     set currentSong( newSong : SongState) {
@@ -166,7 +164,8 @@ export default class PlayPianoController{
       }
       // TODO use http get 
       await sleep(500);
-      this.currentSong.progress++
+      this.currentSong.progress++;
+      this.emit(PPEvents.NOTEPLAYED,this.currentSong.progress)
 
     }
 
@@ -179,11 +178,13 @@ export default class PlayPianoController{
   
 
   async restartSong() : Promise<boolean> {
+    if(!this._state.currentSongState.progress){
+      return false;
+    }
     this._state.currentSongState.progress = 0
-    this.status = 'Waiting'
+    this.status = 'Waiting';
     return true;
-    //todo await send song to play to dev
-    throw new Error('Method not implemented.');
+    
   }
 
 
@@ -218,7 +219,6 @@ export default class PlayPianoController{
     event: E,
     ...args: Parameters<PianoEventMap[E]>
   ): boolean {
-    console.log(`${this._state}`)
     return this.eventHandler.emit(event,...args);
   }
   

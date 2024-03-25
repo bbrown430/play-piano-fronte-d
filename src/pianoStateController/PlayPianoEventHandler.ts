@@ -10,11 +10,14 @@ export type PianoEventMap = EventMap & {
 };
 
 
+
+
 export enum PPEvents {
   STATUS = 'statusChange',
   MODE = 'modeChange',
   SOUND = 'soundChange',
-  SONG = 'songChange'
+  SONG = 'songChange',
+  NOTEPLAYED = "notePlayed"
 }
 export class PlayPianoEventHandler {
 

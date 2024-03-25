@@ -1,10 +1,9 @@
 import { usePlayPianoController } from "../../App";
 import { ProgressHeader } from "./ProgressHeader";
+import "./playpageformatting.css"
 
 
  export default function PlayPage() {
-    const controller = usePlayPianoController();
-
     return ( 
         <div className = "inProgress-container">
             <ProgressHeader />
@@ -17,7 +16,7 @@ import { ProgressHeader } from "./ProgressHeader";
 export function SheetMusic(){
 
     return (
-        <div></div>
+        <div className="sheet-music"></div>
     )
 
 }
