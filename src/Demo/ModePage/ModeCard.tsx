@@ -38,6 +38,7 @@ function ModeCard({ mode, icon, text, link} : ModeCardProps) : JSX.Element {
   const nav = useNavigate();
   const pressCard = () => {
   //change piano mode
+  if(mode)
    controller.pianoMode = mode;
 
    //link to song select page
