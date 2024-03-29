@@ -3,6 +3,7 @@ import { PauseMenu } from './PauseMenu';
 import { useEffect, useState } from "react";
 import { log } from "console";
 import { usePlayPianoController } from "../../App";
+import { getSongBoundingBoxes } from "../PlayPage/songdata";
 
 
 export function Debug(){
@@ -39,6 +40,7 @@ export function Debug(){
         <li>{`${pianoStatus}`}</li>
         <li>{`${pianoSound}`}</li>
         <li>{`song = ${songTitle}`}</li>
+        <li>{`${getSongBoundingBoxes()}`}</li>
 
         
 

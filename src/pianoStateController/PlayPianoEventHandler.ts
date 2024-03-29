@@ -9,6 +9,16 @@ export type PianoEventMap = EventMap & {
   soundChange: (newSound: PianoSound) => void;
 };
 
+
+
+
+export enum PPEvents {
+  STATUS = 'statusChange',
+  MODE = 'modeChange',
+  SOUND = 'soundChange',
+  SONG = 'songChange',
+  NOTEPLAYED = "notePlayed"
+}
 export class PlayPianoEventHandler {
 
   private _listeners: Map<keyof PianoEventMap, PianoEventMap[keyof PianoEventMap][]> = new Map();

@@ -2,6 +2,7 @@ import internal from "stream";
 import "./index.css"
 import { PPPATH, usePlayPianoController } from "../../App";
 import { useNavigate } from "react-router";
+import { SongState } from "../../pianoStateController/PlayPianoController";
 
 interface SongCardProps{
     title: string;
@@ -14,9 +15,9 @@ function SongCard({title, artist, year, image}: SongCardProps) {
     const nav = useNavigate();
     const controller = usePlayPianoController();
     const clicksong = async () => {
-        controller.songTitle = title;
-       const started =  await controller.startSong();
-        if(started){ nav(PPPATH.PLAY)};
+        const song :SongState = {title : title}
+        controller.currentSong = song;
+        nav(PPPATH.PLAY)
 
     }
     return(

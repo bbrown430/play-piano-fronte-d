@@ -18,13 +18,14 @@ interface MenuButtonProps {
 
 
 function MenuButton( {title, icon, text, action} : MenuButtonProps) : JSX.Element {
-  
+
   // for testing 
 
   action = action ? action : ()=>{};
   title = title ? title : "Untitled";
   icon = icon ? icon : faQuestion;
   text = text ? text : "placeholder text for a play piano menu button";
+  
 
   return (
     <div className="menu-button" onClick={()=>{if (action){action()}}}>
