@@ -3,8 +3,9 @@ import { assert, error } from 'console';
 import { PlayPianoEventHandler, PianoEventMap, PPEvents } from './PlayPianoEventHandler';
 import { sleep } from './utils';
 import { BoundingBox } from '../Demo/PlayPage/songdata';
+import { PlayPianoHttp } from '../Server/PlayPianoHttp';
 
- export type PianoMode = 'Learn' | 'Play' | 'Free' | 'Magic' | undefined;
+ export type PianoMode = 'Learn' | 'Play' | 'Free' | 'Magic';
  export type PianoState = 'Menus' |'Waiting' | 'Paused' | 'inProgress' | 'Over';
 
 
@@ -37,7 +38,7 @@ export interface SongState {
 }
 
 export type State = {
-  mode? : PianoMode;
+  mode : PianoMode;
   status : PianoState;
   settings : PianoSettings;
   currentSongState : SongState;
@@ -51,7 +52,9 @@ export default class PlayPianoController{
   constructor(){
     this.httpcontroller=new PlayPianoHttp(FlaskEndPoint);
     this.eventHandler = new PlayPianoEventHandler();
-    this._state = {settings:{pianoSound : 'Grand'},
+    this._state = {
+                   mode:'Free',
+                   settings:{pianoSound : 'Grand'},
                    status: 'Menus',
                    currentSongState: {}
                   }
@@ -147,12 +150,13 @@ export default class PlayPianoController{
     set currentSong( newSong : SongState) {
 
 
-      if(this.songTitle===title){
-        return;
+      if(newSong.title){
+        this.currentSong.title=newSong.title
+        this.httpcontroller.setSong(newSong.title);
       } 
-      this.httpcontroller.setSong(title);
+
       this.emit(PPEvents.SONG, newSong);
-      this._state.songSettings.title = title;
+      this._state.currentSongState = newSong;
       
     }
     get currentSong() : SongState {

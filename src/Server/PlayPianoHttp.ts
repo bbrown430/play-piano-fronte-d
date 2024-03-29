@@ -1,5 +1,4 @@
 import axios from "axios";
-import { error } from "console";
 
 export enum EndPoints  {
     registerKey = '/k/register',
@@ -140,7 +139,7 @@ export class PlayPianoHttp implements operations{
     async setKeyColor(keyidx:number,color : [number,number,number]): Promise<boolean> {
 
         if(color.find((element) => (element < 0 || element > 255))){
-            throw error("invalid key color");
+            throw new Error("invalid key color");
         }
 
         const fullUrl = `${this.url}${EndPoints.setKeyColor}`;
@@ -221,3 +220,10 @@ export class PlayPianoHttp implements operations{
 
 
 }
+
+
+
+export function initializeMenuButtons(count:number,...colors : [number,number,number]){
+
+}
+
