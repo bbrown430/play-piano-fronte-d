@@ -1,10 +1,13 @@
 import { title } from 'process';
 import { PlayPianoEventHandler, PianoEventMap } from './PlayPianoEventHandler';
+import { PlayPianoHttp } from '../HttpAPI/PlayPianoHttp';
 
- export type PianoMode = 'Learn' | 'Play' | 'Free' | 'Magic' | undefined;
+ export type PianoMode = 'Learn' | 'Play' | 'Free' | 'Magic';
  export type PianoState = 'Menus' | 'Paused' | 'inProgress' | 'Over';
 
  export type PianoSound = 'Grand' | 'Digital' | 'Organ';
+
+ const FlaskEndPoint = '';
 
 
 
@@ -36,11 +39,17 @@ export type State = {
 }
 
 export default class PlayPianoController{
+  private httpcontroller! : PlayPianoHttp;
   private eventHandler : PlayPianoEventHandler;
   private _state : State;
   constructor(){
+    this.httpcontroller=new PlayPianoHttp(FlaskEndPoint)
+
+
+
+
     this.eventHandler = new PlayPianoEventHandler()
-    this._state = {mode: undefined,
+    this._state = { mode : 'Free',
                    settings:{pianoSound : 'Grand'},
                    songSettings : {title : '???????'},
                    status: 'Menus',
@@ -55,10 +64,13 @@ export default class PlayPianoController{
     return this._state.settings.pianoSound;
   }
 
-  set pianoSound(pianoSound : PianoSound){
+   set  pianoSound(pianoSound : PianoSound){
+
+    if(pianoSound !== this._state.settings.pianoSound){
     this._state.settings.pianoSound = pianoSound;
-    console.log('sound change called');
-    this.emit('soundChange',this.pianoSound);
+    this.httpcontroller.setSoundSetting(pianoSound);
+    this.emit('soundChange',this.pianoSound);}
+
   }
 
   //gets the current 
@@ -87,12 +99,9 @@ export default class PlayPianoController{
   set pianoMode(mode : PianoMode) {
     if(this.pianoMode !== mode){
     this._state.mode = mode;
+    this.httpcontroller.setMode(mode);
     this.emit('pianoModeChange',this.pianoMode);}
   } 
-
-  resetMode(){
-    this.pianoMode = undefined;
-  }
 
 
   get status() : PianoState{
@@ -100,7 +109,11 @@ export default class PlayPianoController{
   }
 
   set status(status : PianoState) {
+    if (status === this.status){
+      return;
+    }
     this._state.status = status;
+    this.httpcontroller.setStatus(status);
   }
 
 
@@ -128,6 +141,7 @@ export default class PlayPianoController{
       if(this.songTitle===title){
         return;
       } 
+      this.httpcontroller.setSong(title);
       this.emit('songChange', this.songTitle)
       this._state.songSettings.title = title;
       
