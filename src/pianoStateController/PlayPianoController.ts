@@ -1,3 +1,4 @@
+
 import { assert, error } from 'console';
 import { PlayPianoEventHandler, PianoEventMap, PPEvents } from './PlayPianoEventHandler';
 import { sleep } from './utils';
@@ -6,7 +7,10 @@ import { BoundingBox } from '../Demo/PlayPage/songdata';
  export type PianoMode = 'Learn' | 'Play' | 'Free' | 'Magic' | undefined;
  export type PianoState = 'Menus' |'Waiting' | 'Paused' | 'inProgress' | 'Over';
 
+
  export type PianoSound = 'Grand' | 'Digital' | 'Organ';
+
+ const FlaskEndPoint = '';
 
 
 
@@ -41,10 +45,12 @@ export type State = {
 }
 
 export default class PlayPianoController{
+  private httpcontroller! : PlayPianoHttp;
   private eventHandler : PlayPianoEventHandler;
   private _state : State;
   constructor(){
-    this.eventHandler = new PlayPianoEventHandler()
+    this.httpcontroller=new PlayPianoHttp(FlaskEndPoint);
+    this.eventHandler = new PlayPianoEventHandler();
     this._state = {settings:{pianoSound : 'Grand'},
                    status: 'Menus',
                    currentSongState: {}
@@ -59,10 +65,13 @@ export default class PlayPianoController{
     return this._state.settings.pianoSound;
   }
 
-  set pianoSound(pianoSound : PianoSound){
+   set  pianoSound(pianoSound : PianoSound){
+
+    if(pianoSound !== this._state.settings.pianoSound){
     this._state.settings.pianoSound = pianoSound;
-    console.log('sound change called');
-    this.emit('soundChange',this.pianoSound);
+    this.httpcontroller.setSoundSetting(pianoSound);
+    this.emit('soundChange',this.pianoSound);}
+
   }
 
   //gets the current 
@@ -92,11 +101,13 @@ export default class PlayPianoController{
   }
 
   set pianoMode(mode : PianoMode) {
-    if(this.pianoMode !== mode){
+    if(this.pianoMode === mode){
+    return;
+    }
     this._state.mode = mode;
-    this.emit(PPEvents.MODE,mode);}
+    this.emit(PPEvents.MODE,mode);
+    this.httpcontroller.setMode(mode);
   } 
-
 
 
   get status() : PianoState{
@@ -104,8 +115,12 @@ export default class PlayPianoController{
   }
 
   set status(status : PianoState) {
+    if (status === this.status){
+      return;
+    }
     this._state.status = status;
     this.emit(PPEvents.STATUS,status)
+    this.httpcontroller.setStatus(status);
   }
 
 
@@ -131,9 +146,13 @@ export default class PlayPianoController{
 
     set currentSong( newSong : SongState) {
 
-      this._state.currentSongState = newSong;
-      
+
+      if(this.songTitle===title){
+        return;
+      } 
+      this.httpcontroller.setSong(title);
       this.emit(PPEvents.SONG, newSong);
+      this._state.songSettings.title = title;
       
     }
     get currentSong() : SongState {
@@ -142,14 +161,13 @@ export default class PlayPianoController{
 
 
   
-   startSong() : boolean{
+   startSong() {
 
     this.status = 'inProgress'
     this.playCurrentSong();
 
 
-    return true;
-    //throw new Error("Method not implemented.");
+    return;
   }
 
   private async playCurrentSong() {
