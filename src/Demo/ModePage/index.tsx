@@ -6,12 +6,19 @@ import { Settings } from '../PlayPianoMenus/Settings';
 import { PPPATH, usePlayPianoController } from '../../App';
 import MenuButton from '../PlayPianoMenus/button';
 import { useNavigate } from 'react-router';
+import { useEffect, useState } from 'react';
+import useLastKeyPress from '../utils/lastKeyPressAPIHook';
 
 //move to the page for modes, buttons select the mode function buttonAction = {}=>
 
+// eslint-disable-next-line react-hooks/rules-of-hooks
+
+
 function ModeSelect() {
+
   const nav = useNavigate();
 
+  const lastKeyPress = useLastKeyPress();
   return (
     <div className="mode-select">
       <ModeCard
