@@ -11,7 +11,7 @@ import { PlayPianoHttp } from '../Server/PlayPianoHttp';
 
  export type PianoSound = 'Grand' | 'Digital' | 'Organ';
 
- const FlaskEndPoint = '';
+ const FlaskEndPoint = 'http://127.0.0.1:4000';
 
 
 
