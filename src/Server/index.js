@@ -1,7 +1,3 @@
-import { emit } from 'process';
-import '../pianoStateController/PlayPianoController';
-import PlayPianoController from '../pianoStateController/PlayPianoController';
-
 const EventEmitter = require('events');
 
 let lastKeyPressed = {keyID : -1};
@@ -25,9 +21,10 @@ app.get('/', (req, res) => {
   res.send({test : 'Welcome to the PlayPiano Backend API!'});
 });
 
-app.put('/noteadvance',(req)=>{
+app.put('/noteadvance',(req, res)=>{
   lastKeyPressed = req.body.keyID;
-  console.log(`POST req made : ${req}`);
+  console.log(`POST req made : ${lastKeyPressed}`);
+  res.send()
 });
 
 app.get('/noteadvance', (req, res) => {
