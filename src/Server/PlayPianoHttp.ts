@@ -28,10 +28,10 @@ export interface operations {
     getMode() : Promise<string>;
 
       /**
-     * Http set request mode, returns false on failure
-     * @param mode 
+     * Http set piano state, returns false on failure
+     * @param status 
      */
-      setStatus(mode : string) : Promise<boolean>;
+      setStatus(status : string) : Promise<boolean>;
       /**
        * http get request mode 
        */
@@ -97,11 +97,11 @@ export class PlayPianoHttp implements operations{
     constructor(url: string){
         this.url = url
     }
-    async setStatus(mode: string): Promise<boolean> {
-        const fullUrl = `${this.url}${EndPoints.mode}`;
+    async setStatus(status: string): Promise<boolean> {
+        const fullUrl = `${this.url}${EndPoints.status}`;
 
         await axios.post(fullUrl,{
-            mode:mode
+            Status:status
         }).catch(exception => {console.log(`ERROR received from ${fullUrl}: ${exception}\n`);
         return false;})
 
@@ -122,7 +122,7 @@ export class PlayPianoHttp implements operations{
         const fullUrl = `${this.url}${EndPoints.registerKey}`;
         
         await axios.put(fullUrl,{
-                keyID:keyID
+                KeyID:keyID
             }).catch(exception => {console.log(`ERROR received from ${fullUrl}: ${exception}\n`);
             return false;})
 
@@ -145,8 +145,8 @@ export class PlayPianoHttp implements operations{
         const fullUrl = `${this.url}${EndPoints.setKeyColor}`;
 
         await axios.post(fullUrl,{
-            keyIdx: keyidx,
-            color:color
+            KeyIdx: keyidx,
+            Color:color
         }).catch(exception => {console.log(`ERROR received from ${fullUrl}: ${exception}\n`);
         return false;})
 
@@ -161,7 +161,7 @@ export class PlayPianoHttp implements operations{
         const fullUrl = `${this.url}${EndPoints.mode}`;
 
         await axios.post(fullUrl,{
-            mode:mode
+            Mode:mode
         }).catch(exception => {console.log(`ERROR received from ${fullUrl}: ${exception}\n`);
         return false;})
 
