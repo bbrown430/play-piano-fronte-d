@@ -1,12 +1,21 @@
-import { Link, useLocation } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import logo from '../../assets/play-piano-logo.svg';
 import "./index.css"
+import useKeyPressesFromServer, { useActionOnKeyPress } from "../utils/lastKeyPressAPIHook";
+import { useEffect } from "react";
+import { PPPATH } from "../../App";
 
 function SplashScreen() {
+    const nav = useNavigate();
+    const action =  ()=>{
+        nav(PPPATH.MODESELECT)};    
+
+    useActionOnKeyPress(action);
+
+        
     return ( 
         <div className="splash-container">
 
-            <Link to={"ModeSelect"}>
                 <div className="piano-logo">
 
                 <img
@@ -17,7 +26,6 @@ function SplashScreen() {
              />
              </div>
 
-            </Link>
             <h2 className='splash-text'>Play any key to start!</h2>
         </div>
     );

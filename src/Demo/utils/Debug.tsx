@@ -6,14 +6,14 @@ import { usePlayPianoController } from "../../App";
 import { getSongBoundingBoxes } from "../PlayPage/songdata";
 import MenuButton from "../PlayPianoMenus/button";
 import { faCross } from "@fortawesome/free-solid-svg-icons";
-import useLastKeyPress from "./lastKeyPressAPIHook";
+import useKeyPressesFromServer from "./lastKeyPressAPIHook";
 
 
 let x = 0;
 export function Debug(){
 
 
-  const lastKeyPress = useLastKeyPress();
+  const lastKeyPress = useKeyPressesFromServer();
 
   const controller = usePlayPianoController();
 

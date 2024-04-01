@@ -35,9 +35,9 @@ function eventsHandler(request, response, next) {
   };
   response.writeHead(200, headers);
 
-  const data = `data: ${JSON.stringify(lastKeyPressed)}\n\n`;
+  //const data = `data: ${JSON.stringify(lastKeyPressed)}\n\n`;
 
-  response.write(data);
+  //response.write(data);
 
   const clientId = Date.now();
 

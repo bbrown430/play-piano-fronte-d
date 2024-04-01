@@ -7,7 +7,7 @@ import { PPPATH, usePlayPianoController } from '../../App';
 import MenuButton from '../PlayPianoMenus/button';
 import { useNavigate } from 'react-router';
 import { useEffect, useState } from 'react';
-import useLastKeyPress from '../utils/lastKeyPressAPIHook';
+import useKeyPressesFromServer from '../utils/lastKeyPressAPIHook';
 
 //move to the page for modes, buttons select the mode function buttonAction = {}=>
 
@@ -18,7 +18,7 @@ function ModeSelect() {
 
   const nav = useNavigate();
 
-  const lastKeyPress = useLastKeyPress();
+  const lastKeyPress = useKeyPressesFromServer();
   return (
     <div className="mode-select">
       <ModeCard
