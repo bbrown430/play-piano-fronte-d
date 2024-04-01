@@ -8,7 +8,7 @@ import React, { useEffect, useState } from "react";
  * @param keyIDs 
  * @returns 
  */
-export default function useKeyPressesFromServer(...keyIDs : number[]) {
+export default function useKeyPressesFromServer(keyID?: number | number[]) {
 
   const [ lastKeyPress, setLastKeyPress ] = useState<number | undefined>(undefined);
 
@@ -17,11 +17,24 @@ export default function useKeyPressesFromServer(...keyIDs : number[]) {
 
       events.onmessage = (event) => {
 
-        //@TODO if keyid==one of passed given keyIDS
-        const keypressID = JSON.parse(event.data).keyID;
-        if(keyIDs.length > 0 && !keyIDs.includes(keypressID)){
-          return;
+        const keypressID: number = JSON.parse(event.data).keyID;
+        console.log(`Key pressed id : ${keypressID} keys listening for ${keyID}`)
+
+        if(keyID !== undefined){
+          if(typeof keyID === "number"){
+            // eslint-disable-next-line eqeqeq
+            if(keypressID != keyID){
+              console.log("returning key not needed first if")
+              return;
+            }
+          }
+            else if(!keyID.includes(keypressID)){
+              console.log("returning key not needed second if")
+              return;
+
+            }
         }
+        console.log(`key pressed processed  ${keypressID}`)
         setLastKeyPress(()=> JSON.parse(event.data).keyID);
 
 
@@ -30,7 +43,7 @@ export default function useKeyPressesFromServer(...keyIDs : number[]) {
     return () => {
       events.close();
     }
-  }, [keyIDs]);
+  }, [keyID]);
 
   return lastKeyPress;
 }
@@ -41,8 +54,8 @@ export default function useKeyPressesFromServer(...keyIDs : number[]) {
  * @param action is run when a key is pressed. 
  * @param keyID optional specific keys that performs action when pressed
  */
-export function useActionOnKeyPress(action : (keyID?:number)=> void,...keyID:number[]) {
-  const keypressed = useKeyPressesFromServer(...keyID);
+export function useActionOnKeyPress(action : (keyID?:number)=> void, keyID?:number[] | number) {
+  const keypressed = useKeyPressesFromServer(keyID);
 
   useEffect(()=>{
     if(!keypressed){

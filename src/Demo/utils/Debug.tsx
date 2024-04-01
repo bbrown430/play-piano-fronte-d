@@ -51,21 +51,21 @@ export function Debug(){
         <li>{`song = ${songTitle}`}</li>
         <li>{`${getSongBoundingBoxes()}`}</li>
         <MenuButton 
-        title='post keypress'
-        icon={faCross}
-        text='Exit to main menu'
-        action={()=>{
-          //setTestKeyPress((prev)=>prev + 1);
-          fetch('/api/lastkeypress',{
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json'
-            },
-            method: "POST",
-            body: JSON.stringify({keyID: x++}),
-        })
-
-        }} />
+          title='post keypress'
+          icon={faCross}
+          text='Exit to main menu'
+          action={() => {
+            //setTestKeyPress((prev)=>prev + 1);
+            fetch('/api/lastkeypress', {
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+              },
+              method: "POST",
+              body: JSON.stringify({ keyID: x++ }),
+            });
+          }} 
+          keyID={0} />
 
 
         

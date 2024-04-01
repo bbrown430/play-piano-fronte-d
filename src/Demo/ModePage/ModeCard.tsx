@@ -4,13 +4,15 @@ import {faQuestion } from '@fortawesome/free-solid-svg-icons';
 
 import "./index.css"
 import "../../App.css"
-import PlayPianoController, { PianoMode } from '../../pianoStateController/PlayPianoController';
+import PlayPianoController from '../../pianoStateController/PlayPianoController';
+import { PianoMode } from '../utils/types';
 import { useNavigate } from "react-router-dom";
 import { assert } from 'console';
 import { PPPATH, usePlayPianoController } from '../../App';
 import { useActionOnKeyPress } from '../utils/lastKeyPressAPIHook';
 
-const colors = [[255,0,0],[0,255,0],[0,0,255],[255,255,0],[255,0,255],[0,255,255]];
+type color = [number,number,number];
+export const ButtonColors : color[] = [[200,0,0],[0,200,0],[0,0,200],[200,200,0],[200,0,200],[0,200,200]];
 
 type Statefunction = () => void;
 interface ModeCardProps {
@@ -30,14 +32,14 @@ interface ModeCardProps {
  */
 function ModeCard({ mode, icon, text, link, keyID} : ModeCardProps) : JSX.Element {
 
-  const controller = usePlayPianoController();
+  const controller : PlayPianoController = usePlayPianoController();
 
   link = link ? link : PPPATH.SONGSELECT
   mode = mode ? mode : 'Free'
   icon = icon ? icon : faQuestion;
   text = text ? text : "";
 
-  controller.setKeyColor({keyID: keyID, color :colors[keyID]});
+  controller.setKeyColor(keyID, ButtonColors[keyID]);
 
   const nav = useNavigate();
 
@@ -49,10 +51,13 @@ function ModeCard({ mode, icon, text, link, keyID} : ModeCardProps) : JSX.Elemen
     nav(link);
     };
   } 
+
   useActionOnKeyPress(pressAction,keyID);
 
   return (
-    <div className = "mode-card" onClick = {pressAction}>
+    <div className = "mode-card" 
+    style={{backgroundColor:`rgb(${ButtonColors[keyID]})` }}
+    onClick = {pressAction}>
 
       <FontAwesomeIcon icon = {icon} className = "mode-icon" />
 

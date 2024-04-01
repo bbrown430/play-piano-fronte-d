@@ -1,6 +1,6 @@
 import MenuButton from './button';
 import { faArrowRotateForward, faPlay, faWrench } from '@fortawesome/free-solid-svg-icons';
-import { Link, useNavigate } from 'react-router-dom';
+import {useNavigate } from 'react-router-dom';
 import { PPPATH, usePlayPianoController } from '../../App';
 
 export function PauseMenu() {
@@ -17,11 +17,11 @@ export function PauseMenu() {
     nav(PPPATH.PLAY);
   };
 
-  const changeSong= () => {
+  const changeSong = () => {
     controller.status = 'Menus';
     nav(PPPATH.SONGSELECT)
-
   }
+
   return (
     <div className="menu-wrapper">
 
@@ -33,26 +33,19 @@ export function PauseMenu() {
         title='restart'
         icon={faArrowRotateForward}
         text='restart current song from begining'
-        action={restart} />
+        action={restart} keyID={0} />
 
       <MenuButton 
-      
-      title='Change Song'
-      icon={faWrench}
-      text=''
-      action={changeSong}/>
+        title='Change Song'
+        icon={faWrench}
+        text=''
+        action={changeSong} keyID={1}/>
 
       <MenuButton
-
         title='unpause'
         icon={faPlay}
         text=''
-        action={unpause} />
-
-
-
-
-
+        action={unpause} keyID={2} />
 
     </div>
   );

@@ -75,7 +75,7 @@ function sendEventsToAll(keypress) {
 app.post('/api/lastkeypress',  (req,res)=>{
   lastKeyPressed = {
     keyID : req.body.keyID, 
-    keyPresses : lastKeyPressed.keyPresses++
+    keyPresses : lastKeyPressed.keyPresses + 1
   };
   console.log(`POST req made : ${req.body.keyID} ${lastKeyPressed.keyID}`);
   res.json(lastKeyPressed);
@@ -83,7 +83,7 @@ app.post('/api/lastkeypress',  (req,res)=>{
 });
 
 app.get('/api/lastkeypress', (req, res) => {
-  console.log(`GET req made seding :  ${lastKeyPressed.keyID}`);
+  console.log(`GET req made seding :  ${lastKeyPressed}`);
   res.send(lastKeyPressed);
 });
 

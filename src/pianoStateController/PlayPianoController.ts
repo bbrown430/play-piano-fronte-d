@@ -1,15 +1,11 @@
 
 import { assert, error } from 'console';
 import { PlayPianoEventHandler, PianoEventMap, PPEvents } from './PlayPianoEventHandler';
-import { sleep } from './utils';
-import { BoundingBox } from '../Demo/PlayPage/songdata';
+import { sleep } from '../Demo/utils/utils';
 import { PlayPianoHttp } from '../Server/PlayPianoHttp';
-
- export type PianoMode = 'Learn' | 'Play' | 'Free' | 'Magic';
- export type PianoState = 'Menus' |'Waiting' | 'Paused' | 'inProgress' | 'Over';
-
-
- export type PianoSound = 'Grand' | 'Digital' | 'Organ';
+import { PianoMode, PianoState } from '../Demo/utils/types';
+import { PianoSound } from '../Demo/utils/types';
+import { PlayPianoControllerState, SongState } from '../Demo/utils/types';
 
  const FlaskEndPoint = 'http://127.0.0.1:4000';
 
@@ -20,35 +16,10 @@ import { PlayPianoHttp } from '../Server/PlayPianoHttp';
 
  
 
- export interface  PianoSettings{
-  pianoSound : PianoSound
-  // menu sound
-  // background music?
-  // toggle : boolean
-  
-}
-
-
-export interface SongState {
-  title? : string;
- // tempo : number; //percentage 
-  progress?: number
-  end?: number;
-  boundingBoxes?: BoundingBox[];
-}
-
-export type State = {
-  mode : PianoMode;
-  status : PianoState;
-  settings : PianoSettings;
-  currentSongState : SongState;
-
-}
-
 export default class PlayPianoController{
   private httpcontroller! : PlayPianoHttp;
   private eventHandler : PlayPianoEventHandler;
-  private _state : State;
+  private _state : PlayPianoControllerState;
   constructor(){
     this.httpcontroller=new PlayPianoHttp(FlaskEndPoint);
     this.eventHandler = new PlayPianoEventHandler();
@@ -58,6 +29,15 @@ export default class PlayPianoController{
                    status: 'Menus',
                    currentSongState: {}
                   }
+  }
+
+  /**
+   * sets key color using http request to device server
+   * @param keyID 
+   * @param color 
+   */
+  public setKeyColor(keyID : number, color : [number,number,number] ) {
+    this.httpcontroller.setKeyColor(keyID,color)
   }
 
   /**

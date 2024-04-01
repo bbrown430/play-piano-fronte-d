@@ -1,8 +1,7 @@
-import { Link, useLocation, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import logo from '../../assets/play-piano-logo.svg';
 import "./index.css"
-import useKeyPressesFromServer, { useActionOnKeyPress } from "../utils/lastKeyPressAPIHook";
-import { useEffect } from "react";
+import  { useActionOnKeyPress } from "../utils/lastKeyPressAPIHook";
 import { PPPATH } from "../../App";
 
 function SplashScreen() {

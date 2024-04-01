@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import { EventMap } from 'typed-emitter';
-import { PianoMode, PianoState, PianoSound } from './PlayPianoController';
+import { PianoSound } from '../Demo/utils/types';
+import { PianoMode, PianoState } from '../Demo/utils/types';
 
 
 export type PianoEventMap = EventMap & {

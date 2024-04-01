@@ -1,7 +1,7 @@
 import MenuButton from './button';
-import { faCross, faMusic, faPlay, faWrench } from '@fortawesome/free-solid-svg-icons';
-import { useEffect, useState } from 'react';
-import { PianoSound, PianoState } from '../../pianoStateController/PlayPianoController';
+import { faCross, faMusic, } from '@fortawesome/free-solid-svg-icons';
+import {  useState } from 'react';
+import { PianoSound } from '../utils/types';
 import { PPPATH, usePlayPianoController } from '../../App';
 import { useNavigate } from 'react-router';
 
@@ -26,19 +26,21 @@ export function Settings() {
         title='Sound'
         icon={faMusic}
         text={pianoSound}
-        action={ ()=> {
+
+        action={() => {
           controller.changeSoundMode();
-          setPianoSound(controller.pianoSound);}}
+          setPianoSound(controller.pianoSound);
+        } } keyID={0}
           />
 
       <MenuButton 
         title='Exit'
         icon={faCross}
         text='Exit to main menu'
-        action={()=>{
-        nav(PPPATH.MODESELECT);
+        action={() => {
+          nav(PPPATH.MODESELECT);
 
-        }} />
+        } } keyID={1} />
 
 
 

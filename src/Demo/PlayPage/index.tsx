@@ -4,8 +4,10 @@ import "./playpageformatting.css"
 import hcbsheetmusic from "../../assets/SheetMusic/hot-cross-buns-midi/hot-cross-buns-midi.jpg"
 import { useEffect, useState } from "react";
 import { PPEvents } from "../../pianoStateController/PlayPianoEventHandler";
-import { BoundingBox, getSongBoundingBoxes } from "./songdata";
+import { getSongBoundingBoxes } from "./songdata";
+import { BoundingBox } from '../utils/types';
 import PlayPianoController from "../../pianoStateController/PlayPianoController";
+import { useActionOnKeyPress } from "../utils/lastKeyPressAPIHook";
 
 
 
@@ -13,12 +15,25 @@ import PlayPianoController from "../../pianoStateController/PlayPianoController"
     const controller = usePlayPianoController();
 
     const  startdisplaytest = () => {
-        controller.status='Over';
+        controller.status= 'Over';
         controller.currentSong = {boundingBoxes: getSongBoundingBoxes(),title: 'hot cross buns', progress : 0, end : 80};
-        controller.startSong();
-    
+        controller.startSong();    
     
     }
+
+    const progressSong = () =>{
+        if(controller.status !== 'inProgress' || !controller.currentSong.progress){
+            return;
+        }
+        controller.currentSong.progress += 1;
+    }
+
+    const pause = ()=>{
+        controller.status = 'Paused';
+    }
+
+    useActionOnKeyPress(progressSong)
+    useActionOnKeyPress(pause,)
     
     return ( 
         <div className = "inProgress-container"
