@@ -25,25 +25,24 @@ function ModeSelect() {
                 mode= 'Learn'
                 icon={faChalkboardTeacher}
                 text="Learn to play the piano"
+                keyID={1}
                 />
 
       <ModeCard 
-                mode= 'Play'
-                icon={faGamepad}
-                text='Play along, and go for a high score'
-                />
+        mode='Play'
+        icon={faGamepad}
+        text='Play along, and go for a high score' keyID={2}                />
 
       <ModeCard 
-                mode="Free" 
-                icon={faBullseye}
-                text='Free play mode'
-                 />
+        mode="Free"
+        icon={faBullseye}
+        text='Free play mode' keyID={3}                 />
 
       <ModeCard
-                mode="Magic" 
-                icon={faMagicWandSparkles} 
-                text='Select song, and watch the piano magically playing itself' 
-               />
+        mode="Magic"
+        icon={faMagicWandSparkles}
+        text='Select song, and watch the piano magically playing itself' 
+        keyID={4}               />
 
       
       <MenuButton title={'Settings'} icon={faWrench} text={'Change Play Piano Settings'} action={()=> nav(PPPATH.SETTINGS)} />    
