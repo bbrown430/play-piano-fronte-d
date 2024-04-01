@@ -2,40 +2,46 @@ import { forEach } from "lodash";
 import React, { useEffect, useState } from "react";
 
 
+type KeyPress = {keyID: number, count: number};
+
 /**
  * react hook that gets key presses from the server api.
  * updates whenvever a keypress event happens
- * @param keyIDs 
+ * @param keysToReport keys ids that this should report
  * @returns 
  */
-export default function useKeyPressesFromServer(keyID?: number | number[]) {
+export default function useKeyPressesFromServer(keysToReport?: number | number[]) {
 
-  const [ lastKeyPress, setLastKeyPress ] = useState<number | undefined>(undefined);
+  const [lastKeyPress, setLastKeyPress ] = useState(-1);
+  const [lastKeyCount, setLastKeyCount] = useState(-1);
 
   useEffect( () => {
       const events = new EventSource('http://localhost:8080/api/events');
 
       events.onmessage = (event) => {
 
-        const keypressID: number = JSON.parse(event.data).keyID;
-        console.log(`Key pressed id : ${keypressID} keys listening for ${keyID}`)
+        const keypressed = JSON.parse(event.data);
+        const keypress : KeyPress  = {keyID: keypressed.keyID, count : keypressed.count};
+        
+        console.log(`Key pressed id : ${keypress.keyID} keys listening for ${keysToReport}`);
 
-        if(keyID !== undefined){
-          if(typeof keyID === "number"){
+        if(keysToReport !== undefined){
+          if(typeof keysToReport === "number"){
             // eslint-disable-next-line eqeqeq
-            if(keypressID != keyID){
-              console.log("returning key not needed first if")
+            if(keypress.keyID != keysToReport){
+              console.log("returning key not needed first if");
               return;
             }
           }
-            else if(!keyID.includes(keypressID)){
+            else if(!keysToReport.includes(keypress.keyID)){
               console.log("returning key not needed second if")
               return;
 
             }
         }
-        console.log(`key pressed processed  ${keypressID}`)
-        setLastKeyPress(()=> JSON.parse(event.data).keyID);
+        console.log(`key pressed processed  ${keypress.keyID}`)
+        setLastKeyPress(()=> keypress.keyID);
+        setLastKeyCount(()=>keypress.count)
 
 
     }
@@ -43,9 +49,9 @@ export default function useKeyPressesFromServer(keyID?: number | number[]) {
     return () => {
       events.close();
     }
-  }, [keyID]);
+  }, [keysToReport]);
 
-  return lastKeyPress;
+  return [lastKeyPress, lastKeyCount];
 }
 
 
@@ -55,14 +61,18 @@ export default function useKeyPressesFromServer(keyID?: number | number[]) {
  * @param keyID optional specific keys that performs action when pressed
  */
 export function useActionOnKeyPress(action : (keyID?:number)=> void, keyID?:number[] | number) {
-  const keypressed = useKeyPressesFromServer(keyID);
+  const [keyPressed, keyPresses] = useKeyPressesFromServer(keyID);
+  const [ countProcecced, setCountroccessed] = useState(keyPresses);
 
   useEffect(()=>{
-    if(!keypressed){
+    //exit if no key has been pressed since making this hook
+    if(keyPresses < 0 || keyPressed < 0 || keyPresses <= countProcecced){
       return;
     }
-    action(keypressed);
-  },[action, keypressed]);
+    setCountroccessed(prev=> prev+1);
+    action(keyPressed);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[action, keyPresses]);
 }
 /* export default function registerKeyOfInterest(keyID:number,) {
 

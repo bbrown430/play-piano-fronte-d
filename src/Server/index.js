@@ -17,7 +17,7 @@ let clients = [];
 let lastKeyPressed = 
 {
   keyID : -1,
-  keyPresses : 0
+  count : -1,
 };
 
 app.listen(PORT, () => {
@@ -75,7 +75,7 @@ function sendEventsToAll(keypress) {
 app.post('/api/lastkeypress',  (req,res)=>{
   lastKeyPressed = {
     keyID : req.body.keyID, 
-    keyPresses : lastKeyPressed.keyPresses + 1
+    count : lastKeyPressed.count + 1
   };
   console.log(`POST req made : ${req.body.keyID} ${lastKeyPressed.keyID}`);
   res.json(lastKeyPressed);

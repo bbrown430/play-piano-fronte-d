@@ -30,6 +30,7 @@ export function Settings() {
         action={() => {
           controller.changeSoundMode();
           setPianoSound(controller.pianoSound);
+          //todo clearinput
         } } keyID={0}
           />
 
