@@ -89,7 +89,8 @@ export function useProgressFromServer() {
         const lastEvent = JSON.parse(event.data);
         const progress : number  = lastEvent.progress
 
-        if(progress < 0){
+
+        if(progress < 0 || progress===undefined){
 
           return;
         }
@@ -105,4 +106,35 @@ export function useProgressFromServer() {
   }, []);
 
   return progress
+}
+
+export function useStatusFromServer() {
+
+  const [status, setStatus ] = useState<PianoState>('Menus');
+
+  useEffect( () => {
+      const events = new EventSource(EVENTENDPOINT);
+
+      events.onmessage = (event) => {
+
+        const lastEvent = JSON.parse(event.data);
+        const statusFromServer : PianoState  = lastEvent.status
+
+
+        if(statusFromServer === undefined){
+          console.log(`status undefined ${statusFromServer}`)
+          return;
+        }
+        console.log(`midi progress processed  ${statusFromServer}`)
+        setStatus(statusFromServer);
+
+
+    }
+
+    return () => {
+      events.close();
+    }
+  }, []);
+
+  return status
 }

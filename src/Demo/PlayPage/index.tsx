@@ -7,7 +7,7 @@ import { PPEvents } from "../../pianoStateController/PlayPianoEventHandler";
 import { getSongBoundingBoxes } from "./songdata";
 import { BoundingBox } from '../utils/types';
 import PlayPianoController from "../../pianoStateController/PlayPianoController";
-import { useActionOnKeyPress, useOnSongEnd, useProgressFromServer } from "../utils/lastKeyPressAPIHook";
+import { useActionOnKeyPress, useStatusFromServer, useProgressFromServer } from "../utils/lastKeyPressAPIHook";
 
 
 /**
@@ -19,7 +19,6 @@ export enum KEYID{
 
  export default function PlayPage() {
     const controller = usePlayPianoController();
-    const songended = useOnSongEnd();
 
     const  startdisplaytest = () => {
         controller.status= 'Over';
@@ -53,13 +52,14 @@ function SheetMusic(){
     const [boundingBox,setBoundingbox] = useState<BoundingBox|undefined>(undefined);
 
     const progress = useProgressFromServer();
+    const songended = useStatusFromServer();
 
     useEffect(()=>{
             if(controller.currentSong.boundingBoxes){
             setBoundingbox(controller.currentSong.boundingBoxes[progress]);}
             console.log(`${boundingBox?.x},${boundingBox?.y},${boundingBox?.width},${boundingBox?.height}`)
 
-    },[progress])
+    },[progress,songended])
 
     return (
 
