@@ -61,9 +61,9 @@ app.get('/test', (req, res) => {
   res.send({test : 'Welcome to the PlayPiano Backend API!'});
 });
 
-function sendEventsToAll(keypress) {
+function sendEventsToAll(payload) {
   clients.forEach(client => {
-    const data = `data: ${JSON.stringify(keypress)}\n\n`
+    const data = `data: ${JSON.stringify(payload)}\n\n`
     console.log(`sending ${data} to client`);
     client.response.write("event: message\n");
     client.response.write(data);
@@ -90,4 +90,40 @@ app.get('/api/lastkeypress', (req, res) => {
 
 
 
+let status = {
+  status : '',
+} 
+//send song ended event
+app.post('api/status',  (req,res)=>{
+  status = {
+    keyID : req.body.status
+  };
+  console.log(`POST req made : ${req.body.status}`);
+  res.json(status);
+  return sendEventsToAll(status);
+})
 
+app.get('/api/status', (req, res) => {
+  console.log(`GET req made seding :  ${status}`);
+  res.send(status);
+});
+
+
+
+let progress = {
+  progress : -1,
+}
+//assumes sent {keyID:number}
+app.post('/api/progress',  (req,res)=>{
+  progress = {
+    progress : req.body.progress
+  };
+  console.log(`POST req made : ${req.body.progress}`);
+  res.json(progress);
+  return sendEventsToAll(progress);
+});
+
+app.get('/api/progress', (req, res) => {
+  console.log(`GET req made seding :  ${progress}`);
+  res.send(progress);
+});

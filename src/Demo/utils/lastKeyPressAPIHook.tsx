@@ -1,6 +1,7 @@
 import { forEach } from "lodash";
 import React, { useEffect, useState } from "react";
 
+const EVENTENDPOINT = 'http://localhost:8080/api/events'
 
 type KeyPress = {keyID: number, count: number};
 
@@ -16,7 +17,7 @@ export default function useKeyPressesFromServer(keysToReport?: number | number[]
   const [lastKeyCount, setLastKeyCount] = useState(-1);
 
   useEffect( () => {
-      const events = new EventSource('http://localhost:8080/api/events');
+      const events = new EventSource(EVENTENDPOINT);
 
       events.onmessage = (event) => {
 
@@ -74,20 +75,33 @@ export function useActionOnKeyPress(action : (keyID?:number)=> void, keyID?:numb
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[action, keyPresses]);
 }
-/* export default function registerKeyOfInterest(keyID:number,) {
 
-    const [keyOfInterest, setKeyPressed] = React.useState(false);
-  
-  
-  
-    React.useEffect(()=>{
-        fetch('/api/lastkeypress')
-        .then(res=>res.json())
-        .then(data=>{
-            if(data === keyID)
-            setKeyPressed(true)
-        ;});
-      },[])
-  
-    return keyOfInterest;
-  } */
+export function useProgressFromServer() {
+
+  const [progress, setProgress ] = useState(-1);
+
+  useEffect( () => {
+      const events = new EventSource(EVENTENDPOINT);
+
+      events.onmessage = (event) => {
+
+        const lastEvent = JSON.parse(event.data);
+        const progress : number  = lastEvent.progress
+
+        if(progress < 0){
+
+          return;
+        }
+        console.log(`midi progress processed  ${progress}`)
+        setProgress(progress);
+
+
+    }
+
+    return () => {
+      events.close();
+    }
+  }, []);
+
+  return progress
+}
