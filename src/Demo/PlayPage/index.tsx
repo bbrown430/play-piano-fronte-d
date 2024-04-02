@@ -7,33 +7,32 @@ import { PPEvents } from "../../pianoStateController/PlayPianoEventHandler";
 import { getSongBoundingBoxes } from "./songdata";
 import { BoundingBox } from '../utils/types';
 import PlayPianoController from "../../pianoStateController/PlayPianoController";
-import { useActionOnKeyPress } from "../utils/lastKeyPressAPIHook";
+import { useActionOnKeyPress, useOnSongEnd, useProgressFromServer } from "../utils/lastKeyPressAPIHook";
 
 
+/**
+ * enum for significant keyids
+ */
+export enum KEYID{
+    PAUSE = 0,
+}
 
  export default function PlayPage() {
     const controller = usePlayPianoController();
+    const songended = useOnSongEnd();
 
     const  startdisplaytest = () => {
         controller.status= 'Over';
-        controller.currentSong = {boundingBoxes: getSongBoundingBoxes(),title: 'hot cross buns', progress : 0, end : 80};
-        controller.startSong();    
+        controller.currentSong = {boundingBoxes: getSongBoundingBoxes(),title: 'hot cross buns', progress : 0, end : 80}; 
     
     }
 
-    const progressSong = () =>{
-        if(controller.status !== 'inProgress' || !controller.currentSong.progress){
-            return;
-        }
-        controller.currentSong.progress += 1;
-    }
 
     const pause = ()=>{
         controller.status = 'Paused';
     }
 
-    useActionOnKeyPress(progressSong)
-    useActionOnKeyPress(pause,)
+    useActionOnKeyPress(pause,KEYID.PAUSE);
     
     return ( 
         <div className = "inProgress-container"
@@ -53,22 +52,14 @@ function SheetMusic(){
 
     const [boundingBox,setBoundingbox] = useState<BoundingBox|undefined>(undefined);
 
-
+    const progress = useProgressFromServer();
 
     useEffect(()=>{
-        const notePlayedListener = () => {
-            if(controller.currentSong.boundingBoxes && controller.currentSong.progress){
-            setBoundingbox(controller.currentSong.boundingBoxes[controller.currentSong.progress]);}
+            if(controller.currentSong.boundingBoxes){
+            setBoundingbox(controller.currentSong.boundingBoxes[progress]);}
             console.log(`${boundingBox?.x},${boundingBox?.y},${boundingBox?.width},${boundingBox?.height}`)
-          };
 
-          controller.addListener(PPEvents.NOTEPLAYED,notePlayedListener);
-
-          return () => {
-            controller.removeListener(PPEvents.NOTEPLAYED,notePlayedListener)
-          }
-
-    },[controller.currentSong.progress, controller])
+    },[progress])
 
     return (
 

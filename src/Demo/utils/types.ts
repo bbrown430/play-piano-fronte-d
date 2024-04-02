@@ -1,4 +1,16 @@
 
+export enum INTERNALENDPOINTS {
+    CLIENTSTATUS       = '/api/status',
+    KEYPRESSEVENT      = '/api/lastkeypress/event',
+    PROGRESSCHANGEEVENT= '/api/songprogress/event',
+    LASTKEYPRESS       = '/api/lastkeypress', 
+    SONGPROGRESS       = '/api/songprogress', 
+    SONGEND            = '/api/status',
+    SONGENDEVENT       = '/api/status/event',
+    BASEURL            = ''
+  }; 
+  
+
 export type BoundingBox = {
     x: number;
     y: number;

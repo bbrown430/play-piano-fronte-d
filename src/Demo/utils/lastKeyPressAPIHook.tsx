@@ -1,5 +1,6 @@
 import { forEach } from "lodash";
 import React, { useEffect, useState } from "react";
+import { INTERNALENDPOINTS, PianoState, PlayPianoControllerState } from "./types";
 
 
 type KeyPress = {keyID: number, count: number};
@@ -16,13 +17,13 @@ export default function useKeyPressesFromServer(keysToReport?: number | number[]
   const [lastKeyCount, setLastKeyCount] = useState(-1);
 
   useEffect( () => {
-      const events = new EventSource('http://localhost:8080/api/events');
+      const events = new EventSource(`http://localhost:8080${INTERNALENDPOINTS.KEYPRESSEVENT}`);
 
       events.onmessage = (event) => {
 
         const keypressed = JSON.parse(event.data);
         const keypress : KeyPress  = {keyID: keypressed.keyID, count : keypressed.count};
-        
+
         console.log(`Key pressed id : ${keypress.keyID} keys listening for ${keysToReport}`);
 
         if(keysToReport !== undefined){
@@ -91,3 +92,75 @@ export function useActionOnKeyPress(action : (keyID?:number)=> void, keyID?:numb
   
     return keyOfInterest;
   } */
+
+
+
+  /**
+ * react hook that gets song progress from api
+ * updates whenvever a keypress event happens
+ * @returns hook that updates to /api/progress  
+ */
+export function useProgressFromServer() {
+
+  const [progress, setProgress ] = useState(-1);
+
+  useEffect( () => {
+      const events = new EventSource(`${INTERNALENDPOINTS.BASEURL}${INTERNALENDPOINTS.PROGRESSCHANGEEVENT}`);
+
+      events.onmessage = (event) => {
+
+        const lastEvent = JSON.parse(event.data);
+        const progress : number  = lastEvent.progress
+
+        if(progress < 0){
+
+          return;
+        }
+        console.log(`midi progress processed  ${progress}`)
+        setProgress(progress);
+
+
+    }
+
+    return () => {
+      events.close();
+    }
+  }, []);
+
+  return progress
+}
+
+
+  /**
+ * react hook that gets song progress from api
+ * updates whenvever a keypress event happens
+ * @returns hook that updates to /api/progress  
+ */
+  export function useOnSongEnd() {
+    
+    const [status, setStatus ] = useState<PianoState>('Menus');
+  
+    useEffect( () => {
+        const events = new EventSource(`${INTERNALENDPOINTS.BASEURL}${INTERNALENDPOINTS.SONGEND}`);
+  
+        events.onmessage = (event) => {
+  
+          const lastEvent = JSON.parse(event.data);
+          const status : PianoState  = lastEvent.status
+  
+          if(status  !== 'Over'){
+            return;
+          }
+          console.log(`game over from API  ${status}`);
+          setStatus(status);
+  
+  
+      }
+  
+      return () => {
+        events.close();
+      }
+    }, []);
+  
+    return status;
+  }
