@@ -78,7 +78,9 @@ function SheetMusic(){
 
     return (
 
-            <div className= "sheet-music" style={{backgroundImage: `url(${hcbsheetmusic}`, width: "100%"}}>
+            <div className= "sheet-music">
+                <img style = {{position: 'absolute'}}src={`url(${hcbsheetmusic}`} alt="" />
+
                 {controller.status==='inProgress' && boundingBox ?
                  <div className="note-overlay"
                     style={{top:boundingBox.y
