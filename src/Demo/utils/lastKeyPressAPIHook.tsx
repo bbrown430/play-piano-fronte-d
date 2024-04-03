@@ -95,7 +95,9 @@ export function useProgressFromServer() {
         const progress : number  = lastEvent.progress
 
 
+
         if(progress < 0 || progress===undefined){
+          console.log(`returing before setting progress because :  ${progress}`)
 
           return;
         }

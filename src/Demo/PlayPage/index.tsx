@@ -19,20 +19,7 @@ export enum KEYID{
 }
 
  export default function PlayPage() {
-    const controller = usePlayPianoController();
-    const nav = useNavigate();
-
     const statusAPI : PianoState  = useControllerStatus();
-
-
-    const pause = ()=>{
-        controller.status = 'Paused';
-        nav(PPPATH.PAUSED);
-    }
-
- 
-
-    useActionOnKeyPress(pause,KEYID.PAUSE);
     
     return ( 
         <div className = "inProgress-container"
@@ -41,6 +28,7 @@ export enum KEYID{
             {
                 (()=>{
                     switch(statusAPI){
+                        case 'Menus':
                         case "Waiting":
                             return  <StartSongPage/>
 
@@ -66,7 +54,8 @@ function SheetMusic(){
     const [boundingBox,setBoundingbox] = useState<BoundingBox|undefined>(undefined);
 
     const progress = useProgressFromServer();
-    const status = useControllerStatus();
+
+    usePause(controller);
 
     useEffect(()=>{
             if(controller.currentSong.boundingBoxes && controller.currentSong.boundingBoxes.length > progress ){
@@ -79,20 +68,44 @@ function SheetMusic(){
     return (
 
             <div className= "sheet-music">
-                <img style = {{position: 'absolute'}}src={`url(${hcbsheetmusic}`} alt="" />
+                    <img 
+                    id="sheetimg"
+                style = {{position: 'absolute'}} 
+                src={hcbsheetmusic} 
+                alt="" ></img>
 
-                {controller.status==='inProgress' && boundingBox ?
+                {
+                controller.status==='inProgress' && boundingBox ?
                  <div className="note-overlay"
-                    style={{top:boundingBox.y
+                    /* style={{
+                        top:boundingBox.y
                         ,left:boundingBox.x
                         ,width:boundingBox.width
-                        ,height:boundingBox.height}}/> 
+                        ,height:boundingBox.height}} */
+                        style={{
+                            top: 0
+                            ,left:0
+                            ,width:100
+                            ,height:100}}/> 
                     : <></>}
+
             </div>
     )
 
 }
 
+
+function usePause(controller: PlayPianoController) {
+    const nav = useNavigate();
+    const pause = () => {
+        controller.status = 'Paused';
+        nav(PPPATH.PAUSED);
+    };
+
+
+
+    useActionOnKeyPress(pause, KEYID.PAUSE);
+}
 
 function StartSongPage(){
         const controller = usePlayPianoController();
@@ -100,6 +113,7 @@ function StartSongPage(){
         //starts game on keypress
         const  startdisplaytest = () => {
             controller.status = 'inProgress';
+            //@todo remove and place in song select button
             controller.currentSong = {boundingBoxes: getSongBoundingBoxes(),title: 'hot cross buns', progress : 0, end : 80}; 
         
         }
@@ -107,7 +121,9 @@ function StartSongPage(){
         useActionOnKeyPress(startdisplaytest);
 
         return (
-            <div className = "start-page">Press ANY key to START</div>
+            <div className = "start-page">
+                <div className="start-button">Press ANY key to START</div>
+                </div>
         )
 }
 

@@ -4,7 +4,8 @@
   display: flex;
 	flex-direction: row;
 	align-items:flex-start;
- /* border: 10px solid white;*/
+  border: 10px solid white;
+  border-radius: 10px;
 	text-align: center;
 	font-size: 1em;
 	background-color: rgba(217, 217, 217, 0.2);
@@ -12,11 +13,12 @@
 .song-title {
   width: 30%;
   height: 100%;
-  border-style: dashed;
+  /*border-style: dashed;
   border-radius: 10px;
+  border: 2px solid white;*/
   font-size: 3em;
   color: white;
-  border: 2px solid white;
+  
   font-weight: 500;
 }
 .progress-bar {
@@ -33,11 +35,15 @@
 .inProgress-container {
   width: 100%;
   height: 100%;
+  flex-direction: column;
+  display: flex;
   filter: drop-shadow(0px 4px 10px rgba(0,0,0,0.2));
 }
 
 .sheet-music {
-  display: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 100%;
   height: 90%;
 }
@@ -55,18 +61,33 @@
 
 
 .start-page {
-
   width: 100%;
   height: 95%;
   display: flex;
 	flex-direction: column;
+  align-items: center;
   border: 10px solid white;
 	text-align: center;
 	background-color: rgba(217, 217, 217, 0.2);
-
   font-size: 5em;
   color: white;
-  border: 2px solid white;
   font-weight: 500;
+
+}
+
+.start-button {
+  display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	font-size: .8em;
+	background-color: rgba(217, 217, 217, 0.2);
+	height: 20%;
+	width: 80%;
+	border-radius: 16px;
+	border: 10px solid white;
+	margin: 20px;
+	box-shadow: rgba(0, 0, 0, 0.1) 0px 8px 24px;
+	transition: background-color 0.2s ease;
 
 }
