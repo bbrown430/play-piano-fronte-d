@@ -18,8 +18,8 @@ function SongSelect() {
     );
 }
 
-function SongSelectControls(): import("react").ReactNode {
-    throw new Error('Function not implemented.');
+function SongSelectControls() {
+    return <></>
 }
 
 export function SongPage() {

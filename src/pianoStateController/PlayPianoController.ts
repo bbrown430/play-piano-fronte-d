@@ -148,13 +148,13 @@ export default class PlayPianoController{
    startSong() {
 
     this.status = 'inProgress'
-    this.playCurrentSong();
 
 
     return;
   }
 
-  private async playCurrentSong() {
+  //for testing
+  public async playCurrentSong() {
 
     if(undefined === this.currentSong.progress || undefined === this.currentSong.end ){
       console.log(`${this.currentSong.progress}`)

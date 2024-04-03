@@ -20,7 +20,15 @@ export type BoundingBox = {
 
 export type PianoMode = 'Learn' | 'Play' | 'Free' | 'Magic';
 
+export function  isPianoMode(keyInput: string): keyInput is PianoMode {
+  return ['Learn' , 'Play' , 'Free' , 'Magic'].includes(keyInput);
+}
+
 export type PianoState = 'Menus' | 'Waiting' | 'Paused' | 'inProgress' | 'Over';
+
+export function  isPianoState(keyInput: string): keyInput is PianoState {
+  return ['Menus' , 'Waiting' , 'Paused' , 'inProgress' , 'Over'].includes(keyInput);
+}
 
 export type PianoSound = 'Grand' | 'Digital' | 'Organ';
 

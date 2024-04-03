@@ -19,6 +19,7 @@ function SongCard({title, artist, year, image}: SongCardProps) {
     const clicksong = async () => {
         const song : SongState = {title : title}
         controller.currentSong = song;
+        controller.status = 'Waiting';
         nav(PPPATH.PLAY)
 
     }

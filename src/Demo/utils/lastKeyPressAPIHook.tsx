@@ -1,6 +1,7 @@
-import { forEach } from "lodash";
-import React, { useEffect, useState } from "react";
-import { INTERNALENDPOINTS, PianoState, PlayPianoControllerState } from "./types";
+import  { useEffect, useState } from "react";
+import { PianoState, isPianoState,  } from "./types";
+import { usePlayPianoController } from "../../App";
+import { PPEvents } from "../../pianoStateController/PlayPianoEventHandler";
 
 const EVENTENDPOINT = 'http://localhost:8080/api/events'
 
@@ -27,6 +28,9 @@ export default function useKeyPressesFromServer(keysToReport?: number | number[]
 
         console.log(`Key pressed id : ${keypress.keyID} keys listening for ${keysToReport}`);
 
+        if(keypress.keyID === undefined){
+          return;
+        }
         if(keysToReport !== undefined){
           if(typeof keysToReport === "number"){
             // eslint-disable-next-line eqeqeq
@@ -78,6 +82,7 @@ export function useActionOnKeyPress(action : (keyID?:number)=> void, keyID?:numb
 }
 
 export function useProgressFromServer() {
+  const controller = usePlayPianoController();
 
   const [progress, setProgress ] = useState(-1);
 
@@ -110,6 +115,7 @@ export function useProgressFromServer() {
 
 export function useStatusFromServer() {
 
+  const controller = usePlayPianoController();
   const [status, setStatus ] = useState<PianoState>('Menus');
 
   useEffect( () => {
@@ -118,14 +124,16 @@ export function useStatusFromServer() {
       events.onmessage = (event) => {
 
         const lastEvent = JSON.parse(event.data);
-        const statusFromServer : PianoState  = lastEvent.status
+        const statusFromServer  = lastEvent.status
 
 
-        if(statusFromServer === undefined){
+        if(!isPianoState(statusFromServer)){
           console.log(`status undefined ${statusFromServer}`)
           return;
         }
+        if(statusFromServer)
         console.log(`midi progress processed  ${statusFromServer}`)
+        controller.status = statusFromServer;
         setStatus(statusFromServer);
 
 
@@ -137,4 +145,28 @@ export function useStatusFromServer() {
   }, []);
 
   return status
+}
+
+
+
+
+
+export function useControllerStatus(){
+  const controller = usePlayPianoController();
+  const [pianoStatus,setPianoStatus] = useState(controller.status);
+
+  useEffect(()=>{
+
+    
+  const statusListener = ()=>{
+    setPianoStatus(controller.status);
+  }
+
+    controller.addListener(PPEvents.STATUS,statusListener)
+
+    return ()=>{controller.removeListener(PPEvents.STATUS,statusListener)}
+    
+  },[controller, controller.status]
+  )
+  return pianoStatus;
 }
