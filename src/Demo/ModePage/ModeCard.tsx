@@ -56,14 +56,14 @@ function ModeCard({ mode, icon, text, link, keyID} : ModeCardProps) : JSX.Elemen
 
   return (
     <div className = "mode-card" 
-    style={{backgroundColor:`rgb(${ButtonColors[keyID]})` }}
+    //style={{backgroundColor:`rgb(${ButtonColors[keyID]})` }}
     onClick = {pressAction}>
 
       <FontAwesomeIcon icon = {icon} className = "mode-icon" />
 
-      <h1>{mode}</h1>
+      <h2 className="mode-header">{mode}</h2>
 
-      <p>{text}</p>
+      <p className="mode-text">{text}</p>
 
     </div>
   );

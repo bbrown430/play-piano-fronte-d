@@ -14,26 +14,69 @@
 .mode-icon{
 	display: block;
 	color: white;
-	font-size: 5em;
-	padding-top: 32px;
+	font-size: 7em;
+	padding-top: 48px;
 }
 
 h1 {
 	font-family: "Inter", sans-serif;
 	font-weight: 700;
+	margin-top: 32px;
+	margin-bottom: 0px;
+	color: white;
+	font-size: 7em;
+	text-shadow: 0px 3px 10px rgba(0, 0, 0, .15);
+}
+
+h2 {
+	font-family: "Inter", sans-serif;
+	font-weight: 700;
 	margin-top: 16px;
 	margin-bottom: 0px;
 	color: white;
-	font-size: 3em;
+	font-size: 4em;
+}
+
+h3 {
+	font-family: "Inter", sans-serif;
+	font-weight: 700;
+	color: white;
+	font-size: 2em;
+	margin: 0px;
+}
+
+h4 {
+	font-family: "Inter", sans-serif;
+	font-weight: 500;
+	color: white;
+	font-size: 1.5em;
+	margin: 0px;
+	margin-bottom: 4px;
+}
+
+h5 {
+	font-family: "Inter", sans-serif;
+	font-weight: 300;
+	color: white;
+	font-size: 1.5em;
+	margin: 0px;
 }
 
 p {
 	font-family: "Inter", sans-serif;
-	font-weight: 400;
+	font-weight: 500;
 	text-align: center;
 	font-size: 2.5em;
 	width: 100%;
 	color: white;
+}
+
+.sticky-header {
+	text-align: center;
+    padding: 48px 0;
+    position: fixes;
+    top: 0;
+    z-index: 1000; /* Adjust z-index as needed */
 }
 
 
@@ -41,8 +84,8 @@ body {
 	background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
 	background-size: 600% 600%;
 	animation: gradient 40s ease infinite;
-	height: 100vh;
 }
+
 
 @keyframes gradient {
 	0% {
@@ -55,3 +98,17 @@ body {
 		background-position: 0% 50%;
 	}
 }
+
+
+.transition-effect {
+	transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  }
+  
+  .fade-out {
+	opacity: 0;
+  }
+  
+  .scale-down {
+	transform: scale(0.5);
+  }
+  

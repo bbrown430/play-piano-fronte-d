@@ -4,14 +4,16 @@
 	align-items: center;
 	text-align: center;
 	background-color: rgba(217, 217, 217, 0.2);
-	height:200px;
-	width: 500px;
+	height:440px;
+	width: 400px;
 	border-radius: 16px;
 	border: 5px solid white;
 	margin: 20px;
 	box-shadow: rgba(0, 0, 0, 0.1) 0px 8px 24px;
 	cursor: pointer;
 	transition: background-color 0.2s ease;
+	display: flex;
+	justify-content: center;
 }
 
 .song-card:hover{
@@ -23,7 +25,7 @@
 
 .song-select{
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
 	align-items: center;
 
 	/*display: grid;*/ 
@@ -34,8 +36,9 @@
 .song-select-container{
 	display: flex;
 	flex-direction: row;
-	align-items: center;
-
+	justify-content: center;
+  	align-items: center;
+	margin-top: 60px;
 }
 
 .song-screen{
@@ -52,41 +55,70 @@
 	font-size: 3em;
 	color: white;
 	font-weight: bolder;
+}
 
+.song-image{
+	width: 240px;
+	border-radius: 8px;
+}
+
+.song-metadata-title{
+	font-size: 44px;
+}
+
+.artist{
+	font-size: 24px;
+}
+.year-genre{
+	font-size: 16px;
+	margin-bottom: 8px;
 }
 
 
-h1 {
-    font-size: 30px;
-    font-weight: 700;
-    padding-top: 6px;
-	white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+
+/* Styles for cards with position 2 and 4 */
+.song-card.position-2 h3,
+.song-card.position-4 h3 {
+  font-size: 1.5em; /* Adjust the font size as needed */
 }
 
-h2 {
-    font-family: "Inter", sans-serif;
-	font-weight: 500;
-    margin-top: 0px;
-	margin-bottom: 0px;
+.song-card.position-2 h4,
+.song-card.position-4 h4 {
+	font-size: 12px; /* Adjust the font size as needed */
+	margin-bottom: 8px;
+}
+
+.song-card.position-2 img,
+.song-card.position-4 img {
+	width: 160px;
+}
+
+
+.position-2,
+.position-4 {
+  width: 196px;
+  height: 240px;
+  margin-left: 40px;
+  margin-right: 40px;
+}
+
+.song-card.position-1,
+.song-card.position-5 {
+  width: 140px;
+  height: 140px;
+  background-color: rgba(0, 0, 0, 0);
+  margin-left: 48px;
+  margin-right: 48px;
+}
+
+.song-card.position-1 img,
+.song-card.position-5 img {
+	width: 140px;
+	border-radius: 10px;
+}
+
+.arrow{
 	color: white;
-	font-size: 18px;
-}
-
-h3 {
-    font-family: "Inter", sans-serif;
-	font-weight: 300;
-    margin-top: 2px;
-	margin-bottom: 0px;
-	color: white;
-	font-size: 14px;
-}
-
-.logo {
-    margin-top: 16px;
-    height: 160px;
-    width: 160px;
-    border-radius: 6px;
-	box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+	font-size: 3em;
+	padding: 16px;
 }
