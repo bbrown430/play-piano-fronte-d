@@ -42,7 +42,11 @@ export function ProgressHeader(){
     return (
         <div className = "progress-header">
 
-<div className = "song-title" style={{width : '20%'}}>Mode: {controller.pianoMode}</div>
+        <div 
+          className = "song-title" 
+          style={{width : '20%'}}>
+          Mode: {controller.pianoMode}
+        </div>
 
          {controller.pianoMode !== 'Free' ? <>
          <div className = "song-title">{songTitle}</div>

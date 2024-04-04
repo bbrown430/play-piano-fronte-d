@@ -7,7 +7,7 @@ import { PPEvents } from "../../pianoStateController/PlayPianoEventHandler";
 import { getSongBoundingBoxes } from "./songdata";
 import { BoundingBox, PianoState } from '../utils/types';
 import PlayPianoController from "../../pianoStateController/PlayPianoController";
-import { useActionOnKeyPress, useStatusFromServer, useProgressFromServer, useControllerStatus } from "../utils/lastKeyPressAPIHook";
+import { useActionOnKeyPress, useStatusFromServer, useProgressFromServer, useControllerStatus, useScoreFromServer } from "../utils/lastKeyPressAPIHook";
 import { useNavigate } from "react-router";
 
 
@@ -20,6 +20,7 @@ export enum KEYID{
 
  export default function PlayPage() {
     const statusAPI : PianoState  = useControllerStatus();
+    const controller = usePlayPianoController();
     
     return ( 
         <div className = "inProgress-container"
@@ -33,6 +34,9 @@ export enum KEYID{
                             return  <StartSongPage/>
 
                         case "inProgress":
+                            if(controller.pianoMode==='Free'){
+                                return <></>
+                            }
                             return <SheetMusic/>
                         case "Over":
                             return <EndScreen/>
@@ -65,28 +69,35 @@ function SheetMusic(){
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[progress])
 
+
+  const getoffsets = () => {
+    const element = document.getElementById("sheetimg");
+    if(element){
+    const rect = element.getBoundingClientRect();
+    return {top:rect.top,left:rect.left}
+    }
+    return {top: 200,left:500}
+  }
+
+
     return (
 
             <div className= "sheet-music">
                     <img 
                     id="sheetimg"
-                style = {{position: 'absolute'}} 
-                src={hcbsheetmusic} 
-                alt="" ></img>
+                    style = {{position: 'absolute'}} 
+                    src={hcbsheetmusic} 
+                    alt="" ></img>
 
                 {
-                controller.status==='inProgress' && boundingBox ?
+                controller.status === 'inProgress' && boundingBox ?
                  <div className="note-overlay"
-                    /* style={{
-                        top:boundingBox.y
-                        ,left:boundingBox.x
+                     style={{
+                        top:boundingBox.y + getoffsets().top
+                        ,left:boundingBox.x + getoffsets().left
                         ,width:boundingBox.width
-                        ,height:boundingBox.height}} */
-                        style={{
-                            top: 0
-                            ,left:0
-                            ,width:100
-                            ,height:100}}/> 
+                        ,height:boundingBox.height}} 
+                        /> 
                     : <></>}
 
             </div>
