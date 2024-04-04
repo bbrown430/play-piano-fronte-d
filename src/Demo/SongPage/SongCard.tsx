@@ -3,8 +3,7 @@ import "./index.css";
 import { PPPATH, usePlayPianoController } from "../../App";
 import { useNavigate } from "react-router";
 import { SongState } from '../utils/types';
-import { useActionOnKeyPress } from "../utils/lastKeyPressAPIHook";
-import { getSongBoundingBoxes } from "../PlayPage/songdata";
+import { useActionOnKeyPress } from "../utils/APIHooks";
 
 interface SongCardProps {
     title: string;
