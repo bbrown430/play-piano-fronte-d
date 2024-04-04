@@ -80,11 +80,44 @@ export function useActionOnKeyPress(action : (keyID?:number)=> void, keyID?:numb
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[action, keyPresses]);
 }
+export function useScoreFromServer() {
+  const controller = usePlayPianoController();
+
+  const [score, setScore ] = useState(-1);
+
+  useEffect( () => {
+      const events = new EventSource(EVENTENDPOINT);
+
+      events.onmessage = (event) => {
+
+        const lastEvent = JSON.parse(event.data);
+        const score : number  = lastEvent.progress
+
+
+
+        if(score < 0 || score===undefined){
+          console.log(`returing before setting progress because :  ${score}`)
+
+          return;
+        }
+        console.log(`midi progress processed  ${score}`)
+        setScore(score);
+
+
+    }
+
+    return () => {
+      events.close();
+    }
+  }, []);
+
+  return score
+}
 
 export function useProgressFromServer() {
   const controller = usePlayPianoController();
 
-  const [progress, setProgress ] = useState(-1);
+  const [progress, setProgress ] = useState(0);
 
   useEffect( () => {
       const events = new EventSource(EVENTENDPOINT);
@@ -96,13 +129,13 @@ export function useProgressFromServer() {
 
 
 
-        if(progress < 0 || progress===undefined){
+        if(progress < 0 || progress === undefined){
           console.log(`returing before setting progress because :  ${progress}`)
 
           return;
         }
         console.log(`midi progress processed  ${progress}`)
-        setProgress(progress);
+        setProgress(prev=>prev+=1);
 
 
     }

@@ -67,14 +67,13 @@ app.get('/api/lastkeypress', (req, res) => {
 });
 
 
-
 let status = {
   status : '',
 } 
 //send song ended event
 app.post('api/status',  (req,res)=>{
   status = {
-    keyID : req.body.status
+    status : req.body.status
   };
   console.log(`POST req made : ${req.body.status}`);
   res.json(status);
