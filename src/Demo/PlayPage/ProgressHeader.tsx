@@ -3,12 +3,13 @@ import { PPPATH, usePlayPianoController } from "../../App";
 import { PPEvents } from "../../pianoStateController/PlayPianoEventHandler";
 import { useNavigate } from "react-router";
 import "./playpageformatting.css"
-import { useProgressFromServer } from "../utils/lastKeyPressAPIHook";
+import { useProgressFromServer, useScoreFromServer } from "../utils/lastKeyPressAPIHook";
 
 export function ProgressHeader(){
     const controller = usePlayPianoController();
     const [songTitle,setSongTitle] = useState(controller.songTitle);
     const progress = useProgressFromServer();
+    const scoreFromServer = useScoreFromServer()
 
 
     
@@ -41,12 +42,18 @@ export function ProgressHeader(){
     return (
         <div className = "progress-header">
 
+<div className = "song-title" style={{width : '20%'}}>Mode: {controller.pianoMode}</div>
+
+         {controller.pianoMode !== 'Free' ? <>
          <div className = "song-title">{songTitle}</div>
-        
+         
          <div className = "progress-bar">
-        
-           {`${((controller.currentSong.progress ?? 0)/(controller.currentSong.end ?? 0) * 100).toFixed()}  % finished with song`}
-     </div>
+          {`Progress: ${((controller.currentSong.progress ?? 0)/(controller.currentSong.end ?? 1) * 100).toFixed()}% `}</div>
+          
+         </> :<></>}
+
+         {controller.pianoMode === 'Play' ? <div className = "progress-bar">
+          {`Score: ${scoreFromServer}`}</div> : <></>}
 
      </div>
     )

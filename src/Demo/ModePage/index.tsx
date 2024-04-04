@@ -8,8 +8,6 @@ import { useNavigate } from 'react-router';
 //move to the page for modes, buttons select the mode function buttonAction = {}=>
 function ModeSelect() {
 
-  const nav = useNavigate();
-
   return (
     <div className='mode-page-container'>
       <text className='menu-header'>
@@ -35,7 +33,8 @@ function ModeSelect() {
         mode="Free"
         icon={faBullseye}
         text='Free play mode' 
-        keyID={2}                 />
+        keyID={2}        
+        link={PPPATH.PLAY}         />
 
       <ModeCard
         mode="Magic"
