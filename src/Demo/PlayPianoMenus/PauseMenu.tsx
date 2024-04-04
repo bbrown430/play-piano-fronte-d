@@ -1,5 +1,5 @@
 import MenuButton from './button';
-import { faArrowRotateForward, faPlay, faWrench } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRotateForward, faMusic, faPlay, faX } from '@fortawesome/free-solid-svg-icons';
 import {useNavigate } from 'react-router-dom';
 import { PPPATH, usePlayPianoController } from '../../App';
 
@@ -13,7 +13,6 @@ export function PauseMenu() {
 
   const unpause = () => {
     controller.unPause(); 
-    controller.status = 'inProgress';
     nav(PPPATH.PLAY);
   };
 
@@ -21,31 +20,47 @@ export function PauseMenu() {
     controller.status = 'Menus';
     nav(PPPATH.SONGSELECT)
   }
+  const exitToModeSelect = () => {
+    controller.status = 'Menus';
+    nav(PPPATH.MODESELECT)
+  }
 
   return (
     <div className="menu-wrapper">
 
       <div className='menu-header'>
-        <p>Paused</p>
+        Paused
         </div>
 
+    <div className= "menu-row">
       <MenuButton
-        title='restart'
+        title='Restart'
         icon={faArrowRotateForward}
         text='restart current song from begining'
         action={restart} keyID={0} />
 
       <MenuButton 
         title='Change Song'
-        icon={faWrench}
+        icon={faMusic}
         text=''
         action={changeSong} keyID={1}/>
 
+</div>
+
+<div className= "menu-row"> 
       <MenuButton
-        title='unpause'
+        title='Resume'
         icon={faPlay}
         text=''
         action={unpause} keyID={2} />
+
+      <MenuButton
+        title='Exit'
+        icon={faX}
+        text='End Song, Return to Menu'
+        action={exitToModeSelect} keyID={3} />
+
+</div>   
 
     </div>
   );

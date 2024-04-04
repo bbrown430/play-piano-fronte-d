@@ -45,12 +45,12 @@ function ModeSelect() {
 
      </div>
 
-      <MenuButton 
+    {/*   <MenuButton 
         title={'Settings'} 
         icon={faWrench} 
         text={'...'} 
         action={()=> nav(PPPATH.SETTINGS)}
-        keyID={4} />    
+        keyID={4} />     */}
     </div>
   );
 }

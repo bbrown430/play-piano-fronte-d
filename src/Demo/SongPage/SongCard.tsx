@@ -4,6 +4,7 @@ import { PPPATH, usePlayPianoController } from "../../App";
 import { useNavigate } from "react-router";
 import { SongState } from '../utils/types';
 import { useActionOnKeyPress } from "../utils/lastKeyPressAPIHook";
+import { getSongBoundingBoxes } from "../PlayPage/songdata";
 
 interface SongCardProps{
     title: string;
@@ -16,8 +17,15 @@ function SongCard({title, artist, year, image}: SongCardProps) {
     const nav = useNavigate();
     const controller = usePlayPianoController();
 
-    const clicksong = async () => {
-        const song : SongState = {title : title}
+    const clicksong =  () => {
+      //  const bb = getSongBoundingBoxes(title);
+        const song : SongState = {
+            title : title,
+         //   end : bb.length,
+           // boundingBoxes :bb,
+            progress : 0,
+            //sheets : getSongSheetMusic(title),
+        }
         controller.currentSong = song;
         controller.status = 'Waiting';
         nav(PPPATH.PLAY)

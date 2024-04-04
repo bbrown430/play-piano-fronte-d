@@ -24,9 +24,9 @@ function MenuButton( {title, icon, text, action,keyID} : MenuButtonProps) : JSX.
   // for testing 
   const controller : PlayPianoController = usePlayPianoController();
 
-  title = title ? title : "Untitled";
+  title = title ? title : "";
   icon = icon ? icon : faQuestion;
-  text = text ? text : "placeholder text for a play piano menu button";
+  text = text ? text : "";
   
   useActionOnKeyPress(action,keyID)
   controller.setKeyColor(keyID, ButtonColors[keyID]);
@@ -36,7 +36,7 @@ function MenuButton( {title, icon, text, action,keyID} : MenuButtonProps) : JSX.
     style={{backgroundColor:`rgba(${ButtonColors[keyID]},.9)` }}
      onClick={()=>{if (action){action()}}}>
       <FontAwesomeIcon icon={icon}  className="mode-icon" />
-      <h1>{title}</h1>
+      <h1 style={{fontSize:`2em`}}>{title}</h1>
       <p>
         {text}
       </p>

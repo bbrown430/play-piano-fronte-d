@@ -3,13 +3,13 @@
 	flex-direction: column;
 	align-items: center;
 	text-align: center;
-	font-size: .8em;
+	font-size: 1em;
 	background-color: rgba(217, 217, 217, 0.2);
-	height: 250px;
-	width: 500px;
+	height: 350px;
+	width: 600px;
 	border-radius: 16px;
-	border: 5px solid white;
-	margin: 20px;
+	border: 10px solid white;
+	margin: 30px;
 	box-shadow: rgba(0, 0, 0, 0.1) 0px 8px 24px;
 	transition: background-color 0.2s ease;
 }
@@ -22,8 +22,6 @@
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	height: 100%;
-	width: 100%;
 }
 
 .menu-header{
