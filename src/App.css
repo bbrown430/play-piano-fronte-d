@@ -2,11 +2,13 @@
 
 
 .centered {
+	height: 1080px;
+	width: 1920px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	height: 100vh;
-	width: 100vw;
+	/*height: 100vh;
+	width: 100vw;*/
   }
 
 .mode-icon{

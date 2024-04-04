@@ -80,6 +80,8 @@ export function useActionOnKeyPress(action : (keyID?:number)=> void, keyID?:numb
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[action, keyPresses]);
 }
+
+
 export function useScoreFromServer() {
   const controller = usePlayPianoController();
 
@@ -115,8 +117,7 @@ export function useScoreFromServer() {
 }
 
 export function useProgressFromServer() {
-  const controller = usePlayPianoController();
-
+  
   const [progress, setProgress ] = useState(0);
 
   useEffect( () => {
@@ -177,7 +178,7 @@ export function useStatusFromServer() {
     return () => {
       events.close();
     }
-  }, []);
+  }, [controller]);
 
   return status
 }

@@ -11,12 +11,16 @@ function ModeSelect() {
   const nav = useNavigate();
 
   return (
+    <div className='mode-page-container'>
+      <text className='menu-header'>
+        Select Mode
+      </text>
     <div className="mode-select">
       <ModeCard
-                mode= 'Learn'
-                icon={faChalkboardTeacher}
-                text="Learn to play the piano"
-                keyID={0}
+        mode= 'Learn'
+        icon={faChalkboardTeacher}
+        text="Learn to play the piano"
+        keyID={0}
                 />
 
       <ModeCard 
@@ -24,7 +28,9 @@ function ModeSelect() {
         icon={faGamepad}
         text='Play along, and go for a high score'
         keyID={1}                />
+        </div>
 
+    <div className='mode-select'>
       <ModeCard 
         mode="Free"
         icon={faBullseye}
@@ -34,14 +40,15 @@ function ModeSelect() {
       <ModeCard
         mode="Magic"
         icon={faMagicWandSparkles}
-        text='Select song, and watch the piano magically playing itself' 
+        text='Watch the piano magically playing itself' 
         keyID={3}               />
 
-      
+     </div>
+
       <MenuButton 
         title={'Settings'} 
         icon={faWrench} 
-        text={'Change Play Piano Settings'} 
+        text={'...'} 
         action={()=> nav(PPPATH.SETTINGS)}
         keyID={4} />    
     </div>
