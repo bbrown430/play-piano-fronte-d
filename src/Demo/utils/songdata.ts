@@ -15,11 +15,11 @@ export async function getSongBoundingBoxes(title:string) {
    }
         
     let bblist : any[] = [];
-    console.log(Object.values(boundingBoxesJson));
+   // console.log(Object.values(boundingBoxesJson));
 
     for (let index = 0; index < Object.values(boundingBoxesJson).length; index++) {
         bblist.push(Object.values(boundingBoxesJson)[index]);
-        console.log(bblist[index]); 
+       // console.log(bblist[index]); 
 
      }
     
@@ -37,7 +37,7 @@ export async function getSongBoundingBoxes(title:string) {
 export async function getSongSheetMusic(title:string) {
     let image
    try{ image = await import(`../../assets/SheetMusic/${title}/${title}.jpg`)
-    image = await import(`../../assets/SheetMusic/hot cross buns/hot cross buns.jpg`)
+    //image = await import(`../../assets/SheetMusic/hot cross buns/hot cross buns.jpg`)
    return image;
    }
    catch (error){

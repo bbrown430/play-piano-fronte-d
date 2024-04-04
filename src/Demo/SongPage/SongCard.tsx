@@ -1,15 +1,15 @@
-import React from "react";
 import "./index.css";
 import { PPPATH, usePlayPianoController } from "../../App";
 import { useNavigate } from "react-router";
 import { SongState } from '../utils/types';
-import { useActionOnKeyPress } from "../utils/APIHooks";
+import { getSongBoundingBoxes } from "../utils/songdata";
+import { error } from "console";
 
 interface SongCardProps {
     title: string;
     artist: string;
     year: number;
-    image: string;
+    image?: string;
     position: number;
 }
 
@@ -17,10 +17,13 @@ function SongCard({ title, artist, year, image, position }: SongCardProps) {
     const nav = useNavigate();
     const controller = usePlayPianoController();
 
-    const clicksong = () => {
+    const clicksong = async () => {
+        const  bb = await getSongBoundingBoxes(title);
+      
         const song: SongState = {
             title: title,
             progress: 0,
+            boundingBoxes : bb !== undefined ? bb : [],
         }
         controller.currentSong = song;
         controller.status = 'Waiting';

@@ -128,14 +128,14 @@ function StartSongPage(){
         const controller = usePlayPianoController();
 
         //starts game on keypress
-        const  startdisplaytest = async () => {
+        const  startdisplaytest =  () => {
             controller.status = 'inProgress';
 
             //@todo remove and place in song select button
             
 
-            const boundingBoxes  = await getSongBoundingBoxes(controller.currentSong.title||"");
-            controller.currentSong = {boundingBoxes: boundingBoxes,title: controller.currentSong.title, progress : 0, end : boundingBoxes.length}; 
+            //const boundingBoxes  = await getSongBoundingBoxes(controller.currentSong.title||"");
+           // controller.currentSong = {boundingBoxes: boundingBoxes,title: controller.currentSong.title, progress : 0, end : boundingBoxes.length}; 
         
         }
 

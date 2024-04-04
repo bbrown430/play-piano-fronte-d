@@ -1,15 +1,14 @@
 [
   {
-    "title": "hot cross buns",
-    "artist": "??",
-    "year": 3043,
-    "image": ""
-  },
-  {
     "title": "Moral of the Story",
     "artist": "Ashe",
     "year": 2019,
     "image": "/data/Ashe - Moral of the Story/cover.jpg"
+  },{
+    "title": "hot cross buns",
+    "artist": "??",
+    "year": 3043,
+    "image": ""
   },
   {
     "title": "What Was I Made For?",
