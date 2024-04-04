@@ -13,19 +13,16 @@ function SplashScreen() {
 
         
     return ( 
-        <div className="splash-container" onClick={action}>
 
-                <div className="piano-logo">
+        <div className="splash-container centered" onClick={action}>
 
+              <div className="piano-logo">
                 <img
-                style={{width: "1000px", height:"1000px"}}
-                src={logo}
-                className="logo"
-                alt="logo"
-             />
+                    src={logo}
+                    className="piano-logo"
+                    alt="logo"/>
              </div>
-
-            <h2 className='splash-text'>Play any key to start!</h2>
+            <h1 className='splash-text'>Play any key to start!</h1>
         </div>
     );
 }

@@ -1,5 +1,5 @@
 import ModeCard from './ModeCard';
-import {faGamepad, faChalkboardTeacher, faBullseye, faMagicWandSparkles, faWrench } from '@fortawesome/free-solid-svg-icons';
+import {faGamepad, faChalkboardTeacher, faBullseye, faMagicWandSparkles, faWrench, faPaintBrush } from '@fortawesome/free-solid-svg-icons';
 import "./index.css"
 import { PPPATH} from '../../App';
 import MenuButton from '../PlayPianoMenus/button';
@@ -9,38 +9,29 @@ import { useNavigate } from 'react-router';
 function ModeSelect() {
 
   return (
-    <div className='mode-page-container'>
-      <text className='menu-header'>
+    <div >
+      <h1 className='sticky-header'>
         Select Mode
-      </text>
+      </h1>
     <div className="mode-select">
       <ModeCard
         mode= 'Learn'
         icon={faChalkboardTeacher}
-        text="Learn to play the piano"
+        text="Learn how to play your favorite songs with gentle pacing to match your skills."
         keyID={0}
                 />
-
       <ModeCard 
         mode='Play'
         icon={faGamepad}
-        text='Play along, and go for a high score'
+        text='Play along to your favorite songs and go for a new high score!'
         keyID={1}                />
-        </div>
 
-    <div className='mode-select'>
       <ModeCard 
         mode="Free"
-        icon={faBullseye}
-        text='Free play mode' 
+        icon={faPaintBrush}
+        text='Play around and watch the lights dance around your fingers.' 
         keyID={2}        
         link={PPPATH.PLAY}         />
-
-      <ModeCard
-        mode="Magic"
-        icon={faMagicWandSparkles}
-        text='Watch the piano magically playing itself' 
-        keyID={3}               />
 
      </div>
 

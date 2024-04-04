@@ -1,45 +1,45 @@
-import internal from "stream";
-import "./index.css"
+import React from "react";
+import "./index.css";
 import { PPPATH, usePlayPianoController } from "../../App";
 import { useNavigate } from "react-router";
 import { SongState } from '../utils/types';
 import { useActionOnKeyPress } from "../utils/APIHooks";
 
-interface SongCardProps{
+interface SongCardProps {
     title: string;
     artist: string;
     year: number;
     image: string;
+    position: number;
 }
 
-function SongCard({title, artist, year, image}: SongCardProps) {
+function SongCard({ title, artist, year, image, position }: SongCardProps) {
     const nav = useNavigate();
     const controller = usePlayPianoController();
 
-    const clicksong =  () => {
-      //  const bb = getSongBoundingBoxes(title);
-        const song : SongState = {
-            title : title,
-         //   end : bb.length,
-           // boundingBoxes :bb,
-            progress : 0,
-            //sheets : getSongSheetMusic(title),
+    const clicksong = () => {
+        const song: SongState = {
+            title: title,
+            progress: 0,
         }
         controller.currentSong = song;
         controller.status = 'Waiting';
         nav(PPPATH.PLAY)
-
     }
 
-    return(
-        <div className="song-card"
-            onClick={clicksong}>
-            <h1>{title}</h1>
-            <h2>{artist}</h2>
-            <h3>{year}</h3>
-            <img src={image} alt="" />
+    const positionClass = `position-${position}`;
+    const hideTitleArtist = position === 1 || position === 5;
+    const hideYear = position === 1 || position === 5 || position === 2 || position === 4;
 
+
+    return (
+        <div className={`song-card ${positionClass}`} onClick={clicksong}>
+            {!hideTitleArtist && <h3 className="song-metadata-title">{title}</h3>}
+            {!hideTitleArtist && <h4 className="artist">{artist}</h4>}
+            {!hideYear && <h5 className='year-genre'>{year}</h5>}
+            <img className='song-image' src="https://upload.wikimedia.org/wikipedia/en/c/c3/Twilight_%28B%C3%B4a_album%29.jpg" alt="" />
         </div>
     )
 }
-export default SongCard
+
+export default SongCard;

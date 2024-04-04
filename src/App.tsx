@@ -5,14 +5,13 @@ import SongSelect from './Demo/SongPage';
 import { HashRouter } from 'react-router-dom';
 import { Routes, Route } from 'react-router';
 import { Debug } from './Demo/utils/Debug';
-import {PauseMenu} from './Demo/PlayPianoMenus/PauseMenu';
+import { PauseMenu } from './Demo/PlayPianoMenus/PauseMenu';
 import PlayPianoController from './pianoStateController/PlayPianoController';
 import { Settings } from './Demo/PlayPianoMenus/Settings';
 import React, { useContext } from 'react';
 import PlayPage from './Demo/PlayPage';
 
-export  function usePlayPianoController(): PlayPianoController {
-
+export function usePlayPianoController(): PlayPianoController {
   const ctx = useContext(controllerContext);
   return ctx;
 }
@@ -30,21 +29,21 @@ export enum PPPATH {
 }
 
 function App() {
-
   return (
     <HashRouter>
-      <div className="centered">
+      <div>
         <Routes>
-          <Route path = {PPPATH.SPLASHSCREEN}          element={<SplashScreen/>}></Route>
-          <Route path = {PPPATH.MODESELECT}   element={<ModeSelect/>}></Route>
-          <Route path = {PPPATH.PAUSED} element={<PauseMenu/>}></Route>
-          <Route path = {PPPATH.SONGSELECT}   element={<SongSelect/>}></Route>
-          <Route path = {PPPATH.SETTINGS} element={<Settings/>}></Route>
-          <Route path = {PPPATH.PLAY} element = {<PlayPage></PlayPage>}/>
-          <Route path = {PPPATH.DEBUG}   element={<Debug/>}></Route>
+          <Route path={PPPATH.SPLASHSCREEN} element={<SplashScreen />} />
+          <Route path={PPPATH.MODESELECT} element={<ModeSelect />} />
+          <Route path={PPPATH.PAUSED} element={<PauseMenu />} />
+          <Route path={PPPATH.SONGSELECT} element={<SongSelect />} />
+          <Route path={PPPATH.SETTINGS} element={<Settings />} />
+          <Route path={PPPATH.PLAY} element={<PlayPage />} />
+          <Route path={PPPATH.DEBUG} element={<Debug />} />
         </Routes>
       </div>
     </HashRouter>
   );
 }
+
 export default App;

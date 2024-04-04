@@ -5,11 +5,11 @@
 	text-align: center;
 	font-size: 1em;
 	background-color: rgba(217, 217, 217, 0.2);
-	height: 350px;
-	width: 600px;
+	height: 500px;
+	width: 350px;
 	border-radius: 16px;
-	border: 10px solid white;
-	margin: 30px;
+	border: 8px solid white;
+	margin: 40px;
 	box-shadow: rgba(0, 0, 0, 0.1) 0px 8px 24px;
 	transition: background-color 0.2s ease;
 }
@@ -21,7 +21,14 @@
 .mode-select{
 	display: flex;
 	flex-direction: row;
-	align-items: center;
+	justify-content: center;
+  	align-items: center;
+	margin-top: 36px;
+}
+
+.mode-text{
+	width: 90%;
+	font-size: 1.8em
 }
 
 .menu-header{
@@ -32,12 +39,8 @@
 	text-align: center;
 	font-size: 3em;
 	color: white;
-	font-weight: bolder;
-
 }
 
-.mode-page-container{
-	display: flex;
-	flex-direction: column;
-	align-items: center;
+.mode-header{
+	padding-top: 12px;
 }
