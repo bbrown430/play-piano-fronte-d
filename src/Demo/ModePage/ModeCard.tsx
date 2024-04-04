@@ -9,7 +9,7 @@ import { PianoMode } from '../utils/types';
 import { useNavigate } from "react-router-dom";
 import { assert } from 'console';
 import { PPPATH, usePlayPianoController } from '../../App';
-import { useActionOnKeyPress } from '../utils/lastKeyPressAPIHook';
+import { useActionOnKeyPress } from '../utils/APIHooks';
 
 type color = [number,number,number];
 export const ButtonColors : color[] = [[200,0,0],[0,200,0],[0,0,200],[200,200,0],[200,0,200],[0,200,200]];
