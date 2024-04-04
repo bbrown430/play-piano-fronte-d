@@ -202,7 +202,6 @@ export function useControllerStatus(){
 
     return ()=>{controller.removeListener(PPEvents.STATUS,statusListener)}
     
-  },[controller, controller.status]
-  )
+  },[controller, controller.status])
   return pianoStatus;
 }

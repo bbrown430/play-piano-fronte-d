@@ -107,13 +107,14 @@ export default class PlayPianoController{
   }
 
 
-  isPaused() : boolean 
+  protected isPaused() : boolean 
   {
     return this._state.status === 'Paused'; 
   }
+
   unPause() {
     if(this.isPaused()){
-      this._state.status = 'inProgress';
+      this.status = 'inProgress';
     }
   }
 

@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom"
 import logo from '../../assets/play-piano-logo.svg';
 import "./index.css"
-import  { useActionOnKeyPress } from "../utils/lastKeyPressAPIHook";
+import  { useActionOnKeyPress } from "../utils/APIHooks";
 import { PPPATH } from "../../App";
 
 function SplashScreen() {
@@ -13,7 +13,7 @@ function SplashScreen() {
 
         
     return ( 
-        <div className="splash-container">
+        <div className="splash-container" onClick={action}>
 
                 <div className="piano-logo">
 

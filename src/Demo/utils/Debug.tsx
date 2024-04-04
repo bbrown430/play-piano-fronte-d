@@ -1,12 +1,11 @@
 import "../ModePage/index.css"
 import { PauseMenu } from '../PlayPianoMenus/PauseMenu';
 import { useEffect, useState } from "react";
-import { log } from "console";
 import { usePlayPianoController } from "../../App";
-import { getSongBoundingBoxes } from "../PlayPage/songdata";
 import MenuButton from "../PlayPianoMenus/button";
 import { faCross } from "@fortawesome/free-solid-svg-icons";
-import useKeyPressesFromServer from "./lastKeyPressAPIHook";
+import useKeyPressesFromServer from "./APIHooks";
+import { getSongBoundingBoxes } from "./songdata";
 
 
 let x = 0;
@@ -22,8 +21,20 @@ export function Debug(){
   const [songTitle,setSongTitle] = useState(controller.songTitle);
   const [pianoMode,setPianoMode] = useState(controller.pianoMode);
   const [pianoStatus,setPianoStatus] = useState(controller.status);
+  const [token, setToken] = useState<any[]>();
+useEffect(()=>{
 
+  async function getToken() {
+   
+    const response : any[]  = (await getSongBoundingBoxes('hot cross buns'));
 
+   
+    setToken(response);
+  };
+
+  getToken();
+
+},[])
 
   useEffect(() => {
     console.log('effect run')
@@ -49,7 +60,7 @@ export function Debug(){
         <li>{`${pianoStatus}`}</li>
         <li>{`${pianoSound}`}</li>
         <li>{`song = ${songTitle}`}</li>
-        <li>{`${getSongBoundingBoxes()}`}</li>
+      <li>{`${token}`}</li>
         <MenuButton 
           title='post keypress'
           icon={faCross}
@@ -82,3 +93,5 @@ export function Debug(){
 
 
 export default PauseMenu;
+
+

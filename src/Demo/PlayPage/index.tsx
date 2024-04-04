@@ -1,14 +1,13 @@
 import { PPPATH, usePlayPianoController } from "../../App";
 import { ProgressHeader } from "./ProgressHeader";
 import "./playpageformatting.css"
-import hcbsheetmusic from "../../assets/SheetMusic/hot-cross-buns-midi/hot-cross-buns-midi.jpg"
 import { useEffect, useState } from "react";
 import { PPEvents } from "../../pianoStateController/PlayPianoEventHandler";
-import { getSongBoundingBoxes } from "./songdata";
 import { BoundingBox, PianoState } from '../utils/types';
 import PlayPianoController from "../../pianoStateController/PlayPianoController";
-import { useActionOnKeyPress, useStatusFromServer, useProgressFromServer, useControllerStatus, useScoreFromServer } from "../utils/lastKeyPressAPIHook";
-import { useNavigate } from "react-router";
+import { useActionOnKeyPress, useProgressFromServer, useControllerStatus, useScoreFromServer } from "../utils/APIHooks";
+import { usePause } from "../utils/utils";
+import { getSongBoundingBoxes, getSongSheetMusic } from "../utils/songdata";
 
 
 /**
@@ -57,10 +56,28 @@ function SheetMusic(){
 
     const [boundingBox,setBoundingbox] = useState<BoundingBox|undefined>(undefined);
 
+    //const [sheetimg, setSheetImg] = useState(undefined)
+    
+
+
     const progress = useProgressFromServer();
 
-    usePause(controller);
+    usePause();
+/* 
+    useEffect(()=>{
+    
+      async function getToken() {
+       
+        if(controller.songTitle){
+         const response  = (await getSongSheetMusic(controller.songTitle));
+        setSheetImg(response);}
+      };
+    
+      getToken();
+    
+    },[controller.songTitle]) */
 
+    //updates bounding box coordinates 
     useEffect(()=>{
             if(controller.currentSong.boundingBoxes && controller.currentSong.boundingBoxes.length > progress ){
             setBoundingbox(controller.currentSong.boundingBoxes[progress]);}
@@ -83,11 +100,11 @@ function SheetMusic(){
     return (
 
             <div className= "sheet-music">
-                    <img 
+                    {controller.currentSong.title === undefined ? <></>:<img 
                     id="sheetimg"
                     style = {{position: 'absolute'}} 
-                    src={hcbsheetmusic} 
-                    alt="" ></img>
+                    src={require(`../../assets/SheetMusic/${controller.currentSong.title}/${controller.currentSong.title}.jpg`)} 
+                    alt="" ></img>}
 
                 {
                 controller.status === 'inProgress' && boundingBox ?
@@ -106,26 +123,19 @@ function SheetMusic(){
 }
 
 
-function usePause(controller: PlayPianoController) {
-    const nav = useNavigate();
-    const pause = () => {
-        controller.status = 'Paused';
-        nav(PPPATH.PAUSED);
-    };
-
-
-
-    useActionOnKeyPress(pause, KEYID.PAUSE);
-}
 
 function StartSongPage(){
         const controller = usePlayPianoController();
 
         //starts game on keypress
-        const  startdisplaytest = () => {
+        const  startdisplaytest = async () => {
             controller.status = 'inProgress';
+
             //@todo remove and place in song select button
-            controller.currentSong = {boundingBoxes: getSongBoundingBoxes(),title: 'hot cross buns', progress : 0, end : 80}; 
+            
+
+            const boundingBoxes  = await getSongBoundingBoxes(controller.currentSong.title||"");
+            controller.currentSong = {boundingBoxes: boundingBoxes,title: controller.currentSong.title, progress : 0, end : boundingBoxes.length}; 
         
         }
 
@@ -133,7 +143,7 @@ function StartSongPage(){
 
         return (
             <div className = "start-page">
-                <div className="start-button">Press ANY key to START</div>
+                <div className="start-button" onClick={startdisplaytest}>Press ANY key to START</div>
                 </div>
         )
 }
