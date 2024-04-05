@@ -17,7 +17,7 @@ import { PlayPianoControllerState, SongState } from '../Demo/utils/types';
  
 
 export default class PlayPianoController{
-  private httpcontroller! : PlayPianoHttp;
+  public httpcontroller! : PlayPianoHttp;
   private eventHandler : PlayPianoEventHandler;
   private _state : PlayPianoControllerState;
   constructor(){

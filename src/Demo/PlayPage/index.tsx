@@ -19,7 +19,7 @@ import { over } from "lodash";
  * enum for significant keyids
  */
 export enum KEYID{
-    PAUSE = 0,
+    PAUSE = 85,
 }
 
  export default function PlayPage() {

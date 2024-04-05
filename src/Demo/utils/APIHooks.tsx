@@ -1,5 +1,5 @@
 import  { useEffect, useState } from "react";
-import { PianoState, isPianoState,  } from "./types";
+import { ButtonColors, MIDDLE10KEYS, PianoState, WhiteKeys, isPianoState,  } from "./types";
 import { usePlayPianoController } from "../../App";
 import { PPEvents } from "../../pianoStateController/PlayPianoEventHandler";
 import { switchCase, switchStatement } from "@babel/types";
@@ -15,9 +15,48 @@ type KeyPress = {keyID: number, count: number};
  * @returns 
  */
 export default function useKeyPressesFromServer(keysToReport?: number | number[]) {
+  const controller = usePlayPianoController();
 
   const [lastKeyPress, setLastKeyPress ] = useState(-1);
   const [lastKeyCount, setLastKeyCount] = useState(-1);
+  
+  let colorindex = 0
+
+  if(keysToReport !== undefined){
+    if(typeof keysToReport ==='number'){
+      controller.httpcontroller.registerkey(keysToReport);
+      if(keysToReport<=61){
+        controller.setKeyColor(keysToReport,ButtonColors[colorindex])
+      }
+    }
+    else {
+      keysToReport.forEach(val=>{
+        controller.httpcontroller.registerkey(val);
+        if(val<=61){
+          controller.setKeyColor(val,ButtonColors[colorindex])
+          colorindex = (colorindex + 1)%6;
+        }
+      })
+      
+    }
+  }
+  else {
+
+    MIDDLE10KEYS.forEach(val=>{
+      controller.httpcontroller.registerkey(val);
+      if(val<=61){
+        controller.setKeyColor(val,ButtonColors[colorindex])
+        colorindex = (colorindex + 1)%6;
+      }
+    })
+
+    
+
+  }
+  
+
+
+
 
   useEffect( () => {
       const events = new EventSource(EVENTENDPOINT);

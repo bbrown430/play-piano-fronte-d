@@ -52,4 +52,7 @@ export type PlayPianoControllerState = {
   currentSongState: SongState;
 
 };
-
+type color = [number, number, number];
+export const ButtonColors: color[] = [[200, 0, 0], [0, 200, 0], [0, 0, 200], [200, 200, 0], [200, 0, 200], [0, 200, 200]];
+export const WhiteKeys: number[] = [0,2,4,5,7,9,11,12,14,16,17,19,21,23,24,26,28,29,31,33,35,36,38,40,41,43,45,47,48,50,52,53,55,57,59,60]
+export const MIDDLE10KEYS = WhiteKeys.slice(13,24);
