@@ -1,6 +1,7 @@
 import { PPPATH, usePlayPianoController } from "../../App";
 import { ProgressHeader } from "./ProgressHeader";
 import "./playpageformatting.css"
+import "../PlayPianoMenus/index.css"
 import { useEffect, useState } from "react";
 import { PPEvents } from "../../pianoStateController/PlayPianoEventHandler";
 import { BoundingBox, PianoState } from '../utils/types';
@@ -8,6 +9,10 @@ import PlayPianoController from "../../pianoStateController/PlayPianoController"
 import { useActionOnKeyPress, useProgressFromServer, useControllerStatus, useScoreFromServer } from "../utils/APIHooks";
 import { usePause } from "../utils/utils";
 import { getSongBoundingBoxes, getSongSheetMusic } from "../utils/songdata";
+import MenuButton from "../PlayPianoMenus/button";
+import { faArrowRotateForward, faMusic, faPlay, faX } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router";
+import { over } from "lodash";
 
 
 /**
@@ -56,33 +61,24 @@ function SheetMusic(){
 
     const [boundingBox,setBoundingbox] = useState<BoundingBox|undefined>(undefined);
 
-    //const [sheetimg, setSheetImg] = useState(undefined)
     
 
-
+    const APIstatus = useControllerStatus()
     const progress = useProgressFromServer();
 
     usePause();
-/* 
-    useEffect(()=>{
-    
-      async function getToken() {
-       
-        if(controller.songTitle){
-         const response  = (await getSongSheetMusic(controller.songTitle));
-        setSheetImg(response);}
-      };
-    
-      getToken();
-    
-    },[controller.songTitle]) */
 
     //updates bounding box coordinates 
+    // and ends game if we reached the end of the song
     useEffect(()=>{
             if(controller.currentSong.boundingBoxes && controller.currentSong.boundingBoxes.length > progress ){
             setBoundingbox(controller.currentSong.boundingBoxes[progress]);}
             console.log(`${boundingBox?.x},${boundingBox?.y},${boundingBox?.width},${boundingBox?.height}`)
 
+            
+            if((controller.currentSong.end && progress >= controller.currentSong.end) || APIstatus=== 'Over'){
+                controller.status= 'Over'
+            }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[progress])
 
@@ -126,10 +122,14 @@ function SheetMusic(){
 
 function StartSongPage(){
         const controller = usePlayPianoController();
+        const progress = useProgressFromServer();
 
         //starts game on keypress
         const  startdisplaytest =  () => {
             controller.status = 'inProgress';
+            controller.currentSong = {...controller.currentSong,
+                progress: 0,
+            }
 
             //@todo remove and place in song select button
             
@@ -149,7 +149,58 @@ function StartSongPage(){
 }
 
 function EndScreen (){
-    return (
-        <></>
-    )
+        const controller = usePlayPianoController();
+        const nav = useNavigate();
+      
+        const restart = () => {
+          controller.restartSong();
+          nav(PPPATH.PLAY) };
+      
+        const changeSong = () => {
+          controller.status = 'Menus';
+          nav(PPPATH.SONGSELECT)
+        }
+        const exitToModeSelect = () => {
+          controller.status = 'Menus';
+          nav(PPPATH.MODESELECT)
+        }
+      
+        return (
+          <div className="menu-wrapper">
+      
+            <div className='menu-header'>
+              Paused
+              </div>
+      
+          <div className= "menu-row">
+          
+      </div>
+      
+      <div className= "menu-row"> 
+          <MenuButton
+              title='Restart'
+              icon={faArrowRotateForward}
+              text='restart current song from begining'
+              action={restart} keyID={0} />
+      
+            <MenuButton 
+              title='Change Song'
+              icon={faMusic}
+              text=''
+              action={changeSong} keyID={1}/>
+      
+      
+            <MenuButton
+              title='Exit'
+              icon={faX}
+              text='End Song, Return to Menu'
+              action={exitToModeSelect} keyID={3} />
+      
+      </div>   
+      
+          </div>
+        );
+      
+      
+      
 }

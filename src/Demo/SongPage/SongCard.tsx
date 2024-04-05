@@ -23,6 +23,7 @@ function SongCard({ title, artist, year, image, position }: SongCardProps) {
         const song: SongState = {
             title: title,
             progress: 0,
+            end: bb.length,
             boundingBoxes : bb !== undefined ? bb : [],
         }
         controller.currentSong = song;

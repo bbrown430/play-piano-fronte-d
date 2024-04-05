@@ -46,7 +46,7 @@ export function ProgressHeader(){
          <div className = "song-title">{songTitle}</div>
          
          <div className = "progress-bar">
-          {`Progress: ${((controller.currentSong.progress ?? 0)/(controller.currentSong.end ?? 1) * 100).toFixed()}% `}</div>
+          {`Progress: ${((controller.currentSong.progress ?? 0) * 100 / (controller.currentSong.end ?? 1)  ).toFixed()} % `}</div>
           
          </> :<></>}
 

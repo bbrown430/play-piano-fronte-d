@@ -2,6 +2,7 @@ import  { useEffect, useState } from "react";
 import { PianoState, isPianoState,  } from "./types";
 import { usePlayPianoController } from "../../App";
 import { PPEvents } from "../../pianoStateController/PlayPianoEventHandler";
+import { switchCase, switchStatement } from "@babel/types";
 
 const EVENTENDPOINT = 'http://localhost:8080/api/events'
 
@@ -116,8 +117,8 @@ export function useScoreFromServer() {
   return score
 }
 
-export function useProgressFromServer() {
-  
+export function useProgressFromServer() {  
+  const controller = usePlayPianoController();
   const [progress, setProgress ] = useState(0);
 
   useEffect( () => {
@@ -140,11 +141,26 @@ export function useProgressFromServer() {
 
 
     }
+    
 
     return () => {
       events.close();
     }
   }, []);
+
+  useEffect(()=>{
+    switch(controller.status){
+      case "Paused":
+        break;
+      case "inProgress":
+        break;
+      case "Menus":
+      case "Waiting":
+      case "Over":
+        setProgress(0)
+    }
+    
+  },[controller.status])
 
   return progress
 }
