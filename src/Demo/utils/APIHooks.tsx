@@ -21,36 +21,24 @@ export default function useKeyPressesFromServer(keysToReport?: number | number[]
   const [lastKeyCount, setLastKeyCount] = useState(-1);
   
   let colorindex = 0
+  const setColorsIfKey=(val:number)=>{
+    controller.httpcontroller.registerkey(val);
+    if(val<=61){
+      controller.setKeyColor(val,ButtonColors[colorindex])
+      colorindex = (colorindex + 1)%6;
+    }
 
   if(keysToReport !== undefined){
     if(typeof keysToReport ==='number'){
-      controller.httpcontroller.registerkey(keysToReport);
-      if(keysToReport<=61){
-        controller.setKeyColor(keysToReport,ButtonColors[colorindex])
-      }
+      setColorsIfKey(keysToReport);
     }
     else {
-      keysToReport.forEach(val=>{
-        controller.httpcontroller.registerkey(val);
-        if(val<=61){
-          controller.setKeyColor(val,ButtonColors[colorindex])
-          colorindex = (colorindex + 1)%6;
-        }
-      })
-      
+      keysToReport.forEach(setColorsIfKey);
     }
   }
   else {
-
-    MIDDLE10KEYS.forEach(val=>{
-      controller.httpcontroller.registerkey(val);
-      if(val<=61){
-        controller.setKeyColor(val,ButtonColors[colorindex])
-        colorindex = (colorindex + 1)%6;
-      }
-    })
-
-    
+    MIDDLE10KEYS.forEach(setColorsIfKey);
+    }
 
   }
   
