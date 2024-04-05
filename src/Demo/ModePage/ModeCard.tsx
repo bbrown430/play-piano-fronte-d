@@ -52,9 +52,9 @@ function ModeCard({ action, mode, icon, text, link, keyID} : ModeCardProps) : JS
     };
   } 
 
-  action = action!==undefined ? action : pressAction 
+  action = action !== undefined ? action : pressAction 
 
-  useActionOnKeyPress(pressAction,keyID+ButtonOffset);
+  useActionOnKeyPress(action,keyID+ButtonOffset);
 
   return (
     <div className = "mode-card" 
