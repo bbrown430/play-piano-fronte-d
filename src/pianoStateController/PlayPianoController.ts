@@ -98,13 +98,13 @@ export default class PlayPianoController{
     return this._state.status;
   }
 
-  set status(status : PianoState) {
+  async  setStatus(status : PianoState) {
     if (status === this.status){
       return;
     }
     this._state.status = status;
     this.emit(PPEvents.STATUS,status)
-    this.httpcontroller.setStatus(status);
+    await this.httpcontroller.setStatus(status);
   }
 
 
@@ -115,7 +115,7 @@ export default class PlayPianoController{
 
   unPause() {
     if(this.isPaused()){
-      this.status = 'inProgress';
+       this.setStatus('inProgress');
     }
   }
 
@@ -155,7 +155,7 @@ export default class PlayPianoController{
   
    startSong() {
 
-    this.status = 'inProgress'
+    this.setStatus('inProgress');
 
 
     return;
@@ -200,7 +200,7 @@ export default class PlayPianoController{
       return false;
     }
     this._state.currentSongState.progress = 0
-    this.status = 'Waiting';
+    this.setStatus('Waiting');
     return true;
     
   }

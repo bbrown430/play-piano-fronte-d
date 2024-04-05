@@ -27,8 +27,8 @@ function SongCard({ title, artist, year, image, position }: SongCardProps) {
             boundingBoxes : bb !== undefined ? bb : [],
         }
         controller.currentSong = song;
-        controller.status = 'Waiting';
-        nav(PPPATH.PLAY)
+        await controller.setStatus('Waiting');
+        nav(PPPATH.PLAY);
     }
 
     const positionClass = `position-${position}`;

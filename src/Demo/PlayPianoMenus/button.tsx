@@ -14,7 +14,7 @@ interface MenuButtonProps {
   title: string | undefined;
   icon: IconDefinition | undefined;
   text: string | undefined;
-  action: ()=>void | undefined;
+  action: ()=>any | undefined;
   keyID: number;
 }
 

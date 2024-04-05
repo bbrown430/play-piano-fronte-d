@@ -123,8 +123,8 @@ export class PlayPianoHttp implements operations{
         { KeyID:`btn ${keyID}`}
         console.log(`registering ${msg}`);
         
-        await axios.put(fullUrl,{
-            msg}).catch(exception => {console.log(`ERROR received from ${fullUrl}: ${exception}\n`);
+        await axios.put(fullUrl,
+            msg).catch(exception => {console.log(`ERROR received from ${fullUrl}: ${exception}\n`);
             return false;})
 
         return true;

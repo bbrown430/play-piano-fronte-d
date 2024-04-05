@@ -70,14 +70,14 @@ function SheetMusic(){
 
     //updates bounding box coordinates 
     // and ends game if we reached the end of the song
-    useEffect(()=>{
+    useEffect(  ()=>{
             if(controller.currentSong.boundingBoxes && controller.currentSong.boundingBoxes.length > progress ){
             setBoundingbox(controller.currentSong.boundingBoxes[progress]);}
             console.log(`${boundingBox?.x},${boundingBox?.y},${boundingBox?.width},${boundingBox?.height}`)
 
             
             if((controller.currentSong.end && progress >= controller.currentSong.end) || APIstatus=== 'Over'){
-                controller.status= 'Over'
+                controller.setStatus('Over');
             }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[progress])
@@ -125,8 +125,8 @@ function StartSongPage(){
         const progress = useProgressFromServer();
 
         //starts game on keypress
-        const  startdisplaytest =  () => {
-            controller.status = 'inProgress';
+        const  startdisplaytest = async () => {
+            await controller.setStatus('inProgress');
             controller.currentSong = {...controller.currentSong,
                 progress: 0,
             }
@@ -156,12 +156,12 @@ function EndScreen (){
           controller.restartSong();
           nav(PPPATH.PLAY) };
       
-        const changeSong = () => {
-          controller.status = 'Menus';
+        const changeSong = async () => {
+          await controller.setStatus('Menus');
           nav(PPPATH.SONGSELECT)
         }
-        const exitToModeSelect = () => {
-          controller.status = 'Menus';
+        const exitToModeSelect = async () => {
+          await controller.setStatus('Menus');
           nav(PPPATH.MODESELECT)
         }
       

@@ -20,8 +20,8 @@ export const sleep = async (waitTime: number) => new Promise(resolve => setTimeo
 export function usePause() {
     const controller = usePlayPianoController();
     const nav = useNavigate();
-    const pause = () => {
-        controller.status = 'Paused';
+    const pause = async () => {
+        await controller.setStatus('Paused');
         nav(PPPATH.PAUSED);
     };
 

@@ -218,7 +218,7 @@ export function useStatusFromServer() {
         }
         if(statusFromServer)
         console.log(`midi progress processed  ${statusFromServer}`)
-        controller.status = statusFromServer;
+        controller.setStatus(statusFromServer);
         setStatus(statusFromServer);
 
 

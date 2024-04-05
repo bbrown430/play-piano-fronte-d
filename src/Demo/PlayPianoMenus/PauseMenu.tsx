@@ -16,12 +16,12 @@ export function PauseMenu() {
     nav(PPPATH.PLAY);
   };
 
-  const changeSong = () => {
-    controller.status = 'Menus';
+  const changeSong = async () => {
+    await controller.setStatus('Menus');
     nav(PPPATH.SONGSELECT)
   }
-  const exitToModeSelect = () => {
-    controller.status = 'Menus';
+  const exitToModeSelect = async () => {
+    await controller.setStatus('Menus');
     nav(PPPATH.MODESELECT)
   }
 

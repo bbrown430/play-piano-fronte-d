@@ -11,8 +11,8 @@ function ModeSelect() {
   const nav = useNavigate();
   const controller = usePlayPianoController();
 
-  const clickFreePlay = ()=>{
-    controller.status='Waiting'
+  const clickFreePlay = async ()=>{
+    await controller.setStatus('Waiting');
     nav(PPPATH.PLAY)
   }
 

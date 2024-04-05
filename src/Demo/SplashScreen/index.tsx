@@ -2,13 +2,15 @@ import { useNavigate } from "react-router-dom"
 import logo from '../../assets/play-piano-logo.svg';
 import "./index.css"
 import  { useActionOnKeyPress } from "../utils/APIHooks";
-import { PPPATH } from "../../App";
+import { PPPATH, usePlayPianoController } from "../../App";
 
 function SplashScreen() {
     const nav = useNavigate();
+    const controller = usePlayPianoController();
     const action =  ()=>{
         nav(PPPATH.MODESELECT)};    
-
+    
+    controller.setStatus('Menus')
     useActionOnKeyPress(action);
 
         
