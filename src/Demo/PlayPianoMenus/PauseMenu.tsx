@@ -26,13 +26,12 @@ export function PauseMenu() {
   }
 
   return (
-    <div className="menu-wrapper">
+    <div>
+      <h1 className='sticky-header'>
+        Pause Menu
+      </h1>
 
-      <div className='menu-header'>
-        Paused
-        </div>
-
-    <div className= "menu-row">
+    <div className= "mode-select">
       <MenuButton
         title='Restart'
         icon={faArrowRotateForward}
@@ -45,9 +44,6 @@ export function PauseMenu() {
         text=''
         action={changeSong} keyID={1}/>
 
-</div>
-
-<div className= "menu-row"> 
       <MenuButton
         title='Resume'
         icon={faPlay}
@@ -59,7 +55,6 @@ export function PauseMenu() {
         icon={faX}
         text='End Song, Return to Menu'
         action={exitToModeSelect} keyID={3} />
-
 </div>   
 
     </div>

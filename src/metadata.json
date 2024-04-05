@@ -1,205 +1,390 @@
 [
   {
-    "title": "Moral of the Story",
-    "artist": "Ashe",
-    "year": 2019,
-    "image": "/data/Ashe - Moral of the Story/cover.jpg"
-  },{
-    "title": "hot cross buns",
-    "artist": "??",
-    "year": 3043,
-    "image": ""
+      "title": "Moral of the Story",
+      "artist": "Ashe",
+      "album": "Moral of the Story",
+      "year": 2019,
+      "length_seconds": 201,
+      "tempo_bpm": 120,
+      "genre": "Pop",
+      "difficulty": 1,
+      "high_score": 0,
+      "image": "/data/Ashe - Moral of the Story/cover.jpg"
+
   },
   {
-    "title": "What Was I Made For?",
-    "artist": "Billie Eilish",
-    "year": 2023,
-    "image": "/data/Billie Eilish - What Was I Made For [From The Motion Picture Barbie]/cover.jpg"
+      "title": "What Was I Made For?",
+      "artist": "Billie Eilish",
+      "album": "What Was I Made For? [From The Motion Picture \"Barbie\"]",
+      "year": 2023,
+      "length_seconds": 222,
+      "tempo_bpm": 78,
+      "genre": "Indie",
+      "difficulty": 3,
+      "high_score": 0,
+      "image": "/data/Billie Eilish - What Was I Made For [From The Motion Picture Barbie]/cover.jpg"
+
   },
   {
-    "title": "When I Was Your Man",
-    "artist": "Bruno Mars",
-    "year": 2012,
-    "image": "/data/Bruno Mars - When I Was Your Man/cover.jpg"
+      "title": "When I Was Your Man",
+      "artist": "Bruno Mars",
+      "album": "Unorthodox Jukebox",
+      "year": 2012,
+      "length_seconds": 214,
+      "tempo_bpm": 73,
+      "genre": "Pop",
+      "difficulty": 3,
+      "high_score": 0,
+      "image": "/data/Bruno Mars - When I Was Your Man/cover.jpg"
   },
   {
-    "title": "Duvet",
-    "artist": "bôa",
-    "year": 2010,
-    "image": "/data/bôa - Duvet/cover.jpg"
+      "title": "Duvet",
+      "artist": "b\u00f4a",
+      "album": "Twilight",
+      "year": 2010,
+      "length_seconds": 204,
+      "tempo_bpm": 93,
+      "genre": "Indie",
+      "difficulty": 3,
+      "high_score": 0,
+      "image": "/data/bôa - Duvet/cover.jpg"
   },
   {
-    "title": "Sweden",
-    "artist": "C418",
-    "year": 2011,
-    "image": "/data/C418 - Sweden/cover.jpg"
+      "title": "Sweden",
+      "artist": "C418",
+      "album": "Minecraft - Volume Alpha",
+      "year": 2011,
+      "length_seconds": 216,
+      "tempo_bpm": 88,
+      "genre": "Soundtrack",
+      "difficulty": 3,
+      "high_score": 0,
+      "image": "/data/C418 - Sweden/cover.jpg"
   },
   {
-    "title": "Wet Hands",
-    "artist": "C418",
-    "year": 2011,
-    "image": "/data/C418 - Wet Hands/cover.jpg"
+      "title": "Wet Hands",
+      "artist": "C418",
+      "album": "Minecraft - Volume Alpha",
+      "year": 2011,
+      "length_seconds": 90,
+      "tempo_bpm": 148,
+      "genre": "Soundtrack",
+      "difficulty": 3,
+      "high_score": 0,
+      "image": "/data/C418 - Wet Hands/cover.jpg"
   },
   {
-    "title": "A Sky Full of Stars",
-    "artist": "Coldplay",
-    "year": 2014,
-    "image": "/data/Coldplay - A Sky Full of Stars/cover.jpg"
+      "title": "A Sky Full of Stars",
+      "artist": "Coldplay",
+      "album": "Ghost Stories",
+      "year": 2014,
+      "length_seconds": 268,
+      "tempo_bpm": 125,
+      "genre": "Pop",
+      "difficulty": 3,
+      "high_score": 0,
+      "image": "/data/Coldplay - A Sky Full of Stars/cover.jpg"
   },
   {
-    "title": "Clocks",
-    "artist": "Coldplay",
-    "year": 2002,
-    "image": "/data/Coldplay - Clocks/cover.jpg"
+      "title": "Clocks",
+      "artist": "Coldplay",
+      "album": "A Rush of Blood to the Head",
+      "year": 2002,
+      "length_seconds": 308,
+      "tempo_bpm": 131,
+      "genre": "Alternative",
+      "difficulty": 3,
+      "high_score": 0,
+      "image": "/data/Coldplay - Clocks/cover.jpg"
   },
   {
-    "title": "The Scientist",
-    "artist": "Coldplay",
-    "year": 2002,
-    "image": "/data/Coldplay - The Scientist/cover.jpg"
+      "title": "The Scientist",
+      "artist": "Coldplay",
+      "album": "A Rush of Blood to the Head",
+      "year": 2002,
+      "length_seconds": 310,
+      "tempo_bpm": 146,
+      "genre": "Alternative",
+      "difficulty": 3,
+      "high_score": 0,
+      "image": "/data/Coldplay - The Scientist/cover.jpg"
   },
   {
-    "title": "Viva La Vida",
-    "artist": "Coldplay",
-    "year": 2008,
-    "image": "/data/Coldplay - Viva La Vida/cover.jpg"
+      "title": "Viva La Vida",
+      "artist": "Coldplay",
+      "album": "Viva La Vida or Death and All His Friends",
+      "year": 2008,
+      "length_seconds": 242,
+      "tempo_bpm": 138,
+      "genre": "Alternative",
+      "difficulty": 3,
+      "high_score": 0,
+      "image": "/data/Coldplay - Viva La Vida/cover.jpg"
   },
   {
-    "title": "Rocket Man",
-    "artist": "Elton John",
-    "year": 1972,
-    "image": "/data/Elton John - Rocket Man (I Think It_s Going To Be A Long, Long Time)/cover.jpg"
+      "title": "Rocket Man",
+      "artist": "Elton John",
+      "album": "Honky Chateau",
+      "year": 1972,
+      "length_seconds": 282,
+      "tempo_bpm": 137,
+      "genre": "Pop",
+      "difficulty": 3,
+      "high_score": 0,
+      "image": "/data/Elton John - Rocket Man (I Think It_s Going To Be A Long, Long Time)/cover.jpg"
   },
   {
-    "title": "As It Was",
-    "artist": "Harry Styles",
-    "year": 2022,
-    "image": "/data/Harry Styles - As It Was/cover.jpg"
+      "title": "As It Was",
+      "artist": "Harry Styles",
+      "album": "Harry's House",
+      "year": 2022,
+      "length_seconds": 167,
+      "tempo_bpm": 174,
+      "genre": "Pop",
+      "difficulty": 3,
+      "high_score": 0,
+      "image": "/data/Harry Styles - As It Was/cover.jpg"
   },
   {
-    "title": "Peaches",
-    "artist": "Jack Black",
-    "year": 2023,
-    "image": "/data/Jack Black - Peaches/cover.jpg"
+      "title": "Peaches",
+      "artist": "Jack Black",
+      "album": "The Super Mario Bros. Movie (Original Motion Picture Soundtrack)",
+      "year": 2023,
+      "length_seconds": 95,
+      "tempo_bpm": 92,
+      "genre": "Soundtrack",
+      "difficulty": 3,
+      "high_score": 0,
+      "image": "/data/Jack Black - Peaches/cover.jpg"
   },
   {
-    "title": "Hedwig's Theme",
-    "artist": "John Williams",
-    "year": 2001,
-    "image": "/data/John Williams - Hedwig_s Theme/cover.jpg"
+      "title": "Hedwig's Theme",
+      "artist": "John Williams",
+      "album": "Harry Potter and The Sorcerer's Stone Original Motion Picture Soundtrack",
+      "year": 2001,
+      "length_seconds": 309,
+      "tempo_bpm": 73,
+      "genre": "Soundtrack",
+      "difficulty": 3,
+      "high_score": 0,
+      "image": "/data/John Williams - Hedwig_s Theme/cover.jpg"
   },
   {
-    "title": "Glimpse of Us",
-    "artist": "Joji",
-    "year": 2022,
-    "image": "/data/Joji - Glimpse of Us/cover.jpg"
+      "title": "Glimpse of Us",
+      "artist": "Joji",
+      "album": "Glimpse of Us",
+      "year": 2022,
+      "length_seconds": 233,
+      "tempo_bpm": 170,
+      "genre": "Indie",
+      "difficulty": 3,
+      "high_score": 0,
+      "image": "/data/Joji - Glimpse of Us/cover.jpg"
   },
   {
-    "title": "Mia & Sebastian’s Theme",
-    "artist": "Justin Hurwitz",
-    "year": 2016,
-    "image": "/data/Justin Hurwitz - Mia & Sebastian’s Theme/cover.jpg"
+      "title": "Mia & Sebastian\u2019s Theme",
+      "artist": "Justin Hurwitz",
+      "album": "La La Land (Original Motion Picture Soundtrack)",
+      "year": 2016,
+      "length_seconds": 98,
+      "tempo_bpm": 117,
+      "genre": "Soundtrack",
+      "difficulty": 3,
+      "high_score": 0,
+      "image": "/data/Justin Hurwitz - Mia & Sebastian’s Theme/cover.jpg"
   },
   {
-    "title": "Runaway",
-    "artist": "Kanye West",
-    "year": 2010,
-    "image": "/data/Kanye West - Runaway/cover.jpg"
+      "title": "Runaway",
+      "artist": "Kanye West",
+      "album": "My Beautiful Dark Twisted Fantasy",
+      "year": 2010,
+      "length_seconds": 548,
+      "tempo_bpm": 85,
+      "genre": "Hip Hop",
+      "difficulty": 3,
+      "high_score": 0,
+      "image": "/data/Kanye West - Runaway/cover.jpg"
   },
   {
-    "title": "Somewhere Only We Know",
-    "artist": "Keane",
-    "year": 2004,
-    "image": "/data/Keane - Somewhere Only We Know/cover.jpg"
+      "title": "Somewhere Only We Know",
+      "artist": "Keane",
+      "album": "Hopes And Fears",
+      "year": 2004,
+      "length_seconds": 236,
+      "tempo_bpm": 172,
+      "genre": "Alternative",
+      "difficulty": 3,
+      "high_score": 0,
+      "image": "/data/Keane - Somewhere Only We Know/cover.jpg"
   },
   {
-    "title": "He's a Pirate",
-    "artist": "Klaus Badelt",
-    "year": 2003,
-    "image": "/data/Klaus Badelt - He_s a Pirate/cover.jpg"
+      "title": "He's a Pirate",
+      "artist": "Klaus Badelt",
+      "album": "Pirates of the Caribbean: The Curse of the Black Pearl (Original Motion Picture Soundtrack)",
+      "year": 2003,
+      "length_seconds": 90,
+      "tempo_bpm": 71,
+      "genre": "Soundtrack",
+      "difficulty": 3,
+      "high_score": 0,
+      "image": "/data/Klaus Badelt - He_s a Pirate/cover.jpg"
   },
   {
-    "title": "Ocarina Of Time Theme",
-    "artist": "Koji Kondo",
-    "year": 1998,
-    "image": "/data/Koji Kondo - Ocarina of Time Theme/cover.jpg"
+      "title": "Ocarina Of Time Theme",
+      "artist": "Koji Kondo",
+      "album": "Ocarina Of Time",
+      "year": 1998,
+      "length_seconds": 169,
+      "tempo_bpm": 72,
+      "genre": "Soundtrack",
+      "difficulty": 3,
+      "high_score": 0,
+      "image": "/data/Koji Kondo - Ocarina of Time Theme/cover.jpg"
   },
   {
-    "title": "From The Start",
-    "artist": "Laufey",
-    "year": 2023,
-    "image": "/data/Laufey - From The Start/cover.jpg"
+      "title": "From The Start",
+      "artist": "Laufey",
+      "album": "From The Start",
+      "year": 2023,
+      "length_seconds": 170,
+      "tempo_bpm": 82,
+      "genre": "Jazz",
+      "difficulty": 3,
+      "high_score": 0,
+      "image": "/data/Laufey - From The Start/cover.jpg"
   },
   {
-    "title": "Für Elise",
-    "artist": "Ludwig van Beethoven",
-    "year": 2009,
-    "image": "/data/Ludwig van Beethoven - Für Elise/cover.jpg"
+      "title": "F\u00fcr Elise",
+      "artist": "Ludwig van Beethoven",
+      "album": "Classical Best Of",
+      "year": 2009,
+      "length_seconds": 173,
+      "tempo_bpm": 144,
+      "genre": "Classical",
+      "difficulty": 3,
+      "high_score": 0,
+      "image": "/data/Ludwig van Beethoven - Für Elise/cover.jpg"
   },
   {
-    "title": "Married Life",
-    "artist": "Michael Giacchino",
-    "year": 2009,
-    "image": "/data/Michael Giacchino - Married Life/cover.jpg"
+      "title": "Married Life",
+      "artist": "Michael Giacchino",
+      "album": "Up (Original Motion Picture Soundtrack)",
+      "year": 2009,
+      "length_seconds": 251,
+      "tempo_bpm": 83,
+      "genre": "Soundtrack",
+      "difficulty": 3,
+      "high_score": 0,
+      "image": "/data/Michael Giacchino - Married Life/cover.jpg"
   },
   {
-    "title": "Succession Theme",
-    "artist": "Nicholas Britell",
-    "year": 2019,
-    "image": "/data/Nicholas Britell - Succession (Main Title Theme)/cover.jpg"
+      "title": "Succession",
+      "artist": "Nicholas Britell",
+      "album": "Succession: Season 1 (HBO Original Series Soundtrack)",
+      "year": 2019,
+      "length_seconds": 102,
+      "tempo_bpm": 140,
+      "genre": "Soundtrack",
+      "difficulty": 3,
+      "high_score": 0,
+      "image": "/data/Nicholas Britell - Succession (Main Title Theme)/cover.jpg"
   },
   {
-    "title": "City Of Stars",
-    "artist": "Ryan Gosling",
-    "year": 2016,
-    "image": "/data/Ryan Gosling - City Of Stars/cover.jpg"
+      "title": "City Of Stars",
+      "artist": "Ryan Gosling",
+      "album": "La La Land (Original Motion Picture Soundtrack)",
+      "year": 2016,
+      "length_seconds": 150,
+      "tempo_bpm": 112,
+      "genre": "Soundtrack",
+      "difficulty": 3,
+      "high_score": 0,
+      "image": "/data/Ryan Gosling - City Of Stars/cover.jpg"
+
   },
   {
-    "title": "champagne problems",
-    "artist": "Taylor Swift",
-    "year": 2020,
-    "image": "/data/Taylor Swift - champagne problems/cover.jpg"
+      "title": "champagne problems",
+      "artist": "Taylor Swift",
+      "album": "evermore",
+      "year": 2020,
+      "length_seconds": 244,
+      "tempo_bpm": 171,
+      "genre": "Pop",
+      "difficulty": 3,
+      "high_score": 0,
+      "image": "/data/Taylor Swift - champagne problems/cover.jpg"
   },
   {
-    "title": "Clean",
-    "artist": "Taylor Swift",
-    "year": 2014,
-    "image": "/data/Taylor Swift - Clean/cover.jpg"
+      "title": "Clean",
+      "artist": "Taylor Swift",
+      "album": "1989",
+      "year": 2014,
+      "length_seconds": 271,
+      "tempo_bpm": 104,
+      "genre": "Pop",
+      "difficulty": 3,
+      "high_score": 0,
+      "image": "/data/Taylor Swift - Clean/cover.jpg"
   },
   {
-    "title": "exile",
-    "artist": "Taylor Swift",
-    "year": 2020,
-    "image": "/data/Taylor Swift - exile (feat. Bon Iver)/cover.jpg"
+      "title": "exile",
+      "artist": "Taylor Swift",
+      "album": "folklore",
+      "year": 2020,
+      "length_seconds": 286,
+      "tempo_bpm": 76,
+      "genre": "Pop",
+      "difficulty": 3,
+      "high_score": 0,
+      "image": "/data/Taylor Swift - exile (feat. Bon Iver)/cover.jpg"
   },
   {
-    "title": "Love Story",
-    "artist": "Taylor Swift",
-    "year": 2008,
-    "image": "/data/Taylor Swift - Love Story/cover.jpg"
+      "title": "Love Story",
+      "artist": "Taylor Swift",
+      "album": "Fearless",
+      "year": 2008,
+      "length_seconds": 235,
+      "tempo_bpm": 119,
+      "genre": "Pop",
+      "difficulty": 3,
+      "high_score": 0,
+      "image": "/data/Taylor Swift - Love Story/cover.jpg"
   },
   {
-    "title": "Hey Jude",
-    "artist": "The Beatles",
-    "year": 2006,
-    "image": "/data/The Beatles - Hey Jude/cover.jpg"
+      "title": "Hey Jude",
+      "artist": "The Beatles",
+      "album": "Love",
+      "year": 2006,
+      "length_seconds": 239,
+      "tempo_bpm": 74,
+      "genre": "Pop",
+      "difficulty": 3,
+      "high_score": 0,
+      "image": "/data/The Beatles - Hey Jude/cover.jpg"
   },
   {
-    "title": "How to Save a Life",
-    "artist": "The Fray",
-    "year": 2005,
-    "image": "/data/The Fray - How to Save a Life/cover.jpg"
+      "title": "Iris",
+      "artist": "The Goo Goo Dolls",
+      "album": "Dizzy up the Girl",
+      "year": 1998,
+      "length_seconds": 290,
+      "tempo_bpm": 156,
+      "genre": "Alternative",
+      "difficulty": 3,
+      "high_score": 0,
+      "image": "/data/The Goo Goo Dolls - Iris/cover.jpg"
+
   },
   {
-    "title": "Iris",
-    "artist": "The Goo Goo Dolls",
-    "year": 1998,
-    "image": "/data/The Goo Goo Dolls - Iris/cover.jpg"
-  },
-  {
-    "title": "The Office Theme",
-    "artist": "The Office",
-    "year": 2005,
-    "image": "/data/The Office - The Office Theme/cover.jpg"
+      "title": "The Office Theme",
+      "artist": "The Office",
+      "album": "The Office Theme",
+      "year": 2005,
+      "length_seconds": 79,
+      "tempo_bpm": 170,
+      "genre": "Soundtrack",
+      "difficulty": 3,
+      "high_score": 0,
+      "image": "/data/The Office - The Office Theme/cover.jpg"
   }
 ]

@@ -11,7 +11,7 @@ import { PPPATH, usePlayPianoController } from '../../App';
 import { useActionOnKeyPress } from '../utils/APIHooks';
 
 type color = [number,number,number];
-export const ButtonColors : color[] = [[200,0,0],[0,200,0],[0,0,200],[200,200,0],[200,0,200],[0,200,200]];
+export const ButtonColors : color[] = [[200,68,90],[115,189,112],[100,152,215],[125,88,204],[200,0,200],[0,200,200]];
 export const ButtonOffset = 30;
 type Statefunction = () => void;
 interface ModeCardProps {
@@ -61,7 +61,7 @@ function ModeCard({ action, mode, icon, text, link, keyID} : ModeCardProps) : JS
     style={{backgroundColor:`rgba(${ButtonColors[keyID]},1)` }}
     onClick = {action}>
       <FontAwesomeIcon icon = {icon} className = "mode-icon" />
-      <h1>{mode}</h1>
+      <h2 className="mode-header">{mode}</h2>
       <p>{text}</p>
     </div>
   );

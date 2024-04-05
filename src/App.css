@@ -43,6 +43,7 @@ h3 {
 	color: white;
 	font-size: 2em;
 	margin: 0px;
+	width: 95%
 }
 
 h4 {
@@ -60,14 +61,15 @@ h5 {
 	color: white;
 	font-size: 1.5em;
 	margin: 0px;
+	padding-bottom: 2px;
 }
 
 p {
 	font-family: "Inter", sans-serif;
 	font-weight: 500;
 	text-align: center;
-	font-size: 2.5em;
-	width: 100%;
+	font-size: 28px;
+	width: 80%;
 	color: white;
 }
 
@@ -82,8 +84,8 @@ p {
 
 body {
 	background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-	background-size: 600% 600%;
-	animation: gradient 40s ease infinite;
+	background-size: 400% 400%;
+	animation: gradient 20s ease infinite;
 }
 
 
@@ -111,4 +113,3 @@ body {
   .scale-down {
 	transform: scale(0.5);
   }
-  

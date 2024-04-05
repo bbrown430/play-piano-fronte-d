@@ -13,10 +13,6 @@
 	transition: background-color 0.2s ease;
 }
 
-.mode-card:hover{
-	background-color: rgba(255, 255, 255, 0.3);
-}
-
 .mode-select{
 	display: flex;
 	flex-direction: row;

@@ -32,13 +32,12 @@ function MenuButton( {title, icon, text, action,keyID} : MenuButtonProps) : JSX.
   controller.setKeyColor(keyID, ButtonColors[keyID]);
 
   return (
-    <div className="menu-button"
+    <div className="mode-card"
     style={{backgroundColor:`rgba(${ButtonColors[keyID]},.9)` }}
      onClick={()=>{if (action){action()}}}>
       <FontAwesomeIcon icon={icon}  className="mode-icon" />
-      <h1 style={{fontSize:`2em`}}>{title}</h1>
-      <p>
-        {text}
+      <h2>{title}</h2>
+      <p>{text}
       </p>
     </div>
   );
