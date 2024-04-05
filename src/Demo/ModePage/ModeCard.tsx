@@ -13,7 +13,7 @@ import { useActionOnKeyPress } from '../utils/APIHooks';
 
 type color = [number,number,number];
 export const ButtonColors : color[] = [[200,0,0],[0,200,0],[0,0,200],[200,200,0],[200,0,200],[0,200,200]];
-
+export const ButtonOffset = 30;
 type Statefunction = () => void;
 interface ModeCardProps {
   action? : Statefunction;
@@ -30,7 +30,7 @@ interface ModeCardProps {
  * @param controller @type {PlayPianoController} to display into for
  * @returns 
  */
-function ModeCard({ mode, icon, text, link, keyID} : ModeCardProps) : JSX.Element {
+function ModeCard({ action, mode, icon, text, link, keyID} : ModeCardProps) : JSX.Element {
 
   const controller : PlayPianoController = usePlayPianoController();
 
@@ -38,8 +38,9 @@ function ModeCard({ mode, icon, text, link, keyID} : ModeCardProps) : JSX.Elemen
   mode = mode ? mode : 'Free'
   icon = icon ? icon : faQuestion;
   text = text ? text : "";
+  
 
-  controller.setKeyColor(keyID, ButtonColors[keyID]);
+  controller.setKeyColor(keyID+ ButtonOffset, ButtonColors[keyID]);
 
   const nav = useNavigate();
 
@@ -52,18 +53,20 @@ function ModeCard({ mode, icon, text, link, keyID} : ModeCardProps) : JSX.Elemen
     };
   } 
 
-  useActionOnKeyPress(pressAction,keyID);
+  action = action ? action : pressAction 
+
+  useActionOnKeyPress(pressAction,keyID+ButtonOffset);
 
   return (
     <div className = "mode-card" 
-    //style={{backgroundColor:`rgb(${ButtonColors[keyID]})` }}
+    style={{backgroundColor:`rgb(${ButtonColors[keyID]})` }}
     onClick = {pressAction}>
 
       <FontAwesomeIcon icon = {icon} className = "mode-icon" />
 
-      <h2 className="mode-header">{mode}</h2>
+      <h1>{mode}</h1>
 
-      <p className="mode-text">{text}</p>
+      <p>{text}</p>
 
     </div>
   );
