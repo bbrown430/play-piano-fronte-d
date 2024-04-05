@@ -4,7 +4,7 @@ const PORT = process.env.PORT || 8080;
 const app = express();
 app.use(cors());
 app.use(express.json());
-//app.use(express.static("build"));
+app.use(express.static("build"));
 app.get('/status', (request, response) => response.json({clients: clients.length}));
 let clients = [];
 let lastKeyPressed = 

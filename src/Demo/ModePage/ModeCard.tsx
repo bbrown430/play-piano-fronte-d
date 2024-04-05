@@ -52,14 +52,14 @@ function ModeCard({ action, mode, icon, text, link, keyID} : ModeCardProps) : JS
     };
   } 
 
-  action = action ? action : pressAction 
+  action = action!==undefined ? action : pressAction 
 
   useActionOnKeyPress(pressAction,keyID+ButtonOffset);
 
   return (
     <div className = "mode-card" 
     style={{backgroundColor:`rgb(${ButtonColors[keyID]})` }}
-    onClick = {pressAction}>
+    onClick = {action}>
 
       <FontAwesomeIcon icon = {icon} className = "mode-icon" />
 
