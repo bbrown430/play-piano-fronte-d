@@ -119,10 +119,12 @@ export class PlayPianoHttp implements operations{
     async registerkey(keyID:number): Promise<boolean> {
 
         const fullUrl = `${this.url}${EndPoints.registerKey}`;
+        const msg =  keyID <= 61 ?  { KeyID:`key ${keyID}`} :
+        { KeyID:`btn ${keyID}`}
+        console.log(`registering ${msg}`);
         
         await axios.put(fullUrl,{
-                KeyID:`key ${keyID}`
-            }).catch(exception => {console.log(`ERROR received from ${fullUrl}: ${exception}\n`);
+            msg}).catch(exception => {console.log(`ERROR received from ${fullUrl}: ${exception}\n`);
             return false;})
 
         return true;
@@ -140,6 +142,7 @@ export class PlayPianoHttp implements operations{
         if(color.find((element) => (element < 0 || element > 255))){
             throw new Error("invalid key color");
         }
+        console.log(`registering ${keyidx} color ${color}`);
 
         const fullUrl = `${this.url}${EndPoints.setKeyColor}`;
 

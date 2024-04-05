@@ -4,6 +4,7 @@ import "./index.css"
 import { PPPATH, usePlayPianoController} from '../../App';
 import MenuButton from '../PlayPianoMenus/button';
 import { useNavigate } from 'react-router';
+import { WhiteKeys } from '../utils/types';
 
 //move to the page for modes, buttons select the mode function buttonAction = {}=>
 function ModeSelect() {
@@ -25,19 +26,22 @@ function ModeSelect() {
         mode= 'Learn'
         icon={faChalkboardTeacher}
         text="Learn how to play your favorite songs with gentle pacing to match your skills."
-        keyID={0}
+        keyID={WhiteKeys[17]}
+        colorID={0}
                 />
       <ModeCard 
         mode='Play'
         icon={faGamepad}
         text='Play along to your favorite songs and go for a new high score!'
-        keyID={1}                />
+        keyID={WhiteKeys[18]}
+        colorID={1}                />
 
       <ModeCard 
         mode="Free"
         icon={faPaintBrush}
         text='Play around and watch the lights dance around your fingers.' 
-        keyID={2}        
+        keyID={WhiteKeys[19]}  
+        colorID={2}      
         action={clickFreePlay}        />
 
      </div>

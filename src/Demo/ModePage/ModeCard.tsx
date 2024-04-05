@@ -9,10 +9,8 @@ import { PianoMode } from '../utils/types';
 import { useNavigate } from "react-router-dom";
 import { PPPATH, usePlayPianoController } from '../../App';
 import { useActionOnKeyPress } from '../utils/APIHooks';
+import { ButtonColors } from '../utils/types';
 
-type color = [number,number,number];
-export const ButtonColors : color[] = [[200,68,90],[115,189,112],[100,152,215],[125,88,204],[200,0,200],[0,200,200]];
-export const ButtonOffset = 30;
 type Statefunction = () => void;
 interface ModeCardProps {
   action? : Statefunction;
@@ -20,6 +18,7 @@ interface ModeCardProps {
   icon? : IconDefinition;
   text? : string ;
   link? : string;
+  colorID? : number
   keyID : number;
 }
 
@@ -29,7 +28,7 @@ interface ModeCardProps {
  * @param controller @type {PlayPianoController} to display into for
  * @returns 
  */
-function ModeCard({ action, mode, icon, text, link, keyID} : ModeCardProps) : JSX.Element {
+function ModeCard({ colorID,action, mode, icon, text, link, keyID} : ModeCardProps) : JSX.Element {
 
   const controller : PlayPianoController = usePlayPianoController();
 
@@ -37,9 +36,8 @@ function ModeCard({ action, mode, icon, text, link, keyID} : ModeCardProps) : JS
   mode = mode ? mode : 'Free'
   icon = icon ? icon : faQuestion;
   text = text ? text : "";
+  colorID = colorID || 0;
   
-
-  controller.setKeyColor(keyID+ ButtonOffset, ButtonColors[keyID]);
 
   const nav = useNavigate();
 
@@ -54,11 +52,11 @@ function ModeCard({ action, mode, icon, text, link, keyID} : ModeCardProps) : JS
 
   action = action !== undefined ? action : pressAction 
 
-  useActionOnKeyPress(action,keyID+ButtonOffset);
+  useActionOnKeyPress(action,keyID);
 
   return (
     <div className = "mode-card" 
-    style={{backgroundColor:`rgba(${ButtonColors[keyID]},1)` }}
+    style={{backgroundColor:`rgba(${ButtonColors[colorID]},1)` }}
     onClick = {action}>
       <FontAwesomeIcon icon = {icon} className = "mode-icon" />
       <h2 className="mode-header">{mode}</h2>
