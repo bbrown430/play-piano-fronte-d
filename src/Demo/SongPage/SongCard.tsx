@@ -38,10 +38,10 @@ function SongCard({ title, artist, year, image, position }: SongCardProps) {
 
     return (
         <div className={`song-card ${positionClass}`} onClick={clicksong}>
-            {!hideTitleArtist && <h3 className="song-metadata-title">{title}</h3>}
-            {!hideTitleArtist && <h4 className="artist">{artist}</h4>}
+            {!hideYear && <h3 className="song-metadata-title">{title}</h3>}
+            {!hideYear && <h4 className="artist">{artist}</h4>}
             {!hideYear && <h5 className='year-genre'>{year}</h5>}
-            <img className='song-image' src="https://upload.wikimedia.org/wikipedia/en/c/c3/Twilight_%28B%C3%B4a_album%29.jpg" alt="" />
+            <img className='song-image' src={image} alt="" />
         </div>
     )
 }

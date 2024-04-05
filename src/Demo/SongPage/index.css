@@ -79,7 +79,11 @@
 /* Styles for cards with position 2 and 4 */
 .song-card.position-2 h3,
 .song-card.position-4 h3 {
-  font-size: 1.5em; /* Adjust the font size as needed */
+  	font-size: 1.5em; /* Adjust the font size as needed */
+  	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	width: 150px; /* Adjust width as needed */
 }
 
 .song-card.position-2 h4,
@@ -90,30 +94,47 @@
 
 .song-card.position-2 img,
 .song-card.position-4 img {
-	width: 160px;
+	width: 240px;
 }
 
 
 .position-2,
 .position-4 {
-  width: 196px;
+  width: 240px;
   height: 240px;
   margin-left: 40px;
   margin-right: 40px;
 }
 
 .song-card.position-1,
+.song-card.position-2,
+.song-card.position-4,
 .song-card.position-5 {
-  width: 140px;
-  height: 140px;
   background-color: rgba(0, 0, 0, 0);
-  margin-left: 48px;
-  margin-right: 48px;
+  border: 0px
+}
+
+.position-1,
+.position-5 {
+	width: 160px;
+	height: 160px;
+	margin-left: 12px;
+	margin-right: 12px;
+}
+
+.position-1{
+	margin-left: 36px;
+	margin-right: 8px;
+}
+.position-5{
+	margin-left: 8px;
+	margin-right: 36px;
 }
 
 .song-card.position-1 img,
 .song-card.position-5 img {
-	width: 140px;
+	width: 160px;
+	height: 160px;
 	border-radius: 10px;
 }
 
