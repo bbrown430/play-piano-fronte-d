@@ -30,7 +30,6 @@ interface ModeCardProps {
  * @returns 
  */
 function ModeCard({ action, mode, icon, text, link, keyID} : ModeCardProps) : JSX.Element {
-function ModeCard({ action, mode, icon, text, link, keyID} : ModeCardProps) : JSX.Element {
 
   const controller : PlayPianoController = usePlayPianoController();
 
@@ -59,7 +58,6 @@ function ModeCard({ action, mode, icon, text, link, keyID} : ModeCardProps) : JS
 
   return (
     <div className = "mode-card" 
-    style={{backgroundColor:`rgb(${ButtonColors[keyID]})` }}
     style={{backgroundColor:`rgb(${ButtonColors[keyID]})` }}
     onClick = {pressAction}>
 
