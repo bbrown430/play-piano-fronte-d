@@ -22,25 +22,31 @@ export default function useKeyPressesFromServer(keysToReport?: number | number[]
   
   let colorindex = 0
   const setColorsIfKey=(val:number)=>{
+    console.log(`registering ${val}`);
+    if(val>61)
     controller.httpcontroller.registerkey(val);
-    if(val<=61){
+    else if(val<=61){
       controller.setKeyColor(val,ButtonColors[colorindex])
       colorindex = (colorindex + 1)%6;
-    }
+    }}
 
   if(keysToReport !== undefined){
+    console.log(keysToReport);
     if(typeof keysToReport ==='number'){
+      console.log(`atttemping register and to set color of single key`)
       setColorsIfKey(keysToReport);
     }
     else {
+      console.log(`atttemping to register and set color of multiple keys`)
       keysToReport.forEach(setColorsIfKey);
     }
   }
   else {
+    console.log(`atttemping to register and set color of middle 10 white keys`)
     MIDDLE10KEYS.forEach(setColorsIfKey);
     }
 
-  }
+  
   
 
 
