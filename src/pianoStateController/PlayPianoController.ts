@@ -99,9 +99,6 @@ export default class PlayPianoController{
   }
 
   async  setStatus(status : PianoState) {
-    if (status === this.status){
-      return;
-    }
     this._state.status = status;
     this.emit(PPEvents.STATUS,status)
     await this.httpcontroller.setStatus(status);
