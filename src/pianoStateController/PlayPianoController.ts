@@ -136,9 +136,15 @@ export default class PlayPianoController{
         this.currentSong.title=newSong.title
         this.httpcontroller.setSong(newSong.title);
       } 
+      this.currentSong.boundingBoxes = newSong.boundingBoxes || [];
+
+      this.currentSong.end =  newSong.end || 10000;
+
+      this.currentSong.progress = 0;
+
 
       this.emit(PPEvents.SONG, newSong);
-      this._state.currentSongState = newSong;
+  
       
     }
     get currentSong() : SongState {
