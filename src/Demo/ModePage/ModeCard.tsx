@@ -60,7 +60,7 @@ function ModeCard({ colorID,action, mode, icon, text, link, keyID} : ModeCardPro
     style={{backgroundColor:`rgba(${ButtonColors[colorID]},1)` }}
     onClick = {action}>
       <FontAwesomeIcon icon = {icon} className = "mode-icon" />
-      <h1>{mode}</h1>
+      <h2 className="mode-header">{mode}</h2>
       <p>{text}</p>
     </div>
   );

@@ -4,7 +4,7 @@
 	align-items: center;
 	text-align: center;
 	background-color: rgba(217, 217, 217, 0.2);
-	height:440px;
+	height:540px;
 	width: 400px;
 	border-radius: 16px;
 	border: 5px solid white;
@@ -16,9 +16,6 @@
 	justify-content: center;
 }
 
-.song-card:hover{
-	background-color: rgba(255, 255, 255, 0.3);
-}
 .selected{	
 	border: 5px solid black;
 }
@@ -71,7 +68,7 @@
 }
 .year-genre{
 	font-size: 16px;
-	margin-bottom: 8px;
+	margin-bottom: 12px;
 }
 
 
@@ -142,4 +139,22 @@
 	color: white;
 	font-size: 3em;
 	padding: 16px;
+}
+
+.star{
+	color: white;
+	padding-left: 2px;
+	padding-right: 2px;
+	font-size: 1.8em;
+}
+.star-half{
+	color: rgba(255, 255, 255, .3);
+	padding-left: 2px;
+	padding-right: 2px;
+	font-size: 1.8em;
+}
+
+.difficulty{
+	padding-top: 12px;
+	padding-bottom: 12px;
 }

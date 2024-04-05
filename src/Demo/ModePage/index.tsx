@@ -17,7 +17,7 @@ function ModeSelect() {
   }
 
   return (
-    <div >
+    <div>
       <h1 className='sticky-header'>
         Select Mode
       </h1>
