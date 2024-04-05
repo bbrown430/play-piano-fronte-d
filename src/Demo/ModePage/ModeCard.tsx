@@ -57,17 +57,11 @@ function ModeCard({ action, mode, icon, text, link, keyID} : ModeCardProps) : JS
 
   return (
     <div className = "mode-card" 
-    style={{backgroundColor:`rgb(${ButtonColors[keyID]})` }}
+    style={{backgroundColor:`rgba(${ButtonColors[keyID]},1)` }}
     onClick = {action}>
-
       <FontAwesomeIcon icon = {icon} className = "mode-icon" />
-
       <h1>{mode}</h1>
-      <h1>{mode}</h1>
-
       <p>{text}</p>
-      <p>{text}</p>
-
     </div>
   );
 }
