@@ -1,12 +1,19 @@
 import ModeCard from './ModeCard';
 import {faGamepad, faChalkboardTeacher, faBullseye, faMagicWandSparkles, faWrench, faPaintBrush } from '@fortawesome/free-solid-svg-icons';
 import "./index.css"
-import { PPPATH} from '../../App';
+import { PPPATH, usePlayPianoController} from '../../App';
 import MenuButton from '../PlayPianoMenus/button';
 import { useNavigate } from 'react-router';
 
 //move to the page for modes, buttons select the mode function buttonAction = {}=>
 function ModeSelect() {
+  const nav = useNavigate();
+  const controller = usePlayPianoController();
+
+  const clickFreePlay = ()=>{
+    controller.status='Waiting'
+    nav(PPPATH.PLAY)
+  }
 
   return (
     <div >
@@ -31,7 +38,7 @@ function ModeSelect() {
         icon={faPaintBrush}
         text='Play around and watch the lights dance around your fingers.' 
         keyID={2}        
-        link={PPPATH.PLAY}         />
+        action={clickFreePlay}        />
 
      </div>
 

@@ -12,9 +12,8 @@ export enum EndPoints  {
 }
 
 
-
 export interface operations {
-    registerkey(keyID:string) : Promise<boolean>
+    registerkey(keyID:number) : Promise<boolean>
     setKeyColor(keyidx:number, color: [number,number,number]) : Promise<boolean>;
 
     /**
@@ -117,12 +116,12 @@ export class PlayPianoHttp implements operations{
     /**
      * requests to register a key of interest to the backend
      */
-    async registerkey(keyID:string): Promise<boolean> {
+    async registerkey(keyID:number): Promise<boolean> {
 
         const fullUrl = `${this.url}${EndPoints.registerKey}`;
         
         await axios.put(fullUrl,{
-                KeyID:keyID
+                KeyID:`key ${keyID}`
             }).catch(exception => {console.log(`ERROR received from ${fullUrl}: ${exception}\n`);
             return false;})
 

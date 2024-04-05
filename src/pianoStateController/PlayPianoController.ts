@@ -37,6 +37,7 @@ export default class PlayPianoController{
    * @param color 
    */
   public setKeyColor(keyID : number, color : [number,number,number] ) {
+    this.httpcontroller.registerkey(keyID)
     this.httpcontroller.setKeyColor(keyID,color)
   }
 
@@ -154,8 +155,13 @@ export default class PlayPianoController{
     return;
   }
 
+
+
+
+
+
   //for testing
-  public async playCurrentSong() {
+  public async testPlayCurrentSong() {
 
     if(undefined === this.currentSong.progress || undefined === this.currentSong.end ){
       console.log(`${this.currentSong.progress}`)
