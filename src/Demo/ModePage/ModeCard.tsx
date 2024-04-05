@@ -7,7 +7,6 @@ import "../../App.css"
 import PlayPianoController from '../../pianoStateController/PlayPianoController';
 import { PianoMode } from '../utils/types';
 import { useNavigate } from "react-router-dom";
-import { assert } from 'console';
 import { PPPATH, usePlayPianoController } from '../../App';
 import { useActionOnKeyPress } from '../utils/APIHooks';
 
@@ -30,6 +29,7 @@ interface ModeCardProps {
  * @param controller @type {PlayPianoController} to display into for
  * @returns 
  */
+function ModeCard({ action, mode, icon, text, link, keyID} : ModeCardProps) : JSX.Element {
 function ModeCard({ action, mode, icon, text, link, keyID} : ModeCardProps) : JSX.Element {
 
   const controller : PlayPianoController = usePlayPianoController();
@@ -60,12 +60,15 @@ function ModeCard({ action, mode, icon, text, link, keyID} : ModeCardProps) : JS
   return (
     <div className = "mode-card" 
     style={{backgroundColor:`rgb(${ButtonColors[keyID]})` }}
+    style={{backgroundColor:`rgb(${ButtonColors[keyID]})` }}
     onClick = {pressAction}>
 
       <FontAwesomeIcon icon = {icon} className = "mode-icon" />
 
       <h1>{mode}</h1>
+      <h1>{mode}</h1>
 
+      <p>{text}</p>
       <p>{text}</p>
 
     </div>
