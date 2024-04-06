@@ -14,9 +14,10 @@ interface SongCardProps {
     image?: string;
     genre: string;
     position: number;
+    midi: string;
 }
 
-function SongCard({ title, artist, year, image, position, genre}: SongCardProps) {
+function SongCard({ title, artist, year, image, position, genre, midi}: SongCardProps) {
     const nav = useNavigate();
     const controller = usePlayPianoController();
 
@@ -24,7 +25,7 @@ function SongCard({ title, artist, year, image, position, genre}: SongCardProps)
         const  bb = await getSongBoundingBoxes(title);
       
         const song: SongState = {
-            title: title,
+            title: midi,
             progress: 0,
             end: bb.length,
             boundingBoxes : bb !== undefined ? bb : [],

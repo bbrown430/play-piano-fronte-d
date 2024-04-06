@@ -53,6 +53,7 @@ function SongSelect() {
                             image={song.image}
                             position={index + 1} // Increment index by 1 to match position numbering
                             genre={song.genre}
+                            midi={song.midi}
                         />
                     ))}
                     <FontAwesomeIcon icon={faChevronRight} className="arrow" onClick={() => setStartIndex((prevIndex) => (prevIndex === metadata.length - 1 ? 0 : prevIndex + 1))} />
