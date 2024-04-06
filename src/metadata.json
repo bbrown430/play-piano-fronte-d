@@ -422,10 +422,10 @@
         "year": 1761,
         "length_seconds": 0,
         "tempo_bpm": 0,
-        "genre": "Soundtrack",
+        "genre": "Classic",
         "difficulty": 1,
         "high_score": 0,
-        "image": "/data/Traditional English - Twinkle Twinkle Little Star/cover.jpg",
+        "image": "/data/Traditional English - Twinkle Twinkle Little Star/cover.png",
         "midi": "/home/capstone/git/play-piano-frontend/public/data/Traditional English - Twinkle Twinkle Little Star/data.mid"
     }
 ]

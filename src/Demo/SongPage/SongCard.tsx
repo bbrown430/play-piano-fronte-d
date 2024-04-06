@@ -28,7 +28,7 @@ function SongCard({ title, artist, year, image, position, genre, midi}: SongCard
             console.log('songselected, but not in first position')
             return;
         }
-        const  bb = await getSongBoundingBoxes(title);
+        const  bb = await getSongBoundingBoxes(artist,title);
         await controller.setStatus('Waiting');
       
         const song: SongState = {

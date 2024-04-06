@@ -6,12 +6,12 @@ import { BoundingBox } from '../utils/types';
  * @param title name of song to fetch data from assets folder
  * @returns 
  */
-export async function getSongBoundingBoxes(title:string) {
+export async function getSongBoundingBoxes(artist:string, title:string) {
     let boundingBoxesJson
-   try{  boundingBoxesJson = await import(`../../assets/SheetMusic/${title}/bounding_boxes.json`);
+   try{  boundingBoxesJson = await import(`public/data/${artist} - ${title}/bounding_boxes.json`);
    }
    catch (error){
-    throw error
+    throw Error('clould not find bounding boxes')
    }
         
     let bblist : any[] = [];
