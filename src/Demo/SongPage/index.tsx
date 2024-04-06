@@ -30,12 +30,6 @@ function SongSelect() {
     // Array of 5 items based on the current start index
     const currentArray = getCircularArray(startIndex, metadata.length);
 
-    const scrollRight = () => {
-        setStartIndex((prevIndex) => (prevIndex === metadata.length - 1 ? 0 : prevIndex + 1));
-    };
-    const scrollLeft = () => {
-        setStartIndex((prevIndex) => (prevIndex === 0 ? metadata.length - 1 : prevIndex - 1));
-    }
     const selectCenterSong =  () => {
         const element = document.getElementById("position-3");
         if(element){
@@ -47,12 +41,19 @@ function SongSelect() {
       }
 
       //scroll rigfhgt with right key
+/*     
+    const scrollRight = () => {
+        setStartIndex((prevIndex) => (prevIndex === metadata.length - 1 ? 0 : prevIndex + 1));
+    };
+    const scrollLeft = () => {
+        setStartIndex((prevIndex) => (prevIndex === 0 ? metadata.length - 1 : prevIndex - 1));
+    }
     const scrollR =useActionOnKeyPress(scrollRight,35,2)
 
      const selectSong = useActionOnKeyPress(selectCenterSong,31,6);
 
       //scroll left with left key
-    const scrollL = useActionOnKeyPress(scrollLeft,28,2)
+    const scrollL = useActionOnKeyPress(scrollLeft,28,2) */
     const exitToModeSelect = useActionOnKeyPress(returnToModeSelect,2,0);
 
     
