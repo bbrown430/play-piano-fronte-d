@@ -37,8 +37,8 @@ function SongSelect() {
         setStartIndex((prevIndex) => (prevIndex === 0 ? metadata.length - 1 : prevIndex - 1));
     }
 
-    useActionOnKeyPress(scrollRight,33,2)
-    
+    useActionOnKeyPress(scrollRight,35,2)
+
     useActionOnKeyPress(scrollLeft,28,2)
     useActionOnKeyPress(returnToModeSelect,2,0);
 

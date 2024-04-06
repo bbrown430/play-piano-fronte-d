@@ -24,7 +24,8 @@ function SongCard({ title, artist, year, image, position, genre, midi}: SongCard
 
 
     const clicksong = async () => {
-        if(position!==0){
+        if(position!==3){
+            console.log('songselected, but not in first position')
             return;
         }
         const  bb = await getSongBoundingBoxes(title);
@@ -42,7 +43,7 @@ function SongCard({ title, artist, year, image, position, genre, midi}: SongCard
         nav(PPPATH.PLAY);
     }
 
-    useActionOnKeyPress(clicksong,[29,31],4)
+    useActionOnKeyPress(clicksong,31,4)
 
     const positionClass = `position-${position}`;
     const hideMetadata = position === 1 || position === 5 || position === 2 || position === 4;

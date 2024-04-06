@@ -29,8 +29,7 @@ function MenuButton( {colorID, title, icon, text, action,keyID} : MenuButtonProp
   icon = icon ? icon : faQuestion;
   text = text ? text : "";
   
-  useActionOnKeyPress(action,keyID)
-  controller.setKeyColor(keyID, ButtonColors[keyID]);
+  useActionOnKeyPress(action,keyID,colorID||0)
 
   return (
     <div className="pause-card"
