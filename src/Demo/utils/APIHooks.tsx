@@ -106,7 +106,7 @@ export function useActionOnKeyPress(action : (keyID?:number)=> void, keyID?:numb
 
   useEffect(()=>{
     //exit if no key has been pressed since making this hook
-    if(countProcecced<0 || keyPresses < 0 || keyPressed < 0 || keyPresses <= countProcecced){
+    if( keyPresses < 0 || keyPressed < 0 || keyPresses <= countProcecced){
       return;
     }
     setCountProccessed(prev=> prev+1);
