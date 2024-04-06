@@ -31,11 +31,11 @@ export function PauseMenu() {
         Pause Menu
       </h1>
 
-    <div className= "mode-select">
+    <div className= "pause-select">
       <MenuButton
         title='Restart'
         icon={faArrowRotateForward}
-        text='restart current song from begining'
+        text=''
         action={restart} keyID={0} />
 
       <MenuButton 
@@ -53,7 +53,7 @@ export function PauseMenu() {
       <MenuButton
         title='Exit'
         icon={faX}
-        text='End Song, Return to Menu'
+        text=''
         action={exitToModeSelect} keyID={3} />
 </div>   
 

@@ -22,8 +22,8 @@
         "genre": "Indie",
         "difficulty": 3,
         "high_score": 0,
-        "image": "/data/Billie Eilish - What Was I Made For [From The Motion Picture Barbie]/cover.jpg",
-        "midi": "/home/capstone/git/play-piano-frontend/public/data/Billie Eilish - What Was I Made For?/data.mid"
+        "image": "/data/Billie Eilish - What Was I Made For/cover.jpg",
+        "midi": "/home/capstone/git/play-piano-frontend/public/data/Billie Eilish - What Was I Made For/data.mid"
     },
     {
         "title": "When I Was Your Man",
@@ -48,8 +48,8 @@
         "genre": "Indie",
         "difficulty": 3,
         "high_score": 0,
-        "image": "/data/b\u00f4a - Duvet/cover.jpg",
-        "midi": "/home/capstone/git/play-piano-frontend/public/data/b\u00f4a - Duvet/data.mid"
+        "image": "/data/boa - Duvet/cover.jpg",
+        "midi": "/home/capstone/git/play-piano-frontend/public/data/boa - Duvet/data.mid"
     },
     {
         "title": "Sweden",
@@ -139,7 +139,7 @@
         "genre": "Pop",
         "difficulty": 3,
         "high_score": 0,
-        "image": "/data/Elton John - Rocket Man (I Think It_s Going To Be A Long, Long Time)/cover.jpg",
+        "image": "/data/Elton John - Rocket Man/cover.jpg",
         "midi": "/home/capstone/git/play-piano-frontend/public/data/Elton John - Rocket Man/data.mid"
     },
     {
@@ -179,7 +179,7 @@
         "difficulty": 3,
         "high_score": 0,
         "image": "/data/John Williams - Hedwig_s Theme/cover.jpg",
-        "midi": "/home/capstone/git/play-piano-frontend/public/data/John Williams - Hedwig's Theme/data.mid"
+        "midi": "/home/capstone/git/play-piano-frontend/public/data/John Williams - Hedwig_s Theme/data.mid"
     },
     {
         "title": "Glimpse of Us",
@@ -204,8 +204,8 @@
         "genre": "Soundtrack",
         "difficulty": 3,
         "high_score": 0,
-        "image": "/data/Justin Hurwitz - Mia & Sebastian\u2019s Theme/cover.jpg",
-        "midi": "/home/capstone/git/play-piano-frontend/public/data/Justin Hurwitz - Mia & Sebastian\u2019s Theme/data.mid"
+        "image": "/data/Justin Hurwitz - Mia & Sebastians Theme/cover.jpg",
+        "midi": "/home/capstone/git/play-piano-frontend/public/data/Justin Hurwitz - Mia & Sebastians Theme/data.mid"
     },
     {
         "title": "Runaway",
@@ -244,7 +244,7 @@
         "difficulty": 3,
         "high_score": 0,
         "image": "/data/Klaus Badelt - He_s a Pirate/cover.jpg",
-        "midi": "/home/capstone/git/play-piano-frontend/public/data/Klaus Badelt - He's a Pirate/data.mid"
+        "midi": "/home/capstone/git/play-piano-frontend/public/data/Klaus Badelt - He_s a Pirate/data.mid"
     },
     {
         "title": "Ocarina Of Time Theme",
@@ -308,7 +308,7 @@
         "genre": "Soundtrack",
         "difficulty": 3,
         "high_score": 0,
-        "image": "/data/Nicholas Britell - Succession (Main Title Theme)/cover.jpg",
+        "image": "/data/Nicholas Britell - Succession/cover.jpg",
         "midi": "/home/capstone/git/play-piano-frontend/public/data/Nicholas Britell - Succession/data.mid"
     },
     {
@@ -360,7 +360,7 @@
         "genre": "Pop",
         "difficulty": 3,
         "high_score": 0,
-        "image": "/data/Taylor Swift - exile (feat. Bon Iver)/cover.jpg",
+        "image": "/data/Taylor Swift - exile/cover.jpg",
         "midi": "/home/capstone/git/play-piano-frontend/public/data/Taylor Swift - exile/data.mid"
     },
     {
