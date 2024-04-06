@@ -6,6 +6,7 @@ import { getSongBoundingBoxes } from "../utils/songdata";
 import { error } from "console";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { useActionOnKeyPress } from "../utils/APIHooks";
 
 interface SongCardProps {
     title: string;
@@ -21,7 +22,11 @@ function SongCard({ title, artist, year, image, position, genre, midi}: SongCard
     const nav = useNavigate();
     const controller = usePlayPianoController();
 
+
     const clicksong = async () => {
+        if(position!==0){
+            return;
+        }
         const  bb = await getSongBoundingBoxes(title);
         await controller.setStatus('Waiting');
       
@@ -36,6 +41,8 @@ function SongCard({ title, artist, year, image, position, genre, midi}: SongCard
         
         nav(PPPATH.PLAY);
     }
+
+    useActionOnKeyPress(clicksong,[29,31],4)
 
     const positionClass = `position-${position}`;
     const hideMetadata = position === 1 || position === 5 || position === 2 || position === 4;

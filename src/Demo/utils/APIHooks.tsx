@@ -14,7 +14,7 @@ type KeyPress = {keyID: number, count: number};
  * @param keysToReport keys ids that this should report
  * @returns 
  */
-export default function useKeyPressesFromServer(keysToReport?: number | number[]) {
+export default function useKeyPressesFromServer(keysToReport?: number | number[],colorID?:number) {
   const controller = usePlayPianoController();
 
   const [lastKeyPress, setLastKeyPress ] = useState(-1);
@@ -26,7 +26,7 @@ export default function useKeyPressesFromServer(keysToReport?: number | number[]
     if(val>61)
     controller.httpcontroller.registerkey(val);
     else if(val<=61){
-      controller.setKeyColor(val,ButtonColors[colorindex])
+      controller.setKeyColor(val,ButtonColors[colorID||colorindex])
       colorindex = (colorindex + 1)%6;
     }}
 
@@ -74,7 +74,7 @@ export default function useKeyPressesFromServer(keysToReport?: number | number[]
             }
           }
             else if(!keysToReport.includes(keypress.keyID)){
-              console.log("returning key not needed second if")
+              console.log(`returning key not needed second if ${keysToReport} ${keypress.keyID}`)
               return;
 
             }
@@ -100,16 +100,17 @@ export default function useKeyPressesFromServer(keysToReport?: number | number[]
  * @param action is run when a key is pressed. 
  * @param keyID optional specific keys that performs action when pressed
  */
-export function useActionOnKeyPress(action : (keyID?:number)=> void, keyID?:number[] | number) {
-  const [keyPressed, keyPresses] = useKeyPressesFromServer(keyID);
-  const [ countProcecced, setCountroccessed] = useState(keyPresses);
+export function useActionOnKeyPress(action : (keyID?:number)=> void, keyID?:number[] | number,colorID?:number) {
+  const [keyPressed, keyPresses] = useKeyPressesFromServer(keyID,colorID);
+  const [ countProcecced, setCountProccessed] = useState(keyPresses);
 
   useEffect(()=>{
     //exit if no key has been pressed since making this hook
     if(keyPresses < 0 || keyPressed < 0 || keyPresses <= countProcecced){
+      setCountProccessed(prev=>keyPresses)
       return;
     }
-    setCountroccessed(prev=> prev+1);
+    setCountProccessed(prev=> prev+1);
     action(keyPressed);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[action, keyPresses]);

@@ -2,25 +2,32 @@ import MenuButton from './button';
 import { faArrowRotateForward, faMusic, faPlay, faX } from '@fortawesome/free-solid-svg-icons';
 import {useNavigate } from 'react-router-dom';
 import { PPPATH, usePlayPianoController } from '../../App';
+import { sleep } from '../utils/utils';
+import { MIDDLE10KEYS } from '../utils/types';
 
 export function PauseMenu() {
   const controller = usePlayPianoController();
   const nav = useNavigate();
 
-  const restart = () => {
-    controller.restartSong();
+  const restart = async () => {
+    if(controller.pianoMode==='Free'){
+      return;
+    }
+    await controller.restartSong();
     nav(PPPATH.PLAY) };
 
-  const unpause = () => {
-    controller.unPause(); 
+  const unpause = async () => {
+    await controller.unPause(); 
     nav(PPPATH.PLAY);
   };
 
   const changeSong = async () => {
+    await controller.setStatus('Over');
     await controller.setStatus('Menus');
     nav(PPPATH.SONGSELECT)
   }
   const exitToModeSelect = async () => {
+    await controller.setStatus('Over');
     await controller.setStatus('Menus');
     nav(PPPATH.MODESELECT)
   }
@@ -36,25 +43,27 @@ export function PauseMenu() {
         title='Restart'
         icon={faArrowRotateForward}
         text=''
-        action={restart} keyID={0} />
+        action={restart}
+        keyID={MIDDLE10KEYS[3]}
+        colorID={0}  />
 
       <MenuButton 
         title='Change Song'
         icon={faMusic}
         text=''
-        action={changeSong} keyID={1}/>
+        action={changeSong} keyID={MIDDLE10KEYS[4]}/>
 
       <MenuButton
         title='Resume'
         icon={faPlay}
         text=''
-        action={unpause} keyID={2} />
+        action={unpause} keyID={MIDDLE10KEYS[5]} />
 
       <MenuButton
         title='Exit'
         icon={faX}
         text=''
-        action={exitToModeSelect} keyID={3} />
+        action={exitToModeSelect} keyID={MIDDLE10KEYS[6]} />
 </div>   
 
     </div>

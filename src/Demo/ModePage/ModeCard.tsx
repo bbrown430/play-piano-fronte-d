@@ -36,7 +36,6 @@ function ModeCard({ colorID,action, mode, icon, text, link, keyID} : ModeCardPro
   mode = mode ? mode : 'Free'
   icon = icon ? icon : faQuestion;
   text = text ? text : "";
-  colorID = colorID || 0;
   
 
   const nav = useNavigate();
@@ -52,11 +51,11 @@ function ModeCard({ colorID,action, mode, icon, text, link, keyID} : ModeCardPro
 
   action ||= pressAction 
 
-  useActionOnKeyPress(action,keyID);
+  useActionOnKeyPress(action,keyID,colorID);
 
   return (
     <div className = "mode-card" 
-    style={{backgroundColor:`rgba(${ButtonColors[colorID]},1)` }}
+    style={{backgroundColor:`rgba(${ButtonColors[colorID||0]},1)` }}
     onClick = {action}>
       <FontAwesomeIcon icon = {icon} className = "mode-icon" />
       <h2 className="mode-header">{mode}</h2>

@@ -4,9 +4,17 @@ import SongCard from './SongCard';
 import './index.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'; // Import the specific icon
+import { useNavigate } from 'react-router';
+import { PPPATH } from '../../App';
+import { useActionOnKeyPress } from '../utils/APIHooks';
 
 function SongSelect() {
     const [startIndex, setStartIndex] = useState(0);
+    const nav = useNavigate();
+
+    const returnToModeSelect= async()=>{
+        nav(PPPATH.MODESELECT)
+    }
 
     // Function to get the circular array of 5 items
     const getCircularArray = (currentIndex: number, arrayLength: number) => {
@@ -18,8 +26,22 @@ function SongSelect() {
         return result;
     };
 
+    useActionOnKeyPress(returnToModeSelect,2,0);
     // Array of 5 items based on the current start index
     const currentArray = getCircularArray(startIndex, metadata.length);
+
+    const scrollRight = () => {
+        setStartIndex((prevIndex) => (prevIndex === metadata.length - 1 ? 0 : prevIndex + 1));
+    };
+    const scrollLeft = () => {
+        setStartIndex((prevIndex) => (prevIndex === 0 ? metadata.length - 1 : prevIndex - 1));
+    }
+
+    useActionOnKeyPress(scrollRight,33,2)
+    
+    useActionOnKeyPress(scrollLeft,28,2)
+    useActionOnKeyPress(returnToModeSelect,2,0);
+
 
     // Event listener for arrow key presses
     useEffect(() => {

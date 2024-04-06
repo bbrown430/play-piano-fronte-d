@@ -13,6 +13,8 @@ import MenuButton from "../PlayPianoMenus/button";
 import { faArrowRotateForward, faMusic, faPlay, faX } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router";
 import { over } from "lodash";
+import logo from '../../assets/play-piano-logo.svg';
+import "../SplashScreen/index.css"
 
 
 /**
@@ -39,7 +41,10 @@ export enum KEYID{
 
                         case "inProgress":
                             if(controller.pianoMode==='Free'){
-                                return <></>
+                                return                 <img
+                                src={logo}
+                                className="piano-logo"
+                                alt="logo"/>
                             }
                             return <SheetMusic/>
                         case "Over":
