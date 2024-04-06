@@ -414,5 +414,18 @@
         "high_score": 0,
         "image": "/data/The Office - The Office Theme/cover.jpg",
         "midi": "/home/capstone/git/play-piano-frontend/public/data/The Office - The Office Theme/data.mid"
+    },
+    {
+        "title": "Twinkle Twinkle Little Star",
+        "artist": "Traditional English",
+        "album": "",
+        "year": 1761,
+        "length_seconds": 0,
+        "tempo_bpm": 0,
+        "genre": "Soundtrack",
+        "difficulty": 1,
+        "high_score": 0,
+        "image": "/data/Traditional English - Twinkle Twinkle Little Star/cover.jpg",
+        "midi": "/home/capstone/git/play-piano-frontend/public/data/Traditional English - Twinkle Twinkle Little Star/data.mid"
     }
 ]
