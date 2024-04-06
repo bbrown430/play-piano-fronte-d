@@ -36,11 +36,26 @@ function SongSelect() {
     const scrollLeft = () => {
         setStartIndex((prevIndex) => (prevIndex === 0 ? metadata.length - 1 : prevIndex - 1));
     }
+    const selectCenterSong =  () => {
+        const element = document.getElementById("position-3");
+        if(element){
+        element?.click();
+        console.log('attempting to click position 3 card');
+        }
+        console.log('could not find position 3 card');
 
-    useActionOnKeyPress(scrollRight,35,2)
+      }
 
-    useActionOnKeyPress(scrollLeft,28,2)
-    useActionOnKeyPress(returnToModeSelect,2,0);
+      //scroll rigfhgt with right key
+    const scrollR =useActionOnKeyPress(scrollRight,35,2)
+
+     const selectSong = useActionOnKeyPress(selectCenterSong,31,6);
+
+      //scroll left with left key
+    const scrollL = useActionOnKeyPress(scrollLeft,28,2)
+    const exitToModeSelect = useActionOnKeyPress(returnToModeSelect,2,0);
+
+    
 
 
     // Event listener for arrow key presses

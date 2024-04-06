@@ -51,19 +51,24 @@ export function PauseMenu() {
         title='Change Song'
         icon={faMusic}
         text=''
-        action={changeSong} keyID={MIDDLE10KEYS[4]}/>
+        action={changeSong} keyID={MIDDLE10KEYS[4]}
+        colorID={1}/>
 
       <MenuButton
         title='Resume'
         icon={faPlay}
         text=''
-        action={unpause} keyID={MIDDLE10KEYS[5]} />
+        action={unpause} 
+        keyID={MIDDLE10KEYS[5]}
+        colorID={2} />
 
       <MenuButton
         title='Exit'
         icon={faX}
         text=''
-        action={exitToModeSelect} keyID={MIDDLE10KEYS[6]} />
+        action={exitToModeSelect}
+        keyID={MIDDLE10KEYS[6]}
+        colorID={3} />
 </div>   
 
     </div>

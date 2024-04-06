@@ -43,14 +43,17 @@ function SongCard({ title, artist, year, image, position, genre, midi}: SongCard
         nav(PPPATH.PLAY);
     }
 
-    useActionOnKeyPress(clicksong,31,4)
-
     const positionClass = `position-${position}`;
     const hideMetadata = position === 1 || position === 5 || position === 2 || position === 4;
 
 
     return (
-        <div className={`song-card ${positionClass}`} onClick={clicksong}>
+        <div 
+        className={`song-card ${positionClass}`}
+        onClick={clicksong}
+        id={positionClass}
+        >
+
             {!hideMetadata && <h3 className="song-metadata-title">{title}</h3>}
             {!hideMetadata && <h4 className="artist">{artist}</h4>}
             {!hideMetadata && <h5 className='year-genre'>{genre}, {year}</h5>}

@@ -73,7 +73,7 @@ export default function useKeyPressesFromServer(keysToReport?: number | number[]
               return;
             }
           }
-            else if(!keysToReport.includes(keypress.keyID)){
+            else if(keysToReport.includes(keypress.keyID.valueOf())){
               console.log(`returning key not needed second if ${keysToReport} ${keypress.keyID}`)
               return;
 
@@ -106,8 +106,7 @@ export function useActionOnKeyPress(action : (keyID?:number)=> void, keyID?:numb
 
   useEffect(()=>{
     //exit if no key has been pressed since making this hook
-    if(keyPresses < 0 || keyPressed < 0 || keyPresses <= countProcecced){
-      setCountProccessed(prev=>keyPresses)
+    if(countProcecced<0 || keyPresses < 0 || keyPressed < 0 || keyPresses <= countProcecced){
       return;
     }
     setCountProccessed(prev=> prev+1);
