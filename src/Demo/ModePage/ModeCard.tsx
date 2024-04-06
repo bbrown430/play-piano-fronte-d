@@ -43,15 +43,14 @@ function ModeCard({ colorID,action, mode, icon, text, link, keyID} : ModeCardPro
 
   const pressAction = async () => {
   if(mode)
-   controller.pianoMode = mode;
+    controller.pianoMode = mode;
     await controller.setStatus('Waiting');
-   //link to song select page
     if(link){
     nav(link);
     };
   } 
 
-  action = action !== undefined ? action : pressAction 
+  action ||= pressAction 
 
   useActionOnKeyPress(action,keyID);
 

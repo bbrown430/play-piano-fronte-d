@@ -208,9 +208,9 @@ export class PlayPianoHttp implements operations{
     async setSong(title: string): Promise<boolean> {
         const fullUrl = `${this.url}${EndPoints.songName}`;
 
-        await axios.post(fullUrl,{
-            SongName: title,
-        }).catch(exception => {console.log(`ERROR received from ${fullUrl}: ${exception}\n`);
+        await axios.post(fullUrl,
+            {SongName: title})
+        .catch(exception => {console.log(`ERROR received from ${fullUrl}: ${exception}\n`);
         return false;})
 
         return true;
@@ -223,9 +223,4 @@ export class PlayPianoHttp implements operations{
 
 }
 
-
-
-export function initializeMenuButtons(count:number,...colors : [number,number,number]){
-
-}
 

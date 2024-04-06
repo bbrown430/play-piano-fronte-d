@@ -23,15 +23,17 @@ function SongCard({ title, artist, year, image, position, genre, midi}: SongCard
 
     const clicksong = async () => {
         const  bb = await getSongBoundingBoxes(title);
+        await controller.setStatus('Waiting');
       
         const song: SongState = {
-            title: midi,
+            midiPath: midi,
+            title: title,
             progress: 0,
             end: bb.length,
             boundingBoxes : bb !== undefined ? bb : [],
         }
         controller.currentSong = song;
-        await controller.setStatus('Waiting');
+        
         nav(PPPATH.PLAY);
     }
 

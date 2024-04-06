@@ -39,7 +39,7 @@ export interface PianoSettings {
 
 export interface SongState {
   title?: string;
-  // tempo : number; //percentage 
+  midiPath? : string;
   progress?: number;
   end?: number;
   boundingBoxes?: BoundingBox[];

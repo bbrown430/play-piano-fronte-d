@@ -98,10 +98,14 @@ export default class PlayPianoController{
     return this._state.status;
   }
 
-  async  setStatus(status : PianoState) {
-    this._state.status = status;
-    this.emit(PPEvents.STATUS,status)
-    await this.httpcontroller.setStatus(status);
+  async  setStatus(newStatus : PianoState) {
+    if(this.status === 'Menus' && newStatus==='inProgress'){
+      console.log('invalid state change menus => inprogress')
+      throw new Error('invalid state change menus => inprogress')
+    }
+    this._state.status = newStatus;
+    this.emit(PPEvents.STATUS,newStatus)
+    //await this.httpcontroller.setStatus(newStatus);
   }
 
 
@@ -131,8 +135,11 @@ export default class PlayPianoController{
 
       if(newSong.title){
         this.currentSong.title=newSong.title
-        this.httpcontroller.setSong(newSong.title);
       } 
+      if(newSong.midiPath){
+        this.currentSong.midiPath = newSong.midiPath;
+        this.httpcontroller.setSong(newSong.midiPath);
+      }
       this.currentSong.boundingBoxes = newSong.boundingBoxes || [];
 
       this.currentSong.end =  newSong.end || 10000;
