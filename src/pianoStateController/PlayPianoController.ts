@@ -84,13 +84,11 @@ export default class PlayPianoController{
     return this._state.mode;
   }
 
-  set pianoMode(mode : PianoMode) {
-    if(this.pianoMode === mode){
-    return;
-    }
+  async setPianoMode(mode : PianoMode) {
+    
     this._state.mode = mode;
     this.emit(PPEvents.MODE,mode);
-    this.httpcontroller.setMode(mode);
+    await this.httpcontroller.setMode(mode);
   } 
 
 
@@ -105,7 +103,7 @@ export default class PlayPianoController{
     }
     this._state.status = newStatus;
     this.emit(PPEvents.STATUS,newStatus)
-    //await this.httpcontroller.setStatus(newStatus);
+    await this.httpcontroller.setStatus(newStatus);
   }
 
 

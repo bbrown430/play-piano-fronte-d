@@ -100,7 +100,7 @@ export class PlayPianoHttp implements operations{
         const fullUrl = `${this.url}${EndPoints.status}`;
 
         await axios.post(fullUrl,{
-            Status:status
+            Status: status
         }).catch(exception => {console.log(`ERROR received from ${fullUrl}: ${exception}\n`);
         return false;})
 
@@ -161,9 +161,10 @@ export class PlayPianoHttp implements operations{
      
 
         const fullUrl = `${this.url}${EndPoints.mode}`;
+        console.log(`setting si/mode to ${mode}`)
 
         await axios.post(fullUrl,{
-            Mode:mode
+            Mode: mode
         }).catch(exception => {console.log(`ERROR received from ${fullUrl}: ${exception}\n`);
         return false;})
 

@@ -43,7 +43,7 @@ function ModeCard({ colorID,action, mode, icon, text, link, keyID} : ModeCardPro
 
   const pressAction = async () => {
   if(mode)
-    controller.pianoMode = mode;
+    await controller.setPianoMode(mode);
     await controller.setStatus('Waiting');
     if(link){
     nav(link);

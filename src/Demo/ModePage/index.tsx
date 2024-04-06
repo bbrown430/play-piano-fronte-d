@@ -12,6 +12,7 @@ function ModeSelect() {
   const controller = usePlayPianoController();
 
   const clickFreePlay = async ()=>{
+    await controller.setPianoMode('Free');
     await controller.setStatus('Waiting');
     nav(PPPATH.PLAY)
   }
