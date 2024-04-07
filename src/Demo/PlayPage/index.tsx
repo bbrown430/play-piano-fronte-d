@@ -128,6 +128,7 @@ function SheetMusic(){
             <div className= "sheet-music">
                     {controller.currentSong.title === undefined ? <></>:<img 
                     id="sheetimg"
+                    className="sheetimg"
                     style = {{position: 'absolute'}} 
                     src={imgsrc} 
                     alt="" ></img>}
