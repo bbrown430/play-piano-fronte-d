@@ -193,15 +193,18 @@ function StartSongPage(){
         //starts game on keypress
         const  startdisplaytest = async () => {
             await controller.clearKeys();
+
             await controller.setStatus('inProgress');
           
         }
 
         useEffect(  () => {
             const events = new EventSource(EVENTENDPOINT);
+
+            const regkeys = async()=> {await controller.clearKeys();
+                await controller.registerAllKeys();}
     
-           (async()=> {await controller.clearKeys();
-            await controller.registerAllKeys();})();
+           regkeys();
     
       
             events.onmessage = (event) => {

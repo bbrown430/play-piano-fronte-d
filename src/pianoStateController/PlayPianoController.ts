@@ -110,7 +110,7 @@ export default class PlayPianoController{
     
     this._state.mode = mode;
     this.emit(PPEvents.MODE,mode);
-   // await this.httpcontroller.setMode(mode);
+    await this.httpcontroller.setMode(mode);
   } 
 
 
@@ -125,7 +125,7 @@ export default class PlayPianoController{
     }
     this._state.status = newStatus;
     this.emit(PPEvents.STATUS,newStatus)
- //   await this.httpcontroller.setStatus(newStatus);
+    await this.httpcontroller.setStatus(newStatus);
   }
 
 
