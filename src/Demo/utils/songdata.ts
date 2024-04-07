@@ -8,7 +8,9 @@ import { BoundingBox } from '../utils/types';
  */
 export async function getSongBoundingBoxes(artist:string, title:string) {
     let boundingBoxesJson
-   try{  boundingBoxesJson = await import(`../../public/data/${artist} - ${title}/bounding_boxes.json`);
+    const path = `../../../public/data/${artist} - ${title}/bounding_boxes.json`
+
+   try{  boundingBoxesJson = await import(path);
    }
    catch (error){
     throw Error('clould not find bounding boxes')
@@ -34,14 +36,16 @@ export async function getSongBoundingBoxes(artist:string, title:string) {
  * @param title name of song to fetch data from assets folder
  * @returns 
  */
-export async function getSongSheetMusic(title:string) {
+export async function getSongSheetMusic(artist:string, title:string) {
     let image
-   try{ image = await import(`../../assets/SheetMusic/${title}/${title}.jpg`)
+    const path = `../../../public/data/${artist} - ${title}/sheet_music.jpg`
+
+   try{ image = await import(path)
     //image = await import(`../../assets/SheetMusic/hot cross buns/hot cross buns.jpg`)
    return image;
    }
    catch (error){
-    throw error
+    throw Error(`failed to load ${path}`)
    }
         
 }

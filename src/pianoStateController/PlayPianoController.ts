@@ -131,13 +131,13 @@ export default class PlayPianoController{
     set currentSong( newSong : SongState) {
 
 
-      if(newSong.title){
-        this.currentSong.title=newSong.title
-      } 
+   
       if(newSong.midiPath){
         this.currentSong.midiPath = newSong.midiPath;
         this.httpcontroller.setSong(newSong.midiPath);
       }
+      this.currentSong.title = newSong.title || "no tittle"
+      this.currentSong.artist = newSong.artist || "no artist"
       this.currentSong.boundingBoxes = newSong.boundingBoxes || [];
 
       this.currentSong.end =  newSong.end || 10000;
