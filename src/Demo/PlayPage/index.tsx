@@ -41,10 +41,12 @@ export enum KEYID{
 
                         case "inProgress":
                             if(controller.pianoMode==='Free'){
-                                return                 <img
-                                src={logo}
-                                className="piano-logo"
-                                alt="logo"/>
+                                return <div className="center-logo">
+                                    <img
+                                        src={logo}
+                                        className="piano-logo-pulse"
+                                        alt="logo"/>
+                                </div>
                             }
                             return <SheetMusic/>
                         case "Over":
@@ -158,7 +160,9 @@ function StartSongPage(){
 
         return (
             <div className = "start-page">
-                <div className="start-button" onClick={startdisplaytest}>Press ANY key to START</div>
+                <div className="start-button" onClick={startdisplaytest}>
+                    <h2>Press any key to start!</h2>
+                    </div>
                 </div>
         )
 }
