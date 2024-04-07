@@ -151,19 +151,17 @@ export default class PlayPianoController{
     }
 
     async setCurrentSong( newSong : SongState) {
-
-
-   
-      if(newSong.midiPath){
-        this.currentSong.midiPath = newSong.midiPath;
-      await this.httpcontroller.setSong(newSong.midiPath);
-      }
       this.currentSong.title = newSong.title || "no tittle"
       this.currentSong.artist = newSong.artist || "no artist"
       this.currentSong.boundingBoxes = newSong.boundingBoxes || [];
       this.currentSong.end =  newSong.end || 10000;
       this.currentSong.progress = 0;
       this.emit(PPEvents.SONG, newSong);
+      if(newSong.midiPath){
+        this.currentSong.midiPath = newSong.midiPath;
+      await this.httpcontroller.setSong(newSong.midiPath);
+      }
+
   
       
     }

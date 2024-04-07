@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { PPEvents } from "../../pianoStateController/PlayPianoEventHandler";
 import { BoundingBox, PianoState } from '../utils/types';
 import PlayPianoController from "../../pianoStateController/PlayPianoController";
-import { useActionOnKeyPress, useProgressFromServer, useControllerStatus, useScoreFromServer } from "../utils/APIHooks";
+import { useActionOnKeyPress, useProgressFromServer, useControllerStatus, useScoreFromServer, EVENTENDPOINT, KeyPress } from "../utils/APIHooks";
 import { usePause } from "../utils/utils";
 import { getSongBoundingBoxes, getSongSheetMusic } from "../utils/songdata";
 import MenuButton from "../PlayPianoMenus/button";
@@ -62,12 +62,16 @@ export enum KEYID{
 }
 
 function SheetMusic(){
+    const [imgsrc,setImgSrc] = useState(undefined); 
     const controller = usePlayPianoController();
     //@todo one day have a list of page breaks, and incriment when appropriate
         // eslint-disable-next-line @typescript-eslint/no-unused-vars 
     const [pagenum, setPagenum] = useState(1);
 
     const [boundingBox,setBoundingbox] = useState<BoundingBox|undefined>(undefined);
+
+
+
 
     
 
@@ -89,6 +93,19 @@ function SheetMusic(){
             }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[progress])
+    useEffect(  ()=>{
+        let imgtemp;
+
+  try {imgtemp = require(`../../assets/SheetMusic/${controller.currentSong.artist} - ${controller.currentSong.title }/data-${pagenum}.png`)
+        } catch(error){
+            console.log(`failed to load sheet music, displaying logo${`../../../public/data/${controller.currentSong.artist} - ${controller.currentSong.title }/data-${pagenum}.jpg`}`)
+        imgtemp= logo;
+    } 
+        setImgSrc(imgtemp)
+      
+        
+// eslint-disable-next-line react-hooks/exhaustive-deps
+},[controller.currentSong.title])
 
 
   const getoffsets = () => {
@@ -100,12 +117,7 @@ function SheetMusic(){
     return {top: 200,left:500}
   }
 
-  let imgsrc; 
-  try {imgsrc = require(`../../../public/data/${controller.currentSong.artist} - ${controller.currentSong.title }/data-${pagenum}.jpg`)
-} catch(error){
-    console.log('failed to load sheet music, displaying logo')
-    imgsrc= logo;
-} 
+  
 
 
 
@@ -142,19 +154,39 @@ function StartSongPage(){
         //starts game on keypress
         const  startdisplaytest = async () => {
             await controller.setStatus('inProgress');
-            controller.setCurrentSong( {...controller.currentSong,
-                progress: 0,
-            })
-
-            //@todo remove and place in song select button
-            
-
-            //const boundingBoxes  = await getSongBoundingBoxes(controller.currentSong.title||"");
-           // controller.currentSong = {boundingBoxes: boundingBoxes,title: controller.currentSong.title, progress : 0, end : boundingBoxes.length}; 
-        
+          
         }
 
-        useActionOnKeyPress(startdisplaytest);
+        useEffect(  () => {
+            const events = new EventSource(EVENTENDPOINT);
+    
+           (async()=> {await controller.clearKeys();
+            await controller.registerAllKeys();})();
+    
+      
+            events.onmessage = (event) => {
+      
+              const keypressed = JSON.parse(event.data);
+              const keypress : KeyPress  = {keyID: keypressed.keyID, count : keypressed.count};
+              console.log(`Key pressed id : ${keypress.keyID} keys listening for ANY`);
+    
+              if(keypress.keyID === undefined){
+                console.log(`returning keypress :  ${keypress}`)
+                return;
+              }
+              startdisplaytest();
+    
+    
+        }
+    
+            return () => {
+                events.close();
+              }
+    
+          // eslint-disable-next-line react-hooks/exhaustive-deps
+          },[controller])
+
+        
 
         return (
             <div className = "start-page">
