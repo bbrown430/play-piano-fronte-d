@@ -128,12 +128,23 @@ function SheetMusic(){
     useEffect(  ()=>{
         let imgtemp;
 
-  try {imgtemp = require(`../../assets/SheetMusic/${controller.currentSong.artist} - ${controller.currentSong.title }/data-${pagenum}.png`)
-        } catch(error){
-            console.log(`failed to load sheet music, displaying logo${`../../../public/data/${controller.currentSong.artist} - ${controller.currentSong.title }/data-${pagenum}.jpg`}`)
-        imgtemp= logo;
-    } 
-        setImgSrc(imgtemp)
+        if (controller.currentSong && controller.currentSong.title) {
+            const safeTitle = controller.currentSong.title.replace(/[?']/g, '');
+        
+            try {
+                imgtemp = require(`../../assets/SheetMusic/${controller.currentSong.artist} - ${safeTitle}/data-${pagenum}.png`);
+            } catch(error) {
+                console.log(`Failed to load sheet music, displaying logo: ../../../public/data/${controller.currentSong.artist} - ${safeTitle}/data-${pagenum}.jpg`);
+                imgtemp = logo;
+            }
+        
+            setImgSrc(imgtemp);
+        } else {
+            console.log("Current song title is undefined.");
+            // Handle the case when current song title is undefined
+        }
+        
+        
       
         
 // eslint-disable-next-line react-hooks/exhaustive-deps
