@@ -3,7 +3,7 @@ import { assert, error } from 'console';
 import { PlayPianoEventHandler, PianoEventMap, PPEvents } from './PlayPianoEventHandler';
 import { sleep } from '../Demo/utils/utils';
 import { PlayPianoHttp } from '../Server/PlayPianoHttp';
-import { PianoMode, PianoState } from '../Demo/utils/types';
+import { ButtonColors, PianoMode, PianoState, WhiteKeys } from '../Demo/utils/types';
 import { PianoSound } from '../Demo/utils/types';
 import { PlayPianoControllerState, SongState } from '../Demo/utils/types';
 
@@ -14,9 +14,11 @@ import { PlayPianoControllerState, SongState } from '../Demo/utils/types';
 
 
 
- 
+   
+ const httpoff= true;
 
 export default class PlayPianoController{
+ 
   public httpcontroller! : PlayPianoHttp;
   private eventHandler : PlayPianoEventHandler;
   private _state : PlayPianoControllerState;
@@ -31,14 +33,34 @@ export default class PlayPianoController{
                   }
   }
 
+
   /**
    * sets key color using http request to device server
    * @param keyID 
    * @param color 
    */
   public setKeyColor(keyID : number, color : [number,number,number] ) {
+    if(httpoff){
+      return;
+    }
     this.httpcontroller.registerkey(keyID)
     this.httpcontroller.setKeyColor(keyID,color)
+  }
+
+  /**
+   * sends request to clear all key registrations and colors
+   */
+ async clearKeys() {
+      await this.httpcontroller.registerkey(-1);
+  }
+  async registerAllKeys(){
+    if(httpoff){
+      return;
+    }
+    this.httpcontroller.registerkey(100)
+    await WhiteKeys.forEach(async (val,index)=>{
+      this.httpcontroller.setKeyColor(val,ButtonColors[index%6])
+    })
   }
 
   /**
@@ -88,7 +110,7 @@ export default class PlayPianoController{
     
     this._state.mode = mode;
     this.emit(PPEvents.MODE,mode);
-    await this.httpcontroller.setMode(mode);
+   // await this.httpcontroller.setMode(mode);
   } 
 
 
@@ -103,7 +125,7 @@ export default class PlayPianoController{
     }
     this._state.status = newStatus;
     this.emit(PPEvents.STATUS,newStatus)
-    await this.httpcontroller.setStatus(newStatus);
+ //   await this.httpcontroller.setStatus(newStatus);
   }
 
 
@@ -128,23 +150,19 @@ export default class PlayPianoController{
      
     }
 
-    set currentSong( newSong : SongState) {
+    async setCurrentSong( newSong : SongState) {
 
 
    
       if(newSong.midiPath){
         this.currentSong.midiPath = newSong.midiPath;
-        this.httpcontroller.setSong(newSong.midiPath);
+      await this.httpcontroller.setSong(newSong.midiPath);
       }
       this.currentSong.title = newSong.title || "no tittle"
       this.currentSong.artist = newSong.artist || "no artist"
       this.currentSong.boundingBoxes = newSong.boundingBoxes || [];
-
       this.currentSong.end =  newSong.end || 10000;
-
       this.currentSong.progress = 0;
-
-
       this.emit(PPEvents.SONG, newSong);
   
       
@@ -198,11 +216,9 @@ export default class PlayPianoController{
   
 
   async restartSong() : Promise<boolean> {
-    if(!this._state.currentSongState.progress){
-      return false;
-    }
     this._state.currentSongState.progress = 0
     this.setStatus('Waiting');
+    await this.setCurrentSong( {...this.currentSong})
     return true;
     
   }
