@@ -1,7 +1,7 @@
 import { usePlayPianoController } from "../../App";
 import { useEffect, useState } from "react";
 import { BoundingBox } from '../utils/types';
-import { useControllerStatus, EVENTENDPOINT } from "../utils/APIHooks";
+import { EVENTENDPOINT } from "../utils/APIHooks";
 import logo from '../../assets/play-piano-logo.svg';
 import { usePause } from "../utils/utils";
 
@@ -15,33 +15,8 @@ export function SheetMusic() {
 
     const [boundingBox, setBoundingbox] = useState<BoundingBox | undefined>(undefined);
     const [progress, setProgress] = useState(0);
-
-
-    const APIstatus = useControllerStatus();
-
-    //ends when status from api or controller ends
-    //@todo maybe @SymNC
-    /* useEffect( ()=> {
-         const events = new EventSource(EVENTENDPOINT);
-   
-         events.onmessage = (event) => {
- 
-             const lastEvent = JSON.parse(event.data);
-             const apiStatus : PianoState  = lastEvent.status
- 
-         }
- 
- 
-     })*/
     //updates progress
     useEffect(() => {
-        /* (async () => {
-            controller.clearKeys();
-        }
-        )(); */
-
-
-
         const events = new EventSource(EVENTENDPOINT);
 
         events.onmessage = (event) => {
@@ -129,7 +104,7 @@ export function SheetMusic() {
                 src={imgsrc}
                 alt=""></img>}
 
-            {controller.status === 'inProgress' && boundingBox ?
+            {controller.status === 'inProgress' &&controller.pianoMode === 'Learn' && boundingBox  ?
                 <div className="note-overlay"
                     style={{
                         top: boundingBox.y + getoffsets().top,

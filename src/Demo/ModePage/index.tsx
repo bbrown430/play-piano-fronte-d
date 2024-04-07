@@ -1,10 +1,10 @@
+/* eslint-disable eqeqeq */
 import ModeCard from './ModeCard';
-import {faGamepad, faChalkboardTeacher, faBullseye, faMagicWandSparkles, faWrench, faPaintBrush } from '@fortawesome/free-solid-svg-icons';
+import {faGamepad, faChalkboardTeacher, faPaintBrush } from '@fortawesome/free-solid-svg-icons';
 import "./index.css"
 import { PPPATH, usePlayPianoController} from '../../App';
-import MenuButton from '../PlayPianoMenus/button';
 import { useNavigate } from 'react-router';
-import { ButtonColors, WhiteKeys } from '../utils/types';
+import { ButtonColors } from '../utils/types';
 import { useEffect } from 'react';
 import { EVENTENDPOINT, KeyPress } from '../utils/APIHooks';
 

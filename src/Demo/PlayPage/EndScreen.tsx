@@ -3,14 +3,13 @@ import { PPPATH, usePlayPianoController } from "../../App";
 import MenuButton from "../PlayPianoMenus/button";
 import { faArrowRotateForward, faMusic, faX } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router";
-import { EVENTENDPOINT, KeyPress, useControllerMode, useScoreFromServer } from "../utils/APIHooks";
+import { EVENTENDPOINT, KeyPress, useControllerMode } from "../utils/APIHooks";
 import { useEffect } from "react";
 import { ButtonColors } from "../utils/types";
 
 export function EndScreen() {
     const controller = usePlayPianoController();
     const nav = useNavigate();
-    const score = useScoreFromServer();
     const mode = useControllerMode();
 
     const restart = () => {
@@ -32,9 +31,7 @@ export function EndScreen() {
 
         const events = new EventSource(EVENTENDPOINT);
         const setupButtons = async ()=>{
-            await controller.clearKeys();
             await controller.registerKey(28,ButtonColors[0])
-           
             await controller.registerKey(31,ButtonColors[1])
             await controller.registerKey(35,ButtonColors[2])
     

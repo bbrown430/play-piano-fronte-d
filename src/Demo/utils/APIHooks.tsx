@@ -1,8 +1,7 @@
 import  { useEffect, useState } from "react";
-import { ButtonColors, MIDDLE10KEYS, PianoState, WhiteKeys, isPianoState,  } from "./types";
+import { PianoState, isPianoState,  } from "./types";
 import { usePlayPianoController } from "../../App";
 import { PPEvents } from "../../pianoStateController/PlayPianoEventHandler";
-import { switchCase, switchStatement } from "@babel/types";
 
 export const EVENTENDPOINT = 'http://localhost:8080/api/events'
 
@@ -14,6 +13,7 @@ export type KeyPress = {keyID: number, count: number};
  * @param keysToReport keys ids that this should report
  * @returns 
  */
+/*
   function useKeyPressesFromServer(keysToReport?: number | number[],colorID?:number) {
   const controller = usePlayPianoController();
 
@@ -94,12 +94,12 @@ export type KeyPress = {keyID: number, count: number};
   return [lastKeyPress, lastKeyCount];
 }
 
-
+*/
 /**
  * 
  * @param action is run when a key is pressed. 
  * @param keyID optional specific keys that performs action when pressed
- */
+ *//*
  function useActionOnKeyPress(action : (keyID?:number)=> void, keyID?:number[] | number,colorID?:number) {
   const [keyPressed, keyPresses] = useKeyPressesFromServer(keyID,colorID);
   const [ countProcecced, setCountProccessed] = useState(keyPresses);
@@ -114,7 +114,7 @@ export type KeyPress = {keyID: number, count: number};
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[action, keyPresses]);
 }
-
+ */
 
 export function useScoreFromServer() {
   const [score, setScore ] = useState(0);

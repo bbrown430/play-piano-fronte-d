@@ -4,9 +4,9 @@ import { faArrowRotateForward, faMusic, faPlay, faX } from '@fortawesome/free-so
 import {useNavigate } from 'react-router-dom';
 import { PPPATH, usePlayPianoController } from '../../App';
 import { sleep } from '../utils/utils';
-import { ButtonColors, MIDDLE10KEYS } from '../utils/types';
-import { useEffect, useState } from 'react';
-import { EVENTENDPOINT, KeyPress, useControllerMode, useControllerStatus, useStatusFromServer } from '../utils/APIHooks';
+import { ButtonColors } from '../utils/types';
+import { useEffect } from 'react';
+import { EVENTENDPOINT, KeyPress, useControllerMode, useControllerStatus } from '../utils/APIHooks';
 
 export function PauseMenu(){
   const mode = useControllerMode();
@@ -149,7 +149,7 @@ function PauseMenuLP() {
         text=''
         action={changeSong} 
         keyID={33}
-        colorID={1}/> : <></>}
+        colorID={2}/> : <></>}
 
       <MenuButton
         title='Exit'

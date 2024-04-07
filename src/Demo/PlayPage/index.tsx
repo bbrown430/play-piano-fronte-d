@@ -7,7 +7,6 @@ import {  useControllerStatus, useStatusFromServer } from "../utils/APIHooks";
 import logo from '../../assets/play-piano-logo.svg';
 import "../SplashScreen/index.css"
 import { EndScreen } from "./EndScreen";
-import { element } from "prop-types";
 import { StartSongPage } from "./StartSongPage";
 import { SheetMusic } from "./SheetMusic";
 import { usePause } from "../utils/utils";
