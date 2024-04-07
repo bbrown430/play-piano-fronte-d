@@ -21,20 +21,8 @@ export function Debug(){
   const [songTitle,setSongTitle] = useState(controller.songTitle);
   const [pianoMode,setPianoMode] = useState(controller.pianoMode);
   const [pianoStatus,setPianoStatus] = useState(controller.status);
-  const [token, setToken] = useState<any[]>();
-useEffect(()=>{
+ 
 
-  async function getToken() {
-   
-    const response : any[]  = (await getSongBoundingBoxes('hot cross buns'));
-
-   
-    setToken(response);
-  };
-
-  getToken();
-
-},[])
 
   useEffect(() => {
     console.log('effect run')
@@ -60,7 +48,6 @@ useEffect(()=>{
         <li>{`${pianoStatus}`}</li>
         <li>{`${pianoSound}`}</li>
         <li>{`song = ${songTitle}`}</li>
-      <li>{`${token}`}</li>
         <MenuButton 
           title='post keypress'
           icon={faCross}

@@ -8,7 +8,7 @@ import { BoundingBox } from '../utils/types';
  */
 export async function getSongBoundingBoxes(artist:string, title:string) {
     let boundingBoxesJson
-   try{  boundingBoxesJson = await import(`public/data/${artist} - ${title}/bounding_boxes.json`);
+   try{  boundingBoxesJson = await import(`../../public/data/${artist} - ${title}/bounding_boxes.json`);
    }
    catch (error){
     throw Error('clould not find bounding boxes')
