@@ -119,7 +119,7 @@ export function useActionOnKeyPress(action : (keyID?:number)=> void, keyID?:numb
 export function useScoreFromServer() {
   const controller = usePlayPianoController();
 
-  const [score, setScore ] = useState(-1);
+  const [score, setScore ] = useState(0);
 
   useEffect( () => {
       const events = new EventSource(EVENTENDPOINT);
@@ -127,12 +127,12 @@ export function useScoreFromServer() {
       events.onmessage = (event) => {
 
         const lastEvent = JSON.parse(event.data);
-        const score : number  = lastEvent.progress
+        const apiscore : number  = lastEvent.progress
 
 
 
-        if(score < 0 || score===undefined){
-          console.log(`returing before setting progress because :  ${score}`)
+        if(score===undefined){
+          console.log(`returing before setting progress because :  ${score} <is undefined `)
 
           return;
         }
