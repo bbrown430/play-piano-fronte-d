@@ -104,7 +104,7 @@ function SheetMusic(){
                     {controller.currentSong.title === undefined ? <></>:<img 
                     id="sheetimg"
                     style = {{position: 'absolute'}} 
-                    src={require(`../../assets/SheetMusic/${controller.currentSong.title}/${controller.currentSong.title}.jpg`)} 
+                    src={require(`../../../public/data/${controller.currentSong.artist} - ${controller.currentSong.title }/sheet_music.jpg`)} 
                     alt="" ></img>}
 
                 {

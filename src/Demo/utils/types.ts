@@ -38,6 +38,7 @@ export interface PianoSettings {
 
 
 export interface SongState {
+  artist?:string;
   title?: string;
   midiPath? : string;
   progress?: number;

@@ -33,6 +33,7 @@ function SongCard({ title, artist, year, image, position, genre, midi, difficult
         await controller.setStatus('Waiting');
       
         const song: SongState = {
+            artist:artist,
             midiPath: midi,
             title: title,
             progress: 0,
