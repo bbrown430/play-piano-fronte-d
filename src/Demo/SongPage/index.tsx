@@ -33,7 +33,7 @@ function SongSelect() {
    
 
 
-    const returnToModeSelect= async()=>{
+    const returnToModeSelect= ()=>{
         nav(PPPATH.MODESELECT)
             }
       //listen 3 piano keys
@@ -79,11 +79,11 @@ function SongSelect() {
             setStartIndex((prevIndex) => (prevIndex === metadata.length - 1 ? 0 : prevIndex + 1))
           }else if(keypress.keyID == 31){
             selectCenterSong();
-          }else if(keypress.keyID == 31){
+          }else if(keypress.keyID == 2){
             const element = document.getElementById("secret back btn");
-        if(element){
-        element?.click();
-        }
+                    if(element){
+             element?.click();
+                 }
           };
 
 
