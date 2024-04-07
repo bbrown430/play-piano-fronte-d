@@ -178,8 +178,8 @@
         "genre": "Soundtrack",
         "difficulty": 2,
         "high_score": 0,
-        "image": "/data/John Williams - Hedwig_s Theme/cover.jpg",
-        "midi": "/home/capstone/git/play-piano-frontend/public/data/John Williams - Hedwig_s Theme/data.mid"
+        "image": "/data/John Williams - Hedwigs Theme/cover.jpg",
+        "midi": "/home/capstone/git/play-piano-frontend/public/data/John Williams - Hedwigs Theme/data.mid"
     },
     {
         "title": "Glimpse of Us",
@@ -195,7 +195,7 @@
         "midi": "/home/capstone/git/play-piano-frontend/public/data/Joji - Glimpse of Us/data.mid"
     },
     {
-        "title": "Mia & Sebastian\u2019s Theme",
+        "title": "Mia & Sebastian's Theme",
         "artist": "Justin Hurwitz",
         "album": "La La Land (Original Motion Picture Soundtrack)",
         "year": 2016,
@@ -243,8 +243,8 @@
         "genre": "Soundtrack",
         "difficulty": 3,
         "high_score": 0,
-        "image": "/data/Klaus Badelt - He_s a Pirate/cover.jpg",
-        "midi": "/home/capstone/git/play-piano-frontend/public/data/Klaus Badelt - He_s a Pirate/data.mid"
+        "image": "/data/Klaus Badelt - Hes a Pirate/cover.jpg",
+        "midi": "/home/capstone/git/play-piano-frontend/public/data/Klaus Badelt - Hes a Pirate/data.mid"
     },
     {
         "title": "Ocarina Of Time Theme",

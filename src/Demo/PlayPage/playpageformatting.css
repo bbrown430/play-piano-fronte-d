@@ -55,6 +55,7 @@
   opacity: 0.5;
   width: 50px;
   height: 25px;
+  mix-blend-mode: multiply;
 }
 
 
