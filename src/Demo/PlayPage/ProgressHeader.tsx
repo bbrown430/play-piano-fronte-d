@@ -36,22 +36,20 @@ export function ProgressHeader(){
     return (
         <div className = "progress-header">
 
-        <div 
-          className = "song-title" 
-          style={{width : '20%'}}>
+        <h3>
           Mode: {controller.pianoMode}
-        </div>
-
+        </h3>
+        
          {controller.pianoMode !== 'Free' ? <>
-         <div className = "song-title">{songTitle}</div>
+         <h3>{songTitle}</h3>
          
-         <div className = "progress-bar">
-          {`Progress: ${((controller.currentSong.progress ?? 0) * 100 / (controller.currentSong.end ?? 1)  ).toFixed()} % `}</div>
+         <h3>
+          {`Progress: ${((controller.currentSong.progress ?? 0) * 100 / (controller.currentSong.end ?? 1)  ).toFixed()} % `}</h3>
           
          </> :<></>}
 
-         {controller.pianoMode === 'Play' ? <div className = "progress-bar">
-          {`Score: ${scoreFromServer}`}</div> : <></>}
+         {controller.pianoMode === 'Play' ? <h3>
+          {`Score: ${scoreFromServer}`}</h3> : <></>}
 
      </div>
     )
