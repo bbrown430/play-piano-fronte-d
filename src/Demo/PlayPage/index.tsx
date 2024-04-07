@@ -20,44 +20,25 @@ import { useEffect } from "react";
 
     useEffect(()=>{
 
-      ( async ()=> {if(statusAPI === 'Over'){
-            await controller.setStatus('Over');
-        }})()
 
     },[controller, statusAPI])
     
     
     return ( 
-        <div className = "inProgress-container"
-        >
+        <div className = "inProgress-container">
              <ProgressHeader/>
-            {
-                (()=>{
-                    switch(controllerStatus){
-                        case 'Menus':
-                        case "Waiting":
-                            return  <StartSongPage/>
-
-                        case "inProgress":
-                            if(controller.pianoMode==='Free'){
-                                return <div className="center-logo">
-                                    <img
-                                        src={logo}
-                                        className="piano-logo-pulse"
-                                        alt="logo"/>
-                                </div>
-                            }
-                            return <SheetMusic/>
-                        case "Over":
-                            return <EndScreen/>
-                        default: 
-                            return <></>
-                    }
-                })()
-            }
             
-        
-
+    {statusAPI === 'Over' ? (
+    <EndScreen />
+) : controllerStatus === 'Waiting' ? (
+    <StartSongPage />
+) : controllerStatus === 'inProgress' && controller.pianoMode === 'Free' ? (
+    <div className="center-logo">
+        <img src={logo} className="piano-logo-pulse" alt="logo" />
+    </div>
+) : controllerStatus === 'inProgress' ? (
+    <SheetMusic />
+) : <></>}
         </div>
     );
 }
