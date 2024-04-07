@@ -53,8 +53,8 @@ function SongSelect() {
             await controller.clearKeys();
             await controller.setKeyColor(2,ButtonColors[4])
             await controller.setKeyColor(28,ButtonColors[0])
-            await controller.setKeyColor(35,ButtonColors[0])
             await controller.setKeyColor(31,ButtonColors[1])
+            await controller.setKeyColor(35,ButtonColors[0])
     
           }
 

@@ -39,9 +39,10 @@ export function PauseMenu() {
     const events = new EventSource(EVENTENDPOINT);
     const setupButtons = async ()=>{
         await controller.clearKeys();
-        await controller.setKeyColor(28,ButtonColors[0])
-        await controller.setKeyColor(35,ButtonColors[1])
-        await controller.setKeyColor(31,ButtonColors[2])
+        await controller.setKeyColor(26,ButtonColors[0])
+        await controller.setKeyColor(29,ButtonColors[1])
+        await controller.setKeyColor(33,ButtonColors[2])
+        await controller.setKeyColor(36,ButtonColors[3])
 
       }
 
@@ -57,7 +58,7 @@ export function PauseMenu() {
         console.log(`returning keypress :  ${keypress}`)
         return;
       }
-      if(keypress.keyID == 28 ){
+      if(keypress.keyID == 26 ){
 
         const element = document.getElementById('Restart');
         if(element){
@@ -74,14 +75,14 @@ export function PauseMenu() {
       console.log('attempting to click position 3 card');
       }
     }//play
-      else if(keypress.keyID == 31){
+      else if(keypress.keyID == 33){
          const element = document.getElementById('Resume');
         if(element){
        element?.click();
        console.log('attempting to click position  play card');
 
       }
-    }else if(keypress.keyID == 33){
+    }else if(keypress.keyID == 36){
 
         const element = document.getElementById('Exit');
         if(element){

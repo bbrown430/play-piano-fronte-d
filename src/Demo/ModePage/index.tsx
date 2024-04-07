@@ -28,8 +28,9 @@ function ModeSelect() {
     const setupButtons = async ()=>{
         await controller.clearKeys();
         await controller.setKeyColor(28,ButtonColors[0])
-        await controller.setKeyColor(35,ButtonColors[1])
-        await controller.setKeyColor(31,ButtonColors[2])
+       
+        await controller.setKeyColor(31,ButtonColors[1])
+        await controller.setKeyColor(35,ButtonColors[2])
 
       }
 
@@ -46,7 +47,7 @@ function ModeSelect() {
         return;
       }
       //learn
-      if(keypress.keyID == 29 ){
+      if(keypress.keyID == 28 ){
 
       const element = document.getElementById('Learn');
       if(element){
@@ -61,7 +62,7 @@ function ModeSelect() {
        console.log('attempting to click position  play card');
 
       }
-    }else if(keypress.keyID == 33){
+    }else if(keypress.keyID == 35){
 
         const element = document.getElementById('Free');
         if(element){
