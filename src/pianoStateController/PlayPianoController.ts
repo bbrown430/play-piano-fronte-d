@@ -14,10 +14,11 @@ import { PlayPianoControllerState, SongState } from '../Demo/utils/types';
 
 
 
- 
+   
+ const httpoff= true;
 
 export default class PlayPianoController{
-   
+ 
   public httpcontroller! : PlayPianoHttp;
   private eventHandler : PlayPianoEventHandler;
   private _state : PlayPianoControllerState;
@@ -32,12 +33,16 @@ export default class PlayPianoController{
                   }
   }
 
+
   /**
    * sets key color using http request to device server
    * @param keyID 
    * @param color 
    */
   public setKeyColor(keyID : number, color : [number,number,number] ) {
+    if(httpoff){
+      return;
+    }
     this.httpcontroller.registerkey(keyID)
     this.httpcontroller.setKeyColor(keyID,color)
   }
@@ -49,6 +54,9 @@ export default class PlayPianoController{
       await this.httpcontroller.registerkey(-1);
   }
   async registerAllKeys(){
+    if(httpoff){
+      return;
+    }
     this.httpcontroller.registerkey(100)
     await WhiteKeys.forEach(async (val,index)=>{
       this.httpcontroller.setKeyColor(val,ButtonColors[index%6])

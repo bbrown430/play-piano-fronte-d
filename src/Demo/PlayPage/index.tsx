@@ -63,6 +63,9 @@ export enum KEYID{
 
 function SheetMusic(){
     const controller = usePlayPianoController();
+    //@todo one day have a list of page breaks, and incriment when appropriate
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars 
+    const [pagenum, setPagenum] = useState(1);
 
     const [boundingBox,setBoundingbox] = useState<BoundingBox|undefined>(undefined);
 
@@ -97,6 +100,14 @@ function SheetMusic(){
     return {top: 200,left:500}
   }
 
+  let imgsrc; 
+  try {imgsrc = require(`../../../public/data/${controller.currentSong.artist} - ${controller.currentSong.title }/data-${pagenum}.jpg`)
+} catch(error){
+    console.log('failed to load sheet music, displaying logo')
+    imgsrc= logo;
+} 
+
+
 
     return (
 
@@ -104,7 +115,7 @@ function SheetMusic(){
                     {controller.currentSong.title === undefined ? <></>:<img 
                     id="sheetimg"
                     style = {{position: 'absolute'}} 
-                    src={require(`../../../public/data/${controller.currentSong.artist} - ${controller.currentSong.title }/sheet_music.jpg`)} 
+                    src={imgsrc} 
                     alt="" ></img>}
 
                 {
@@ -127,7 +138,6 @@ function SheetMusic(){
 
 function StartSongPage(){
         const controller = usePlayPianoController();
-        const progress = useProgressFromServer();
 
         //starts game on keypress
         const  startdisplaytest = async () => {
