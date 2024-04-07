@@ -30,8 +30,6 @@ function SongCard({ title, artist, year, image, position, genre, midi, difficult
             return;
         }
         const  bb = await getSongBoundingBoxes(artist,title);
-        await controller.setStatus('Waiting');
-      
         const song: SongState = {
             artist:artist,
             midiPath: midi,
@@ -41,6 +39,8 @@ function SongCard({ title, artist, year, image, position, genre, midi, difficult
             boundingBoxes : bb !== undefined ? bb : [],
         }
         await controller.setCurrentSong(song);
+        await controller.setStatus('Waiting');
+      
         
         nav(PPPATH.PLAY);
     }

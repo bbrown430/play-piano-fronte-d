@@ -4,7 +4,9 @@ import "./index.css"
 import { PPPATH, usePlayPianoController} from '../../App';
 import MenuButton from '../PlayPianoMenus/button';
 import { useNavigate } from 'react-router';
-import { WhiteKeys } from '../utils/types';
+import { ButtonColors, WhiteKeys } from '../utils/types';
+import { useEffect } from 'react';
+import { EVENTENDPOINT, KeyPress } from '../utils/APIHooks';
 
 //move to the page for modes, buttons select the mode function buttonAction = {}=>
 function ModeSelect() {
@@ -16,6 +18,65 @@ function ModeSelect() {
     await controller.setStatus('Waiting');
     nav(PPPATH.PLAY)
   }
+
+
+
+  useEffect( () => {
+
+
+    const events = new EventSource(EVENTENDPOINT);
+    const setupButtons = async ()=>{
+        await controller.clearKeys();
+        await controller.setKeyColor(28,ButtonColors[0])
+        await controller.setKeyColor(35,ButtonColors[1])
+        await controller.setKeyColor(31,ButtonColors[2])
+
+      }
+
+    setupButtons();
+
+    events.onmessage = (event) => {
+
+      const keypressed = JSON.parse(event.data);
+      const keypress : KeyPress  = {keyID: keypressed.keyID, count : keypressed.count};
+      console.log(`Key pressed id : ${keypress.keyID} keys listening for 29 31 33`);
+
+      if(keypress.keyID ===undefined){
+        console.log(`returning keypress :  ${keypress}`)
+        return;
+      }
+      //learn
+      if(keypress.keyID == 29 ){
+
+      const element = document.getElementById('Learn');
+      if(element){
+      element?.click();
+      console.log('attempting to click position 3 card');
+      }
+    }//play
+      else if(keypress.keyID == 31){
+         const element = document.getElementById('Play');
+        if(element){
+       element?.click();
+       console.log('attempting to click position  play card');
+
+      }
+    }else if(keypress.keyID == 33){
+
+        const element = document.getElementById('Free');
+        if(element){
+         element?.click();
+         console.log('attempting to click position  play card');
+      };
+    }
+  }
+
+    return () => {
+        events.close();
+      }
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[])
 
   return (
     <div>

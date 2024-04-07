@@ -3,7 +3,9 @@ import { faArrowRotateForward, faMusic, faPlay, faX } from '@fortawesome/free-so
 import {useNavigate } from 'react-router-dom';
 import { PPPATH, usePlayPianoController } from '../../App';
 import { sleep } from '../utils/utils';
-import { MIDDLE10KEYS } from '../utils/types';
+import { ButtonColors, MIDDLE10KEYS } from '../utils/types';
+import { useEffect } from 'react';
+import { EVENTENDPOINT, KeyPress } from '../utils/APIHooks';
 
 export function PauseMenu() {
   const controller = usePlayPianoController();
@@ -31,7 +33,71 @@ export function PauseMenu() {
     await controller.setStatus('Menus');
     nav(PPPATH.MODESELECT)
   }
+  useEffect( () => {
 
+
+    const events = new EventSource(EVENTENDPOINT);
+    const setupButtons = async ()=>{
+        await controller.clearKeys();
+        await controller.setKeyColor(28,ButtonColors[0])
+        await controller.setKeyColor(35,ButtonColors[1])
+        await controller.setKeyColor(31,ButtonColors[2])
+
+      }
+
+    setupButtons();
+
+    events.onmessage = (event) => {
+
+      const keypressed = JSON.parse(event.data);
+      const keypress : KeyPress  = {keyID: keypressed.keyID, count : keypressed.count};
+      console.log(`Key pressed id : ${keypress.keyID} keys listening for 29 31 33`);
+
+      if(keypress.keyID ===undefined){
+        console.log(`returning keypress :  ${keypress}`)
+        return;
+      }
+      if(keypress.keyID == 28 ){
+
+        const element = document.getElementById('Restart');
+        if(element){
+        element?.click();
+        console.log('attempting to click position 3 card');
+        }
+      }//play
+      //learn
+      else if(keypress.keyID == 29 ){
+
+      const element = document.getElementById('Change Song');
+      if(element){
+      element?.click();
+      console.log('attempting to click position 3 card');
+      }
+    }//play
+      else if(keypress.keyID == 31){
+         const element = document.getElementById('Resume');
+        if(element){
+       element?.click();
+       console.log('attempting to click position  play card');
+
+      }
+    }else if(keypress.keyID == 33){
+
+        const element = document.getElementById('Exit');
+        if(element){
+         element?.click();
+         console.log('attempting to click position  play card');
+      };
+    }
+  }
+
+    return () => {
+        events.close();
+      }
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[])
+  
   return (
     <div>
       <h1 className='sticky-header'>

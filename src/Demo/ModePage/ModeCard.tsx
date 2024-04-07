@@ -51,10 +51,9 @@ function ModeCard({ colorID,action, mode, icon, text, link, keyID} : ModeCardPro
 
   action ||= pressAction 
 
-  useActionOnKeyPress(action,keyID,colorID);
-
   return (
     <div className = "mode-card" 
+    id={`${mode}`}
     style={{backgroundColor:`rgba(${ButtonColors[colorID||0]},1)` }}
     onClick = {action}>
       <FontAwesomeIcon icon = {icon} className = "mode-icon" />

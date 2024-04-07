@@ -192,6 +192,7 @@ function StartSongPage(){
 
         //starts game on keypress
         const  startdisplaytest = async () => {
+            await controller.clearKeys();
             await controller.setStatus('inProgress');
           
         }

@@ -23,16 +23,13 @@ interface MenuButtonProps {
 function MenuButton( {colorID, title, icon, text, action,keyID} : MenuButtonProps) : JSX.Element {
 
   // for testing 
-  const controller : PlayPianoController = usePlayPianoController();
-
   title = title ? title : "";
   icon = icon ? icon : faQuestion;
   text = text ? text : "";
   
-  useActionOnKeyPress(action,keyID,colorID||0)
-
   return (
     <div className="pause-card"
+    id={`${title}`}
     style={{backgroundColor:`rgba(${ButtonColors[colorID||0]},.9)` }}
      onClick={()=>{if (action){action()}}}>
       <FontAwesomeIcon icon={icon}  className="mode-icon" />

@@ -42,33 +42,20 @@ function SongSelect() {
 
       }
 
-      //scroll rigfhgt with right key
-/*     
-    const scrollRight = () => {
-        setStartIndex((prevIndex) => (prevIndex === metadata.length - 1 ? 0 : prevIndex + 1));
-    };
-    const scrollLeft = () => {
-        setStartIndex((prevIndex) => (prevIndex === 0 ? metadata.length - 1 : prevIndex - 1));
-    }
-    const scrollR =useActionOnKeyPress(scrollRight,35,2)
 
-     const selectSong = useActionOnKeyPress(selectCenterSong,31,6);
-
-      //scroll left with left key
-    const scrollL = useActionOnKeyPress(scrollLeft,28,2) */
-
-    
-
-      
 
       //listen 3 piano keys
       useEffect( () => {
         const events = new EventSource(EVENTENDPOINT);
+        const setupButtons = async ()=>{
+            await controller.clearKeys();
+            await controller.setKeyColor(28,ButtonColors[0])
+            await controller.setKeyColor(35,ButtonColors[0])
+            await controller.setKeyColor(31,ButtonColors[1])
+    
+          }
 
-        controller.clearKeys();
-        controller.setKeyColor(28,ButtonColors[0])
-        controller.setKeyColor(35,ButtonColors[0])
-        controller.setKeyColor(31,ButtonColors[1])
+        setupButtons();
   
         events.onmessage = (event) => {
   
@@ -99,7 +86,7 @@ function SongSelect() {
             events.close();
           }
 
-      },[controller])
+      },[])
     // Event listener for arrow key presses
     useEffect(() => {
         const handleKeyPress = (event: KeyboardEvent) => {

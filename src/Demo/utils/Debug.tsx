@@ -12,7 +12,7 @@ let x = 0;
 export function Debug(){
 
 
-  const lastKeyPress = useKeyPressesFromServer();
+//  const lastKeyPress = useKeyPressesFromServer();
 
   const controller = usePlayPianoController();
 
@@ -43,7 +43,6 @@ export function Debug(){
       <title>debug</title>
       <ol>
         <li>{`current game state information`}</li>
-        <li>{lastKeyPress!==undefined ? lastKeyPress : "bruhhhh"}</li>
         <li>{`${pianoMode}`}</li>
         <li>{`${pianoStatus}`}</li>
         <li>{`${pianoSound}`}</li>
