@@ -117,8 +117,6 @@ export type KeyPress = {keyID: number, count: number};
 
 
 export function useScoreFromServer() {
-  const controller = usePlayPianoController();
-
   const [score, setScore ] = useState(0);
 
   useEffect( () => {
@@ -131,12 +129,12 @@ export function useScoreFromServer() {
 
 
 
-        if(apiscore===undefined){
+        if(apiscore === undefined){
           console.log(`returing before setting progress because :  ${apiscore} <is undefined `)
 
           return;
         }
-        console.log(`midi progress processed  ${score}`)
+        console.log(`midi score being set to ${apiscore}`)
         setScore(apiscore);
 
 
@@ -200,7 +198,6 @@ export function useProgressFromServer() {
 
 export function useStatusFromServer() {
 
-  const controller = usePlayPianoController();
   const [status, setStatus ] = useState<PianoState>('Menus');
 
   useEffect( () => {
@@ -209,25 +206,26 @@ export function useStatusFromServer() {
       events.onmessage = (event) => {
 
         const lastEvent = JSON.parse(event.data);
-        const statusFromServer  = lastEvent.status
+        const statusFromServer = lastEvent.status
+
 
 
         if(!isPianoState(statusFromServer)){
           console.log(`status undefined ${statusFromServer}`)
           return;
         }
-        if(statusFromServer)
-        console.log(`midi progress processed  ${statusFromServer}`)
-        controller.setStatus(statusFromServer);
+        if(statusFromServer){
+        console.log(`midi status processed  ${statusFromServer}`)
+        //controller.setStatus(statusFromServer);
         setStatus(statusFromServer);
-
+        }
 
     }
 
     return () => {
       events.close();
     }
-  }, [controller]);
+  }, []);
 
   return status
 }

@@ -3,12 +3,14 @@ import {usePlayPianoController } from "../../App";
 import { PPEvents } from "../../pianoStateController/PlayPianoEventHandler";
 import "./playpageformatting.css"
 import { useProgressFromServer, useScoreFromServer } from "../utils/APIHooks";
+import { command } from "yargs";
 
 export function ProgressHeader(){
     const controller = usePlayPianoController();
     const [songTitle,setSongTitle] = useState(controller.songTitle);
     const progress = useProgressFromServer();
-    const scoreFromServer = useScoreFromServer()
+    const score = useScoreFromServer()
+    const [progressPercent,setProgressPercent] = useState("-1");
 
 
   
@@ -17,6 +19,12 @@ export function ProgressHeader(){
         const songTitleListener = () => {
             setSongTitle(controller.currentSong.title)
         }
+        
+        let percent = "-1"
+        if(controller.currentSong.end && progress <= controller.currentSong.end){
+          percent = (progress * 100 /controller.currentSong.end).toFixed();
+        }
+        setProgressPercent(percent)
        
         controller.currentSong.progress = progress;
 
@@ -26,7 +34,7 @@ export function ProgressHeader(){
             controller.removeListener(PPEvents.SONG, songTitleListener);
 
         };
-      }, [progress, controller, controller.pianoSound, controller.status, controller.songTitle]);
+      }, [progress,score,controller, controller.pianoSound, controller.status, controller.songTitle]);
     
 
 
@@ -41,12 +49,13 @@ export function ProgressHeader(){
          <h3>{songTitle}</h3>
          
          <h3>
-          {`Progress: ${((controller.currentSong.progress ?? 0) * 100 / (controller.currentSong.end ?? 1)  ).toFixed()} % `}</h3>
+          {progressPercent !== "-1" ? 
+          `Progress: ${progressPercent} % `: "" }</h3>
           
          </> :<></>}
 
          {controller.pianoMode === 'Play' ? <h3>
-          {`Score: ${scoreFromServer}`}</h3> : <></>}
+          {`Score: ${score}`}</h3> : <></>}
 
      </div>
     )

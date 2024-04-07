@@ -40,7 +40,7 @@ function ModeSelect() {
 
       const keypressed = JSON.parse(event.data);
       const keypress : KeyPress  = {keyID: keypressed.keyID, count : keypressed.count};
-      console.log(`Key pressed id : ${keypress.keyID} keys listening for 29 31 33`);
+      console.log(`Key pressed id : ${keypress.keyID} keys listening for 28 31 35`);
 
       if(keypress.keyID ===undefined){
         console.log(`returning keypress :  ${keypress}`)
@@ -74,7 +74,6 @@ function ModeSelect() {
 
     return () => {
         events.close();
-        controller.clearKeys()
       }
 
   },[controller,controller.pianoMode,controller.status])

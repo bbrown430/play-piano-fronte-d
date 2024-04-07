@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 import MenuButton from './button';
 import { faArrowRotateForward, faMusic, faPlay, faX } from '@fortawesome/free-solid-svg-icons';
 import {useNavigate } from 'react-router-dom';
@@ -5,7 +6,7 @@ import { PPPATH, usePlayPianoController } from '../../App';
 import { sleep } from '../utils/utils';
 import { ButtonColors, MIDDLE10KEYS } from '../utils/types';
 import { useEffect, useState } from 'react';
-import { EVENTENDPOINT, KeyPress, useControllerMode, useStatusFromServer } from '../utils/APIHooks';
+import { EVENTENDPOINT, KeyPress, useControllerMode, useControllerStatus, useStatusFromServer } from '../utils/APIHooks';
 
 export function PauseMenu(){
   const mode = useControllerMode();
@@ -24,6 +25,7 @@ export function PauseMenu(){
 function PauseMenuLP() {
   const controller = usePlayPianoController();
   const nav = useNavigate();
+  const status = useControllerStatus();
 
   const restart = async () => {
     if(controller.pianoMode==='Free'){
@@ -115,7 +117,7 @@ function PauseMenuLP() {
         events.close();
       }
 
-  },[controller, controller.status,controller.pianoMode])
+  },[status,controller, controller.status,controller.pianoMode])
   
   return (
     <div>
@@ -167,6 +169,7 @@ function PauseMenuLP() {
 function FreePauseMenu() {
   const controller = usePlayPianoController();
   const nav = useNavigate();
+  const status =  useControllerStatus();
 
 
   const unpause = async () => {
@@ -229,7 +232,7 @@ function FreePauseMenu() {
       }
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[controller, controller.status, controller.pianoMode])
+  },[controller, controller.status, controller.pianoMode,status])
   
   return (
     <div>

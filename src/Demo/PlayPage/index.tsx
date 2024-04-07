@@ -3,7 +3,7 @@ import { ProgressHeader } from "./ProgressHeader";
 import "./playpageformatting.css"
 import "../PlayPianoMenus/index.css"
 import { PianoState } from '../utils/types';
-import {  useControllerStatus } from "../utils/APIHooks";
+import {  useControllerStatus, useStatusFromServer } from "../utils/APIHooks";
 import logo from '../../assets/play-piano-logo.svg';
 import "../SplashScreen/index.css"
 import { EndScreen } from "./EndScreen";
@@ -11,11 +11,21 @@ import { element } from "prop-types";
 import { StartSongPage } from "./StartSongPage";
 import { SheetMusic } from "./SheetMusic";
 import { usePause } from "../utils/utils";
+import { useEffect } from "react";
 
  export default function PlayPage() {
-    const statusAPI : PianoState  = useControllerStatus();
+    const statusAPI : PianoState  = useStatusFromServer();
+    const controllerStatus = useControllerStatus();
     const controller = usePlayPianoController();
     usePause();
+
+    useEffect(()=>{
+
+      ( async ()=> {if(statusAPI === 'Over'){
+            await controller.setStatus('Over');
+        }})()
+
+    },[controller, statusAPI])
     
     
     return ( 
@@ -24,7 +34,7 @@ import { usePause } from "../utils/utils";
              <ProgressHeader/>
             {
                 (()=>{
-                    switch(statusAPI){
+                    switch(controllerStatus){
                         case 'Menus':
                         case "Waiting":
                             return  <StartSongPage/>
