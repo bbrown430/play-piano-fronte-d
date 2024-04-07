@@ -42,6 +42,7 @@
   flex-direction: column;
   align-items: center;
   background-color: white;
+  height: 92vh;
   overflow: hidden; 
 }
 
