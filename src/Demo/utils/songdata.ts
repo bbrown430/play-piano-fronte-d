@@ -1,6 +1,4 @@
 import { BoundingBox } from '../utils/types';
-
-
 /**
  * 
  * @param title name of song to fetch data from assets folder
@@ -8,12 +6,11 @@ import { BoundingBox } from '../utils/types';
  */
 export async function getSongBoundingBoxes(artist:string, title:string) {
     let boundingBoxesJson
-    const path = `../../../public/data/${artist} - ${title}/bounding_boxes.json`
 
-   try{  boundingBoxesJson = await import(path);
+   try{  boundingBoxesJson = await import(`../../assets/SheetMusic/${artist} - ${title}/bounding_boxes.json`);
    }
    catch (error){
-    throw Error('clould not find bounding boxes')
+    throw Error(`clould not find bounding boxes ${`../../assets/SheetMusic/${artist} - ${title}/bounding_boxes.json`}`)
    }
         
     let bblist : any[] = [];
@@ -38,14 +35,14 @@ export async function getSongBoundingBoxes(artist:string, title:string) {
  */
 export async function getSongSheetMusic(artist:string, title:string) {
     let image
-    const path = `../../../public/data/${artist} - ${title}/sheet_music.jpg`
+    //const path = `../../assets/SheetMusic/${artist} - ${title}/sheet_music.jpg`
 
-   try{ image = await import(path)
+   try{ image = await import(`../../assets/SheetMusic/${artist} - ${title}/sheet_music.jpg`)
     //image = await import(`../../assets/SheetMusic/hot cross buns/hot cross buns.jpg`)
    return image;
    }
    catch (error){
-    throw Error(`failed to load ${path}`)
+    throw Error(`failed to load ${`../../assets/SheetMusic/${artist} - ${title}/sheet_music.jpg`}`)
    }
         
 }
