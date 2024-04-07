@@ -71,6 +71,7 @@ function SheetMusic(){
     const [pagenum, setPagenum] = useState(1);
 
     const [boundingBox,setBoundingbox] = useState<BoundingBox|undefined>(undefined);
+    const [progress,setProgress] = useState(0);
 
 
 
@@ -78,9 +79,38 @@ function SheetMusic(){
     
 
     const APIstatus = useControllerStatus()
-    const progress = useProgressFromServer();
 
     usePause();
+
+    useEffect( () => {
+        const events = new EventSource(EVENTENDPOINT);
+        if(controller.status==='Waiting'){
+            setProgress(0);
+        }
+  
+        events.onmessage = (event) => {
+  
+          const lastEvent = JSON.parse(event.data);
+          const progress : number  = lastEvent.progress
+  
+  
+  
+          if(progress < 0 || progress === undefined){
+            console.log(`returing before setting progress because :  ${progress}`)
+  
+            return;
+          }
+          console.log(`midi progress processed  ${progress}`)
+          setProgress(prev=>prev+=1);
+  
+  
+      }
+      
+  
+      return () => {
+        events.close();
+      }
+    }, [controller.status]);
 
     //updates bounding box coordinates 
     // and ends game if we reached the end of the song
