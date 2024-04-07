@@ -10,7 +10,8 @@ export async function getSongBoundingBoxes(artist:string, title:string) {
    try{  boundingBoxesJson = await import(`../../assets/SheetMusic/${artist} - ${title}/bounding_boxes.json`);
    }
    catch (error){
-    throw Error(`clould not find bounding boxes ${`../../assets/SheetMusic/${artist} - ${title}/bounding_boxes.json`}`)
+    console.log(`clould not find bounding boxes ${`../../assets/SheetMusic/${artist} - ${title}/bounding_boxes.json`}`)
+    return [];
    }
         
     let bblist : any[] = [];
@@ -42,7 +43,8 @@ export async function getSongSheetMusic(artist:string, title:string) {
    return image;
    }
    catch (error){
-    throw Error(`failed to load ${`../../assets/SheetMusic/${artist} - ${title}/sheet_music.jpg`}`)
+    console.log(`failed to load ${`../../assets/SheetMusic/${artist} - ${title}/sheet_music.jpg`}`)
+    return;
    }
         
 }

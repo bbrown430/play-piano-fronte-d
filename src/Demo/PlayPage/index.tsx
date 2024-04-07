@@ -132,9 +132,9 @@ function StartSongPage(){
         //starts game on keypress
         const  startdisplaytest = async () => {
             await controller.setStatus('inProgress');
-            controller.currentSong = {...controller.currentSong,
+            controller.setCurrentSong( {...controller.currentSong,
                 progress: 0,
-            }
+            })
 
             //@todo remove and place in song select button
             

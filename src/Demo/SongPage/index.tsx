@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 import { useState, useEffect } from 'react';
 import metadata from '../../metadata.json';
 import SongCard from './SongCard';
@@ -5,11 +6,13 @@ import './index.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'; // Import the specific icon
 import { useNavigate } from 'react-router';
-import { PPPATH } from '../../App';
-import { EVENTENDPOINT, KeyPress, useActionOnKeyPress } from '../utils/APIHooks';
+import { PPPATH, usePlayPianoController } from '../../App';
+import { EVENTENDPOINT, KeyPress, useActionOnKeyPress, useControllerStatus } from '../utils/APIHooks';
+import { ButtonColors } from '../utils/types';
 
 function SongSelect() {
     const [startIndex, setStartIndex] = useState(0);
+    const controller = usePlayPianoController();
     const nav = useNavigate();
 
     const returnToModeSelect= async()=>{
@@ -26,7 +29,6 @@ function SongSelect() {
         return result;
     };
 
-    useActionOnKeyPress(returnToModeSelect,2,0);
     // Array of 5 items based on the current start index
     const currentArray = getCircularArray(startIndex, metadata.length);
 
@@ -54,22 +56,6 @@ function SongSelect() {
 
       //scroll left with left key
     const scrollL = useActionOnKeyPress(scrollLeft,28,2) */
-    const exitToModeSelect = useActionOnKeyPress(returnToModeSelect,2,0);
-
-    
-
-
-    let leftkey = new KeyboardEvent("keydown", {
-        key: "ArrowLeft",
-        keyCode: 13,
-        which: 13
-      });
-
-    const rightKey = new KeyboardEvent("keydown", {
-        key: "ArrowRight",
-        keyCode: 13,
-        which: 13
-      });
 
     
 
@@ -78,6 +64,11 @@ function SongSelect() {
       //listen 3 piano keys
       useEffect( () => {
         const events = new EventSource(EVENTENDPOINT);
+
+        controller.clearKeys();
+        controller.setKeyColor(28,ButtonColors[0])
+        controller.setKeyColor(35,ButtonColors[0])
+        controller.setKeyColor(31,ButtonColors[1])
   
         events.onmessage = (event) => {
   
@@ -108,7 +99,7 @@ function SongSelect() {
             events.close();
           }
 
-      },[])
+      },[controller])
     // Event listener for arrow key presses
     useEffect(() => {
         const handleKeyPress = (event: KeyboardEvent) => {
