@@ -72,20 +72,15 @@ function SheetMusic(){
     const [boundingBox,setBoundingbox] = useState<BoundingBox|undefined>(undefined);
     const [progress,setProgress] = useState(0);
 
-
-
-
     
-
     const APIstatus = useControllerStatus()
 
     usePause();
 
+
+    //updates progress
     useEffect( () => {
         const events = new EventSource(EVENTENDPOINT);
-        if(controller.status==='Waiting'){
-            setProgress(0);
-        }
   
         events.onmessage = (event) => {
   
@@ -102,14 +97,13 @@ function SheetMusic(){
           console.log(`midi progress processed  ${progress}`)
           setProgress(prev=>prev+=1);
   
-  
       }
       
   
       return () => {
         events.close();
       }
-    }, [controller.status]);
+    }, []);
 
     //updates bounding box coordinates 
     // and ends game if we reached the end of the song
@@ -124,7 +118,9 @@ function SheetMusic(){
             }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[progress])
-    useEffect(  ()=>{
+
+
+useEffect(  ()=>{
         let imgtemp;
 
   try {imgtemp = require(`../../assets/SheetMusic/${controller.currentSong.artist} - ${controller.currentSong.title }/data-${pagenum}.png`)

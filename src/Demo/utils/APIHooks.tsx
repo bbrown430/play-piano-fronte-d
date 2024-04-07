@@ -131,13 +131,13 @@ export function useScoreFromServer() {
 
 
 
-        if(score===undefined){
-          console.log(`returing before setting progress because :  ${score} <is undefined `)
+        if(apiscore===undefined){
+          console.log(`returing before setting progress because :  ${apiscore} <is undefined `)
 
           return;
         }
         console.log(`midi progress processed  ${score}`)
-        setScore(score);
+        setScore(apiscore);
 
 
     }
