@@ -16,9 +16,10 @@ interface SongCardProps {
     genre: string;
     position: number;
     midi: string;
+    difficulty: number;
 }
 
-function SongCard({ title, artist, year, image, position, genre, midi}: SongCardProps) {
+function SongCard({ title, artist, year, image, position, genre, midi, difficulty}: SongCardProps) {
     const nav = useNavigate();
     const controller = usePlayPianoController();
 
@@ -60,11 +61,8 @@ function SongCard({ title, artist, year, image, position, genre, midi}: SongCard
             <img className='song-image' src={image} alt="" />
             {!hideMetadata && <h3 className="difficulty">Difficulty</h3>}
             {!hideMetadata && <div className="star-container">
-                <FontAwesomeIcon icon={faStar} className="star"/>
-                <FontAwesomeIcon icon={faStar} className="star"/>
-                <FontAwesomeIcon icon={faStar} className="star"/>
-                <FontAwesomeIcon icon={faStar} className="star-half"/>
-                <FontAwesomeIcon icon={faStar} className="star-half"/>
+                {Array(difficulty).fill(<FontAwesomeIcon icon={faStar} className="star"/>)}
+                {Array(5-difficulty).fill(<FontAwesomeIcon icon={faStar} className="star-half"/>)}
             </div>}
         </div>
     )

@@ -92,6 +92,7 @@ function SongSelect() {
                             position={index + 1} // Increment index by 1 to match position numbering
                             genre={song.genre}
                             midi={song.midi}
+                            difficulty={song.difficulty}
                         />
                     ))}
                     <FontAwesomeIcon icon={faChevronRight} className="arrow" onClick={() => setStartIndex((prevIndex) => (prevIndex === metadata.length - 1 ? 0 : prevIndex + 1))} />
