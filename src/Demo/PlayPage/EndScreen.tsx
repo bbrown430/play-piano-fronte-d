@@ -95,7 +95,7 @@ export function EndScreen() {
                 {mode !== 'Free' ? <MenuButton
                     title='Restart'
                     icon={faArrowRotateForward}
-                    text='restart current song from begining'
+                    text=''
                     action={restart} keyID={28} 
                     colorID={0}/>
                     : <></>}
@@ -115,7 +115,7 @@ export function EndScreen() {
                 <MenuButton
                     title='Exit'
                     icon={faX}
-                    text='End Song, Return to Menu'
+                    text=''
                     action={exitToModeSelect} keyID={35}
                     colorID={3} />
 

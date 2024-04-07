@@ -61,7 +61,7 @@ export function ProgressHeader(){
          </> :<></>}
 
          {controller.pianoMode === 'Play' ? <h3>
-          {`Score: ${score}`}</h3> : <></>}
+          {`Score: ${score.toFixed()}`}</h3> : <></>}
 
      </div>
     )
