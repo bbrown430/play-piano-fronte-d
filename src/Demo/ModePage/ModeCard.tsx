@@ -18,7 +18,7 @@ interface ModeCardProps {
   text? : string ;
   link? : string;
   colorID? : number
-  keyID : number;
+  keyID? : number;
 }
 
 
@@ -27,7 +27,7 @@ interface ModeCardProps {
  * @param controller @type {PlayPianoController} to display into for
  * @returns 
  */
-function ModeCard({ colorID,action, mode, icon, text, link, keyID} : ModeCardProps) : JSX.Element {
+function ModeCard({ colorID,action, mode, icon, text, link} : ModeCardProps) : JSX.Element {
 
   const controller : PlayPianoController = usePlayPianoController();
 
