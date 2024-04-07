@@ -38,12 +38,15 @@ export default class PlayPianoController{
    * @param keyID 
    * @param color 
    */
-  public setKeyColor(keyID : number, color : [number,number,number] ) {
+  public registerKey(keyID : number, color? : [number,number,number] ) {
     if(httpoff){
       return;
     }
     this.httpcontroller.registerkey(keyID)
-    this.httpcontroller.setKeyColor(keyID,color)
+
+    if( color !== undefined) {
+      this.httpcontroller.setKeyColor(keyID,color)
+    }
   }
 
   /**
@@ -143,11 +146,6 @@ export default class PlayPianoController{
     return this._state.status === 'Paused'; 
   }
 
-  unPause() {
-    if(this.isPaused()){
-       this.setStatus('inProgress');
-    }
-  }
 
     /**
    * returns the current piano sound mode.

@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router";
 import { PPPATH, usePlayPianoController } from "../../App";
-import { KEYID } from "../PlayPage";
 import { useEffect } from "react";
 import { EVENTENDPOINT, KeyPress } from "./APIHooks";
 
@@ -12,19 +11,32 @@ import { EVENTENDPOINT, KeyPress } from "./APIHooks";
 export const sleep = async (waitTime: number) => new Promise(resolve => setTimeout(resolve, waitTime));
 
 
+const PAUSEKEYNUM = 85;
 /**
  * hook that will set status to paused, and navigagte to the pause menu when the pause key is pressed
  * @param controller 
  */
- function usePause() {
+ export function usePause() {
     const controller = usePlayPianoController();
     const nav = useNavigate();
 
     useEffect( () => {
         const pause = async () => {
             await controller.setStatus('Paused');
+            await sleep(25);
             nav(PPPATH.PAUSED);
         };
+
+        const buttoninit= async() => {
+            await controller.clearKeys();
+            await sleep(25);
+            controller.registerKey(PAUSEKEYNUM);
+
+
+
+        }
+
+        buttoninit();
 
         const events = new EventSource(EVENTENDPOINT);
   
@@ -33,21 +45,17 @@ export const sleep = async (waitTime: number) => new Promise(resolve => setTimeo
           const keypressed = JSON.parse(event.data);
           const keypress : KeyPress  = {keyID: keypressed.keyID, count : keypressed.count};
   
-          console.log(`Key pressed id : ${keypress.keyID} keys listening for`);
+          console.log(`Key pressed id : ${keypress.keyID} keys listening for ${PAUSEKEYNUM}`);
   
           if(keypress.keyID === undefined){
             return;
           }
-          if( keypress.keyID !== undefined){
               // eslint-disable-next-line eqeqeq
-              if(keypress.keyID === 85){
+              if(keypress.keyID == PAUSEKEYNUM){
                 console.log('pausing with usePause Hook');
                 pause();
-
-
               }
             }
-          }
   
   
       
@@ -57,10 +65,5 @@ export const sleep = async (waitTime: number) => new Promise(resolve => setTimeo
       }
     }, [controller, nav]);
 
-
-
-
-
-    //useActionOnKeyPress(pause, KEYID.PAUSE);
 }
 

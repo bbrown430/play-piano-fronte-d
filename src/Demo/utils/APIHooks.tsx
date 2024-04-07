@@ -26,7 +26,7 @@ export type KeyPress = {keyID: number, count: number};
     if(val>61)
     controller.httpcontroller.registerkey(val);
     else if(val<=61){
-      controller.setKeyColor(val,ButtonColors[colorID||colorindex])
+      controller.registerKey(val,ButtonColors[colorID||colorindex])
       colorindex = (colorindex + 1)%6;
     }}
 
@@ -253,4 +253,23 @@ export function useControllerStatus(){
     
   },[controller, controller.status])
   return pianoStatus;
+}
+
+
+//custom react hook to listen to the Mode in the controller, and update when it emmits changes
+export function useControllerMode(){
+  const controller = usePlayPianoController();
+  const [mode,setMode] = useState(controller.pianoMode);
+
+  useEffect(()=>{
+
+    
+  const modeListener = ()=>{
+    setMode(controller.pianoMode);
+  }
+    controller.addListener(PPEvents.MODE,modeListener)
+    return ()=>{controller.removeListener(PPEvents.MODE,modeListener)}
+    
+  },[controller])
+  return mode;
 }
