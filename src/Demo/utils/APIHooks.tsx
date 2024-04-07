@@ -4,9 +4,9 @@ import { usePlayPianoController } from "../../App";
 import { PPEvents } from "../../pianoStateController/PlayPianoEventHandler";
 import { switchCase, switchStatement } from "@babel/types";
 
-const EVENTENDPOINT = 'http://localhost:8080/api/events'
+export const EVENTENDPOINT = 'http://localhost:8080/api/events'
 
-type KeyPress = {keyID: number, count: number};
+export type KeyPress = {keyID: number, count: number};
 
 /**
  * react hook that gets key presses from the server api.

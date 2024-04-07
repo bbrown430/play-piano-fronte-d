@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'; // Import the specific icon
 import { useNavigate } from 'react-router';
 import { PPPATH } from '../../App';
-import { useActionOnKeyPress } from '../utils/APIHooks';
+import { EVENTENDPOINT, KeyPress, useActionOnKeyPress } from '../utils/APIHooks';
 
 function SongSelect() {
     const [startIndex, setStartIndex] = useState(0);
@@ -59,6 +59,56 @@ function SongSelect() {
     
 
 
+    let leftkey = new KeyboardEvent("keydown", {
+        key: "ArrowLeft",
+        keyCode: 13,
+        which: 13
+      });
+
+    const rightKey = new KeyboardEvent("keydown", {
+        key: "ArrowRight",
+        keyCode: 13,
+        which: 13
+      });
+
+    
+
+      
+
+      //listen 3 piano keys
+      useEffect( () => {
+        const events = new EventSource(EVENTENDPOINT);
+  
+        events.onmessage = (event) => {
+  
+          const keypressed = JSON.parse(event.data);
+          const keypress : KeyPress  = {keyID: keypressed.keyID, count : keypressed.count};
+          console.log(`Key pressed id : ${keypress.keyID} keys listening for 28 35 31`);
+
+          if(keypress.keyID ===undefined){
+            console.log(`returning keypress :  ${keypress}`)
+            return;
+          }
+          //go scroll left
+          if(keypress.keyID == 28 ){
+            console.log('dispatching leftKeyEvent')
+            setStartIndex((prevIndex) => (prevIndex === 0 ? metadata.length - 1 : prevIndex - 1));
+          }//go scroll right
+          else if(keypress.keyID == 35){
+            console.log('dispatching rightKeyEvent')
+            setStartIndex((prevIndex) => (prevIndex === metadata.length - 1 ? 0 : prevIndex + 1))
+          }else if(keypress.keyID == 31){
+            selectCenterSong();
+          };
+
+
+    }
+
+        return () => {
+            events.close();
+          }
+
+      },[])
     // Event listener for arrow key presses
     useEffect(() => {
         const handleKeyPress = (event: KeyboardEvent) => {
@@ -80,7 +130,8 @@ function SongSelect() {
         <div>
             <h1 className='sticky-header'>Select Song</h1>
             <div className='song-select-container'>
-                <div className='song-select'>
+                <div className='song-select'
+                id='select'>
                     <FontAwesomeIcon icon={faChevronLeft} className="arrow" onClick={() => setStartIndex((prevIndex) => (prevIndex === 0 ? metadata.length - 1 : prevIndex - 1))} />
                     {currentArray.map((song, index) => (
                         <SongCard
