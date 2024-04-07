@@ -1,4 +1,4 @@
-import { PPPATH, usePlayPianoController } from "../../App";
+import { usePlayPianoController } from "../../App";
 import { ProgressHeader } from "./ProgressHeader";
 import "./playpageformatting.css"
 import "../PlayPianoMenus/index.css"
@@ -9,12 +9,11 @@ import PlayPianoController from "../../pianoStateController/PlayPianoController"
 import { useActionOnKeyPress, useProgressFromServer, useControllerStatus, useScoreFromServer, EVENTENDPOINT, KeyPress } from "../utils/APIHooks";
 import { usePause } from "../utils/utils";
 import { getSongBoundingBoxes, getSongSheetMusic } from "../utils/songdata";
-import MenuButton from "../PlayPianoMenus/button";
-import { faArrowRotateForward, faMusic, faPlay, faX } from "@fortawesome/free-solid-svg-icons";
-import { useNavigate } from "react-router";
+import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import { over } from "lodash";
 import logo from '../../assets/play-piano-logo.svg';
 import "../SplashScreen/index.css"
+import { EndScreen } from "./EndScreen";
 
 
 /**
@@ -241,59 +240,3 @@ function StartSongPage(){
         )
 }
 
-function EndScreen (){
-        const controller = usePlayPianoController();
-        const nav = useNavigate();
-      
-        const restart = () => {
-          controller.restartSong();
-          nav(PPPATH.PLAY) };
-      
-        const changeSong = async () => {
-          await controller.setStatus('Menus');
-          nav(PPPATH.SONGSELECT)
-        }
-        const exitToModeSelect = async () => {
-          await controller.setStatus('Menus');
-          nav(PPPATH.MODESELECT)
-        }
-      
-        return (
-          <div className="menu-wrapper">
-      
-            <div className='menu-header'>
-              Paused
-              </div>
-      
-          <div className= "menu-row">
-          
-      </div>
-      
-      <div className= "menu-row"> 
-          <MenuButton
-              title='Restart'
-              icon={faArrowRotateForward}
-              text='restart current song from begining'
-              action={restart} keyID={0} />
-      
-            <MenuButton 
-              title='Change Song'
-              icon={faMusic}
-              text=''
-              action={changeSong} keyID={1}/>
-      
-      
-            <MenuButton
-              title='Exit'
-              icon={faX}
-              text='End Song, Return to Menu'
-              action={exitToModeSelect} keyID={3} />
-      
-      </div>   
-      
-          </div>
-        );
-      
-      
-      
-}
