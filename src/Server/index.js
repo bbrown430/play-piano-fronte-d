@@ -71,7 +71,7 @@ let status = {
   status : '',
 } 
 //send song ended event
-app.post('api/status',  (req,res)=>{
+app.post('/api/status',  (req,res)=>{
   status = {
     status : req.body.status
   };
@@ -79,6 +79,8 @@ app.post('api/status',  (req,res)=>{
   res.json(status);
   return sendEventsToAll(status);
 })
+
+
 
 app.get('/api/status', (req, res) => {
   console.log(`GET req made seding :  ${status}`);
