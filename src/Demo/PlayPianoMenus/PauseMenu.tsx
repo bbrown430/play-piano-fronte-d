@@ -57,7 +57,7 @@ function PauseMenuLP() {
 
     const events = new EventSource(EVENTENDPOINT);
     const setupButtons = async ()=>{
-        await controller.clearKeys();
+       // await controller.clearKeys();
         await controller.registerKey(26,ButtonColors[0])
         await controller.registerKey(29,ButtonColors[1])
         await controller.registerKey(33,ButtonColors[2])
@@ -188,7 +188,8 @@ function FreePauseMenu() {
     const events = new EventSource(EVENTENDPOINT);
 
     const setupButtons = async ()=>{
-        await controller.clearKeys();
+        //await controller.clearKeys();
+        //sleep(50);
         await controller.registerKey(26,ButtonColors[0])
         await controller.registerKey(36,ButtonColors[3])
 
