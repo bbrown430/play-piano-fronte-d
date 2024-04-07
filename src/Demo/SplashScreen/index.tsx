@@ -42,8 +42,7 @@ function SplashScreen() {
             events.close();
           }
 
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-      },[controller])
+      },[action, controller.pianoMode,controller.status,controller])
         
     return ( 
 

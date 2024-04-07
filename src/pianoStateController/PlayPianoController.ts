@@ -1,9 +1,8 @@
 
-import { assert, error } from 'console';
 import { PlayPianoEventHandler, PianoEventMap, PPEvents } from './PlayPianoEventHandler';
 import { sleep } from '../Demo/utils/utils';
 import { PlayPianoHttp } from '../Server/PlayPianoHttp';
-import { ButtonColors, PianoMode, PianoState, WhiteKeys } from '../Demo/utils/types';
+import { PianoMode, PianoState,  } from '../Demo/utils/types';
 import { PianoSound } from '../Demo/utils/types';
 import { PlayPianoControllerState, SongState } from '../Demo/utils/types';
 
@@ -77,7 +76,7 @@ export default class PlayPianoController{
     if(pianoSound !== this._state.settings.pianoSound){
     this._state.settings.pianoSound = pianoSound;
     this.httpcontroller.setSoundSetting(pianoSound);
-    this.emit('soundChange',this.pianoSound);}
+    this.emit(PPEvents.SOUND,this.pianoSound);}
 
   }
 
@@ -103,15 +102,19 @@ export default class PlayPianoController{
 
   //gets the current 
   get pianoMode() : PianoMode  {
-
     return this._state.mode;
+    
   }
 
   async setPianoMode(mode : PianoMode) {
     
     this._state.mode = mode;
     this.emit(PPEvents.MODE,mode);
+    if(httpoff){
+      return;
+    }
     await this.httpcontroller.setMode(mode);
+    await this.clearKeys();
   } 
 
 
@@ -124,9 +127,14 @@ export default class PlayPianoController{
       console.log('invalid state change menus => inprogress')
       throw new Error('invalid state change menus => inprogress')
     }
+
+   
+    if(!httpoff){
+     await this.httpcontroller.setStatus(newStatus);
+     await this.clearKeys();
+    }
     this._state.status = newStatus;
     this.emit(PPEvents.STATUS,newStatus)
-    await this.httpcontroller.setStatus(newStatus);
   }
 
 
@@ -158,9 +166,9 @@ export default class PlayPianoController{
       this.currentSong.end =  newSong.end || 10000;
       this.currentSong.progress = 0;
       this.emit(PPEvents.SONG, newSong);
-      if(newSong.midiPath){
+      if(newSong.midiPath && !httpoff){
         this.currentSong.midiPath = newSong.midiPath;
-      await this.httpcontroller.setSong(newSong.midiPath);
+        await this.httpcontroller.setSong(newSong.midiPath);
       }
 
   
@@ -173,6 +181,7 @@ export default class PlayPianoController{
 
   
    startSong() {
+    
 
     this.setStatus('inProgress');
 
@@ -216,7 +225,10 @@ export default class PlayPianoController{
 
   async restartSong() : Promise<boolean> {
     this._state.currentSongState.progress = 0
-    this.setStatus('Waiting');
+    await this.setStatus('Over');
+    await sleep(50);
+    await this.setStatus('Waiting');
+    await sleep(50);
     await this.setCurrentSong( {...this.currentSong})
     return true;
     

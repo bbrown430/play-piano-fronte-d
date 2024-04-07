@@ -4,12 +4,12 @@ import "./playpageformatting.css"
 import "../PlayPianoMenus/index.css"
 import { useEffect, useState } from "react";
 import { BoundingBox, PianoState } from '../utils/types';
-import {  useControllerStatus, EVENTENDPOINT, KeyPress, useStatusFromServer } from "../utils/APIHooks";
-import { sleep } from "../utils/utils";
+import {  useControllerStatus, EVENTENDPOINT, useStatusFromServer } from "../utils/APIHooks";
 import logo from '../../assets/play-piano-logo.svg';
 import "../SplashScreen/index.css"
 import { EndScreen } from "./EndScreen";
 import { element } from "prop-types";
+import { StartSongPage } from "./StartSongPage";
 
 
 /**
@@ -20,7 +20,7 @@ export enum KEYID{
 }
 
  export default function PlayPage() {
-    const statusAPI : PianoState  = useStatusFromServer();
+    const statusAPI : PianoState  = useControllerStatus();
     const controller = usePlayPianoController();
     
     return ( 
@@ -201,68 +201,4 @@ useEffect(  ()=>{
 
 
 
-function StartSongPage(){
-        const controller = usePlayPianoController();
-
-       const  startdisplaytest = async () => {
-            await controller.clearKeys();
-            await sleep(50)
-            await controller.setStatus('inProgress');
-          
-        }
-
-        useEffect(  () => {
-              //starts game on keypress
-           
-            const events = new EventSource(EVENTENDPOINT);
-
-            const regkeys = async()=> {
-                await controller.clearKeys();
-
-                await controller.registerAllKeys();}
-    
-            regkeys();
-    
-      
-            events.onmessage = (event) => {
-      
-              const keypressed = JSON.parse(event.data);
-              const keypress : KeyPress  = {keyID: keypressed.keyID, count : keypressed.count};
-              console.log(`Key pressed id : ${keypress.keyID} keys listening for ANY`);
-    
-              if(keypress.keyID === undefined){
-                console.log(`returning keypress :  ${keypress}`)
-                return;
-              }
-              
-
-
-              const startbutton = document.getElementById('start-button')
-              if(startbutton){
-                startbutton?.click();
-            }
-            }
-    
-    
-        
-    
-            return () => {
-                events.close();            
-              }
-    
-          },[controller,controller.pianoMode,controller.status])
-
-        
-
-        return (
-            <div className = "start-page">
-                <div className="start-button" 
-                id="start-button"
-                
-                onClick={startdisplaytest}>
-                    <h2>Press any key to start!</h2>
-                    </div>
-                </div>
-        )
-}
 

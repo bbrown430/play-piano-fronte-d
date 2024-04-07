@@ -33,12 +33,11 @@ function SongSelect() {
    
 
 
-
-      //listen 3 piano keys
-      useEffect( () => {  
-        const returnToModeSelect= async()=>{
+    const returnToModeSelect= async()=>{
         nav(PPPATH.MODESELECT)
             }
+      //listen 3 piano keys
+      useEffect( () => {  
         const selectCenterSong =  () => {
         const element = document.getElementById("position-3");
         if(element){
@@ -81,7 +80,10 @@ function SongSelect() {
           }else if(keypress.keyID == 31){
             selectCenterSong();
           }else if(keypress.keyID == 31){
-            returnToModeSelect();
+            const element = document.getElementById("secret back btn");
+        if(element){
+        element?.click();
+        }
           };
 
 
@@ -91,7 +93,7 @@ function SongSelect() {
             events.close();
           }
 
-      },[controller.status,controller.pianoMode])
+      },[controller.status, controller.pianoMode, controller])
     // Event listener for arrow key presses
     useEffect(() => {
         const handleKeyPress = (event: KeyboardEvent) => {
@@ -131,6 +133,9 @@ function SongSelect() {
                     ))}
                     <FontAwesomeIcon icon={faChevronRight} className="arrow" onClick={() => setStartIndex((prevIndex) => (prevIndex === metadata.length - 1 ? 0 : prevIndex + 1))} />
                 </div>
+
+                <div id="secret back btn"
+                onClick={returnToModeSelect}></div>
             </div>
         </div>
     );
