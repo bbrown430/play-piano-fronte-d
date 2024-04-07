@@ -1,17 +1,14 @@
 import { useEffect, useState } from "react";
-import { PPPATH, usePlayPianoController } from "../../App";
+import {usePlayPianoController } from "../../App";
 import { PPEvents } from "../../pianoStateController/PlayPianoEventHandler";
-import { useNavigate } from "react-router";
 import "./playpageformatting.css"
 import { useProgressFromServer, useScoreFromServer } from "../utils/APIHooks";
-import { usePause } from "../utils/utils";
 
 export function ProgressHeader(){
     const controller = usePlayPianoController();
     const [songTitle,setSongTitle] = useState(controller.songTitle);
     const progress = useProgressFromServer();
     const scoreFromServer = useScoreFromServer()
-    usePause()
 
 
   
