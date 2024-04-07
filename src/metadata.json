@@ -427,5 +427,18 @@
         "high_score": 0,
         "image": "/data/Traditional English - Twinkle Twinkle Little Star/cover.png",
         "midi": "/home/capstone/git/play-piano-frontend/public/data/Traditional English - Twinkle Twinkle Little Star/data.mid"
+    },
+    {
+        "title": "Mary Had a Little Lamb",
+        "artist": "Traditional English",
+        "album": "",
+        "year": 1830,
+        "length_seconds": 0,
+        "tempo_bpm": 0,
+        "genre": "Classic",
+        "difficulty": 1,
+        "high_score": 0,
+        "image": "/data/Traditional English - Mary Had a Little Lamb/cover.png",
+        "midi": "/home/capstone/git/play-piano-frontend/public/data/Traditional English - Mary Had a Little Lamb/data.mid"
     }
 ]
