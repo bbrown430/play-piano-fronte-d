@@ -8,16 +8,20 @@ import { useEffect } from "react";
 function SplashScreen() {
     const nav = useNavigate();
     const controller = usePlayPianoController();
-    const action =  ()=>{
-        nav(PPPATH.MODESELECT)};    
+
+    const action = () => {
+        nav(PPPATH.MODESELECT);
+    }
+
     
     controller.setStatus('Menus')
     
-    useEffect( () => {
+    useEffect(  () => {
         const events = new EventSource(EVENTENDPOINT);
 
-        controller.clearKeys();
-        controller.registerAllKeys();
+       (async()=> {await controller.clearKeys();
+        await controller.registerAllKeys();})();
+
   
         events.onmessage = (event) => {
   
@@ -38,7 +42,8 @@ function SplashScreen() {
             events.close();
           }
 
-      },[action, controller])
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      },[controller])
         
     return ( 
 

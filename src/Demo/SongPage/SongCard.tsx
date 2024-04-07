@@ -40,7 +40,7 @@ function SongCard({ title, artist, year, image, position, genre, midi, difficult
             end: bb.length,
             boundingBoxes : bb !== undefined ? bb : [],
         }
-        controller.setCurrentSong(song);
+        await controller.setCurrentSong(song);
         
         nav(PPPATH.PLAY);
     }

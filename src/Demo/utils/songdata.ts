@@ -38,12 +38,12 @@ export async function getSongSheetMusic(artist:string, title:string) {
     let image
     //const path = `../../assets/SheetMusic/${artist} - ${title}/sheet_music.jpg`
 
-   try{ image = await import(`../../assets/SheetMusic/${artist} - ${title}/sheet_music.jpg`)
+   try{ image = await import(`../../assets/SheetMusic/${artist} - ${title}/sheet_music.png`)
     //image = await import(`../../assets/SheetMusic/hot cross buns/hot cross buns.jpg`)
    return image;
    }
    catch (error){
-    console.log(`failed to load ${`../../assets/SheetMusic/${artist} - ${title}/sheet_music.jpg`}`)
+    console.log(`failed to load ${`../../assets/SheetMusic/${artist} - ${title}/sheet_music.png`}`)
     return;
    }
         
