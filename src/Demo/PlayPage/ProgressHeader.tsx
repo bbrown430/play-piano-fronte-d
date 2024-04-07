@@ -2,14 +2,15 @@ import { useEffect, useState } from "react";
 import {usePlayPianoController } from "../../App";
 import { PPEvents } from "../../pianoStateController/PlayPianoEventHandler";
 import "./playpageformatting.css"
-import { useProgressFromServer, useScoreFromServer, useStatusFromServer } from "../utils/APIHooks";
+import { useControllerMode, useProgressFromServer, useScoreFromServer, useStatusFromServer } from "../utils/APIHooks";
 
 export function ProgressHeader(){
     const controller = usePlayPianoController();
     const [songTitle,setSongTitle] = useState(controller.songTitle);
     const apiStatus = useStatusFromServer();
     const progress = useProgressFromServer();
-    const score = useScoreFromServer()
+    const score = useScoreFromServer();
+    const mode = useControllerMode();
     const [progressPercent,setProgressPercent] = useState("-1");
 
 
@@ -38,10 +39,11 @@ export function ProgressHeader(){
 
         if(apiStatus === 'Over'){
           percent = "100";
+          controller.setStatus('Over');
         }
 
         setProgressPercent(percent)
-      },[apiStatus, controller.currentSong, controller.currentSong.end, progress])
+      },[apiStatus, controller, progress])
 
 
     return (
@@ -55,7 +57,7 @@ export function ProgressHeader(){
          <h3>{songTitle}</h3>
          
          <h3>
-          {progressPercent !== "-1" ? 
+          {progressPercent !== "-1" && mode === 'Learn'? 
           `Progress: ${progressPercent} % `: "" }</h3>
           
          </> :<></>}

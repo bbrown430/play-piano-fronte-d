@@ -70,15 +70,12 @@ export function SheetMusic() {
     //updates bounding box coordinates 
     // and ends game if we reached the end of the song
     useEffect(() => {
+
         if (controller.currentSong.boundingBoxes && controller.currentSong.boundingBoxes.length > progress) {
             setBoundingbox(controller.currentSong.boundingBoxes[progress]);
         }
         console.log(`${boundingBox?.x},${boundingBox?.y},${boundingBox?.width},${boundingBox?.height}`);
 
-
-        if ((controller.currentSong.end && progress >= controller.currentSong.end) || APIstatus === 'Over') {
-            controller.setStatus('Over');
-        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [progress]);
 
