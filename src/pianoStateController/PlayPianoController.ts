@@ -15,7 +15,7 @@ import { PlayPianoControllerState, SongState } from '../Demo/utils/types';
 
 
    
- const httpoff= true;
+ const httpoff= false;
 
 export default class PlayPianoController{
  
@@ -53,14 +53,15 @@ export default class PlayPianoController{
  async clearKeys() {
       await this.httpcontroller.registerkey(-1);
   }
+
   async registerAllKeys(){
     if(httpoff){
       return;
     }
-    this.httpcontroller.registerkey(100)
-    await WhiteKeys.forEach(async (val,index)=>{
+    await this.httpcontroller.registerkey(100)
+    /*await WhiteKeys.forEach(async (val,index)=>{
       this.httpcontroller.setKeyColor(val,ButtonColors[index%6])
-    })
+ })*/
   }
 
   /**
@@ -185,7 +186,7 @@ export default class PlayPianoController{
 
 
   //for testing
-  public async testPlayCurrentSong() {
+  private async testPlayCurrentSong() {
 
     if(undefined === this.currentSong.progress || undefined === this.currentSong.end ){
       console.log(`${this.currentSong.progress}`)

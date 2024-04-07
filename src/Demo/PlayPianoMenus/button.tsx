@@ -4,11 +4,7 @@ import {faQuestion } from '@fortawesome/free-solid-svg-icons';
 
 import "./index.css"
 import "../../App.css"
-import { useActionOnKeyPress } from '../utils/APIHooks';
 import { ButtonColors } from '../utils/types';
-import PlayPianoController from '../../pianoStateController/PlayPianoController';
-import { usePlayPianoController } from '../../App';
-
 
 interface MenuButtonProps {
   title: string | undefined;

@@ -8,7 +8,6 @@ import PlayPianoController from '../../pianoStateController/PlayPianoController'
 import { PianoMode } from '../utils/types';
 import { useNavigate } from "react-router-dom";
 import { PPPATH, usePlayPianoController } from '../../App';
-import { useActionOnKeyPress } from '../utils/APIHooks';
 import { ButtonColors } from '../utils/types';
 
 type Statefunction = () => void;
@@ -43,7 +42,7 @@ function ModeCard({ colorID,action, mode, icon, text, link, keyID} : ModeCardPro
   const pressAction = async () => {
   if(mode)
     await controller.setPianoMode(mode);
-    await controller.setStatus('Waiting');
+   // await controller.setStatus('Waiting');
     if(link){
     nav(link);
     };

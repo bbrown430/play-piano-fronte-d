@@ -3,10 +3,9 @@ import { PPPATH, usePlayPianoController } from "../../App";
 import { useNavigate } from "react-router";
 import { SongState } from '../utils/types';
 import { getSongBoundingBoxes } from "../utils/songdata";
-import { error } from "console";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from "@fortawesome/free-solid-svg-icons";
-import { useActionOnKeyPress } from "../utils/APIHooks";
+import { sleep } from "../utils/utils";
 
 interface SongCardProps {
     title: string;
@@ -39,8 +38,9 @@ function SongCard({ title, artist, year, image, position, genre, midi, difficult
             boundingBoxes : bb !== undefined ? bb : [],
         }
         await controller.setCurrentSong(song);
+        await sleep(25);
         await controller.setStatus('Waiting');
-      
+        await sleep(25);
         
         nav(PPPATH.PLAY);
     }

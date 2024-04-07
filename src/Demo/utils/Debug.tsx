@@ -4,8 +4,6 @@ import { useEffect, useState } from "react";
 import { usePlayPianoController } from "../../App";
 import MenuButton from "../PlayPianoMenus/button";
 import { faCross } from "@fortawesome/free-solid-svg-icons";
-import useKeyPressesFromServer from "./APIHooks";
-import { getSongBoundingBoxes } from "./songdata";
 
 
 let x = 0;

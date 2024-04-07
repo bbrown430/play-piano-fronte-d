@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'; // Import the specific icon
 import { useNavigate } from 'react-router';
 import { PPPATH, usePlayPianoController } from '../../App';
-import { EVENTENDPOINT, KeyPress, useActionOnKeyPress, useControllerStatus } from '../utils/APIHooks';
+import { EVENTENDPOINT, KeyPress } from '../utils/APIHooks';
 import { ButtonColors } from '../utils/types';
 
 function SongSelect() {
@@ -15,9 +15,7 @@ function SongSelect() {
     const controller = usePlayPianoController();
     const nav = useNavigate();
 
-    const returnToModeSelect= async()=>{
-        nav(PPPATH.MODESELECT)
-    }
+
 
     // Function to get the circular array of 5 items
     const getCircularArray = (currentIndex: number, arrayLength: number) => {
@@ -32,7 +30,16 @@ function SongSelect() {
     // Array of 5 items based on the current start index
     const currentArray = getCircularArray(startIndex, metadata.length);
 
-    const selectCenterSong =  () => {
+   
+
+
+
+      //listen 3 piano keys
+      useEffect( () => {  
+        const returnToModeSelect= async()=>{
+        nav(PPPATH.MODESELECT)
+            }
+        const selectCenterSong =  () => {
         const element = document.getElementById("position-3");
         if(element){
         element?.click();
@@ -41,14 +48,10 @@ function SongSelect() {
         console.log('could not find position 3 card');
 
       }
-
-
-
-      //listen 3 piano keys
-      useEffect( () => {
         const events = new EventSource(EVENTENDPOINT);
         const setupButtons = async ()=>{
             await controller.clearKeys();
+            await controller.setKeyColor(2,ButtonColors[4])
             await controller.setKeyColor(28,ButtonColors[0])
             await controller.setKeyColor(35,ButtonColors[0])
             await controller.setKeyColor(31,ButtonColors[1])
@@ -77,6 +80,8 @@ function SongSelect() {
             setStartIndex((prevIndex) => (prevIndex === metadata.length - 1 ? 0 : prevIndex + 1))
           }else if(keypress.keyID == 31){
             selectCenterSong();
+          }else if(keypress.keyID == 31){
+            returnToModeSelect();
           };
 
 
@@ -86,7 +91,7 @@ function SongSelect() {
             events.close();
           }
 
-      },[])
+      },[controller.status,controller.pianoMode])
     // Event listener for arrow key presses
     useEffect(() => {
         const handleKeyPress = (event: KeyboardEvent) => {

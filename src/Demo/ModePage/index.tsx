@@ -73,10 +73,10 @@ function ModeSelect() {
 
     return () => {
         events.close();
+        controller.clearKeys()
       }
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[])
+  },[controller,controller.pianoMode,controller.status])
 
   return (
     <div>

@@ -3,17 +3,13 @@ import { ProgressHeader } from "./ProgressHeader";
 import "./playpageformatting.css"
 import "../PlayPianoMenus/index.css"
 import { useEffect, useState } from "react";
-import { PPEvents } from "../../pianoStateController/PlayPianoEventHandler";
 import { BoundingBox, PianoState } from '../utils/types';
-import PlayPianoController from "../../pianoStateController/PlayPianoController";
-import { useActionOnKeyPress, useProgressFromServer, useControllerStatus, useScoreFromServer, EVENTENDPOINT, KeyPress } from "../utils/APIHooks";
-import { usePause } from "../utils/utils";
-import { getSongBoundingBoxes, getSongSheetMusic } from "../utils/songdata";
-import { faPlay } from "@fortawesome/free-solid-svg-icons";
-import { over } from "lodash";
+import {  useControllerStatus, EVENTENDPOINT, KeyPress, useStatusFromServer } from "../utils/APIHooks";
+import { sleep } from "../utils/utils";
 import logo from '../../assets/play-piano-logo.svg';
 import "../SplashScreen/index.css"
 import { EndScreen } from "./EndScreen";
+import { element } from "prop-types";
 
 
 /**
@@ -24,7 +20,7 @@ export enum KEYID{
 }
 
  export default function PlayPage() {
-    const statusAPI : PianoState  = useControllerStatus();
+    const statusAPI : PianoState  = useStatusFromServer();
     const controller = usePlayPianoController();
     
     return ( 
@@ -75,11 +71,29 @@ function SheetMusic(){
     
     const APIstatus = useControllerStatus()
 
-    usePause();
+    //ends when status from api or controller ends
+    //@todo maybe @SymNC
+   /* useEffect( ()=> {
+        const events = new EventSource(EVENTENDPOINT);
+  
+        events.onmessage = (event) => {
 
+            const lastEvent = JSON.parse(event.data);
+            const apiStatus : PianoState  = lastEvent.status
+
+        }
+
+
+    })*/
 
     //updates progress
     useEffect( () => {
+        (async () => {
+            controller.clearKeys();}
+        )()
+
+
+
         const events = new EventSource(EVENTENDPOINT);
   
         events.onmessage = (event) => {
@@ -95,7 +109,7 @@ function SheetMusic(){
             return;
           }
           console.log(`midi progress processed  ${progress}`)
-          setProgress(prev=>prev+=1);
+          setProgress((prev)=>prev+=1);
   
       }
       
@@ -103,7 +117,7 @@ function SheetMusic(){
       return () => {
         events.close();
       }
-    }, []);
+    }, [controller.pianoMode,controller.status,controller.currentSong.title]);
 
     //updates bounding box coordinates 
     // and ends game if we reached the end of the song
@@ -190,21 +204,24 @@ useEffect(  ()=>{
 function StartSongPage(){
         const controller = usePlayPianoController();
 
-        //starts game on keypress
-        const  startdisplaytest = async () => {
+       const  startdisplaytest = async () => {
             await controller.clearKeys();
-
+            await sleep(50)
             await controller.setStatus('inProgress');
           
         }
 
         useEffect(  () => {
+              //starts game on keypress
+           
             const events = new EventSource(EVENTENDPOINT);
 
-            const regkeys = async()=> {await controller.clearKeys();
+            const regkeys = async()=> {
+                await controller.clearKeys();
+
                 await controller.registerAllKeys();}
     
-           regkeys();
+            regkeys();
     
       
             events.onmessage = (event) => {
@@ -217,23 +234,32 @@ function StartSongPage(){
                 console.log(`returning keypress :  ${keypress}`)
                 return;
               }
-              startdisplaytest();
+              
+
+
+              const startbutton = document.getElementById('start-button')
+              if(startbutton){
+                startbutton?.click();
+            }
+            }
     
     
-        }
+        
     
             return () => {
-                events.close();
+                events.close();            
               }
     
-          // eslint-disable-next-line react-hooks/exhaustive-deps
-          },[controller])
+          },[controller,controller.pianoMode,controller.status])
 
         
 
         return (
             <div className = "start-page">
-                <div className="start-button" onClick={startdisplaytest}>
+                <div className="start-button" 
+                id="start-button"
+                
+                onClick={startdisplaytest}>
                     <h2>Press any key to start!</h2>
                     </div>
                 </div>

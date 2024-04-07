@@ -14,7 +14,7 @@ export type KeyPress = {keyID: number, count: number};
  * @param keysToReport keys ids that this should report
  * @returns 
  */
-export default function useKeyPressesFromServer(keysToReport?: number | number[],colorID?:number) {
+  function useKeyPressesFromServer(keysToReport?: number | number[],colorID?:number) {
   const controller = usePlayPianoController();
 
   const [lastKeyPress, setLastKeyPress ] = useState(-1);
@@ -100,7 +100,7 @@ export default function useKeyPressesFromServer(keysToReport?: number | number[]
  * @param action is run when a key is pressed. 
  * @param keyID optional specific keys that performs action when pressed
  */
-export function useActionOnKeyPress(action : (keyID?:number)=> void, keyID?:number[] | number,colorID?:number) {
+ function useActionOnKeyPress(action : (keyID?:number)=> void, keyID?:number[] | number,colorID?:number) {
   const [keyPressed, keyPresses] = useKeyPressesFromServer(keyID,colorID);
   const [ countProcecced, setCountProccessed] = useState(keyPresses);
 

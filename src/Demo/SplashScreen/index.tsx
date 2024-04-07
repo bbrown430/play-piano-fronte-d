@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom"
 import logo from '../../assets/play-piano-logo.svg';
 import "./index.css"
-import  { EVENTENDPOINT, KeyPress, useActionOnKeyPress } from "../utils/APIHooks";
+import  { EVENTENDPOINT, KeyPress } from "../utils/APIHooks";
 import { PPPATH, usePlayPianoController } from "../../App";
 import { useEffect } from "react";
 

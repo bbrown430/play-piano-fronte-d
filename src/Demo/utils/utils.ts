@@ -1,9 +1,8 @@
 import { useNavigate } from "react-router";
 import { PPPATH, usePlayPianoController } from "../../App";
-import PlayPianoController from "../../pianoStateController/PlayPianoController";
 import { KEYID } from "../PlayPage";
-import { useActionOnKeyPress } from "./APIHooks";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { EVENTENDPOINT, KeyPress } from "./APIHooks";
 
 /**
  * 
@@ -17,16 +16,51 @@ export const sleep = async (waitTime: number) => new Promise(resolve => setTimeo
  * hook that will set status to paused, and navigagte to the pause menu when the pause key is pressed
  * @param controller 
  */
-export function usePause() {
+ function usePause() {
     const controller = usePlayPianoController();
     const nav = useNavigate();
-    const pause = async () => {
-        await controller.setStatus('Paused');
-        nav(PPPATH.PAUSED);
-    };
+
+    useEffect( () => {
+        const pause = async () => {
+            await controller.setStatus('Paused');
+            nav(PPPATH.PAUSED);
+        };
+
+        const events = new EventSource(EVENTENDPOINT);
+  
+        events.onmessage = (event) => {
+  
+          const keypressed = JSON.parse(event.data);
+          const keypress : KeyPress  = {keyID: keypressed.keyID, count : keypressed.count};
+  
+          console.log(`Key pressed id : ${keypress.keyID} keys listening for`);
+  
+          if(keypress.keyID === undefined){
+            return;
+          }
+          if( keypress.keyID !== undefined){
+              // eslint-disable-next-line eqeqeq
+              if(keypress.keyID === 85){
+                console.log('pausing with usePause Hook');
+                pause();
+
+
+              }
+            }
+          }
+  
+  
+      
+  
+      return () => {
+        events.close();
+      }
+    }, [controller, nav]);
 
 
 
-    useActionOnKeyPress(pause, KEYID.PAUSE);
+
+
+    //useActionOnKeyPress(pause, KEYID.PAUSE);
 }
 
