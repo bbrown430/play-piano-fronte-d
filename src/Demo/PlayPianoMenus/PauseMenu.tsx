@@ -89,17 +89,16 @@ function PauseMenuLP() {
       }//play
       //learn
       else if(keypress.keyID == 29 ){
-
+        const element = document.getElementById('Restart');
+          if(element){
+           element?.click();
+       }
+    }//play
+      else if(keypress.keyID == 33){
       const element = document.getElementById('Change Song');
       if(element){
-      element?.click();
-      }
-    }//play
-      else if(keypress.keyID == 33){ 
-        const element = document.getElementById('Restart');
-        if(element){
-        element?.click();
-       
+      element?.click(); 
+      
       // console.log('attempting to click position  play card');
 
       }
@@ -133,7 +132,7 @@ function PauseMenuLP() {
         text=''
         action={unpause} 
         keyID={26}
-        colorID={2} />
+        colorID={0} />
 
       {controller.pianoMode !== 'Free' ?  <MenuButton
         title='Restart'
@@ -141,7 +140,7 @@ function PauseMenuLP() {
         text=''
         action={restart}
         keyID={29}
-        colorID={0}  /> : <></>}
+        colorID={1}  /> : <></>}
 
 {controller.pianoMode !== 'Free' ?  
       <MenuButton 
@@ -247,7 +246,7 @@ function FreePauseMenu() {
         text=''
         action={unpause} 
         keyID={26}
-        colorID={2} />
+        colorID={0} />
 
       <MenuButton
         title='Exit'
