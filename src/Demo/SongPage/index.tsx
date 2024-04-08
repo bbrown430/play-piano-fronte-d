@@ -120,7 +120,7 @@ function SongSelect() {
                     <FontAwesomeIcon icon={faChevronLeft} className="arrow" onClick={() => setStartIndex((prevIndex) => (prevIndex === 0 ? metadata.length - 1 : prevIndex - 1))} />
                     {currentArray.map((song, index) => (
                         <SongCard
-                            key={index}
+                            key={`${song.title}${song.difficulty}`}
                             title={song.title}
                             artist={song.artist}
                             year={song.year}

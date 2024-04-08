@@ -53,15 +53,16 @@ function SongCard({ title, artist, year, image, position, genre, midi, difficult
         <div 
         className={`song-card ${positionClass}`}
         onClick={clicksong}
+        key={`${title}${positionClass}`}
         id={positionClass}
         >
 
-            {!hideMetadata && <h3 className="song-metadata-title">{title}</h3>}
-            {!hideMetadata && <h4 className="artist">{artist}</h4>}
-            {!hideMetadata && <h5 className='year-genre'>{genre}, {year}</h5>}
-            <img className='song-image' src={image} alt="" />
-            {!hideMetadata && <h3 className="difficulty">Difficulty</h3>}
-            {!hideMetadata && <div className="star-container">
+            {!hideMetadata && <h3 className="song-metadata-title" key={`${title}h3`}>{title}</h3>}
+            {!hideMetadata && <h4 className="artist" key={`${title}h4`}>{artist}</h4>}
+            {!hideMetadata && <h5 className='year-genre' key={`${title}h5`}>{genre}, {year}</h5>}
+            <img className='song-image' src={image} alt="" key={`${title}img`} />
+            {!hideMetadata && <h3 className="difficulty" key={`${title}difh3`}>Difficulty</h3>}
+            {!hideMetadata && <div className="star-container" key={`${title}stardiv`}>
                 {Array(difficulty).fill(<FontAwesomeIcon icon={faStar} className="star"/>)}
                 {Array(5-difficulty).fill(<FontAwesomeIcon icon={faStar} className="star-half"/>)}
             </div>}

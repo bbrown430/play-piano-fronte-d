@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import {usePlayPianoController } from "../../App";
 import { PPEvents } from "../../pianoStateController/PlayPianoEventHandler";
 import "./playpageformatting.css"
-import { useControllerMode, useProgressFromServer, useScoreFromServer, useStatusFromServer } from "../utils/APIHooks";
+import { useControllerMode, useScoreFromServer, useStatusFromServer } from "../utils/APIHooks";
 import { progressProp } from "./SheetMusic";
 
 
