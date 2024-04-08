@@ -3,12 +3,14 @@ import {usePlayPianoController } from "../../App";
 import { PPEvents } from "../../pianoStateController/PlayPianoEventHandler";
 import "./playpageformatting.css"
 import { useControllerMode, useProgressFromServer, useScoreFromServer, useStatusFromServer } from "../utils/APIHooks";
+import { progressProp } from "./SheetMusic";
 
-export function ProgressHeader(){
+
+export function ProgressHeader({progress}:progressProp){
     const controller = usePlayPianoController();
     const [songTitle,setSongTitle] = useState(controller.songTitle);
     const apiStatus = useStatusFromServer();
-    const progress = useProgressFromServer();
+    //const progress = useProgressFromServer();
     const score = useScoreFromServer();
     const mode = useControllerMode();
     const [progressPercent,setProgressPercent] = useState("-1");

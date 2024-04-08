@@ -148,9 +148,9 @@ export function useScoreFromServer() {
   return score
 }
 
-export function useProgressFromServer() {  
-  const controller = usePlayPianoController();
+export function useProgressFromServer() { 
   const [progress, setProgress ] = useState(0);
+  const controller = usePlayPianoController();
 
   useEffect( () => {
       const events = new EventSource(EVENTENDPOINT);
@@ -158,17 +158,17 @@ export function useProgressFromServer() {
       events.onmessage = (event) => {
 
         const lastEvent = JSON.parse(event.data);
-        const progress : number  = lastEvent.progress
+        const apiprogress : number = lastEvent.progress
 
 
 
-        if(progress < 0 || progress === undefined){
-          console.log(`returing before setting progress because :  ${progress}`)
+        if(apiprogress < 0 || apiprogress === undefined){
+          console.log(`returing before setting progress because :${lastEvent}  ${apiprogress}`)
 
           return;
         }
-        console.log(`midi progress processed  ${progress}`)
-        setProgress(prev=>prev+=1);
+        console.log(`midi progress processed prev progress${progress}  ${apiprogress}`);
+        setProgress(prev=>prev+1);
 
 
     }
@@ -176,22 +176,10 @@ export function useProgressFromServer() {
 
     return () => {
       events.close();
+      console.log("dismounting progress tracker")
     }
-  }, []);
-
-  useEffect(()=>{
-    switch(controller.status){
-      case "Paused":
-        break;
-      case "inProgress":
-        break;
-      case "Menus":
-      case "Waiting":
-      case "Over":
-        setProgress(0)
-    }
-    
-  },[controller.status])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [controller,controller.status]);
 
   return progress
 }

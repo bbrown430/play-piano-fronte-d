@@ -31,6 +31,7 @@ export function EndScreen() {
 
         const events = new EventSource(EVENTENDPOINT);
         const setupButtons = async ()=>{
+            await controller.clearKeys();
             await controller.registerKey(28,ButtonColors[0])
             await controller.registerKey(31,ButtonColors[1])
             await controller.registerKey(35,ButtonColors[2])
@@ -45,7 +46,7 @@ export function EndScreen() {
           const keypress : KeyPress  = {keyID: keypressed.keyID, count : keypressed.count};
           console.log(`Key pressed id : ${keypress.keyID} keys listening for 28 31 35`);
     
-          if(keypress.keyID ===undefined){
+          if(keypress.keyID === undefined){
             console.log(`returning keypress :  ${keypress}`)
             return;
           }
@@ -79,13 +80,13 @@ export function EndScreen() {
             events.close();
           }
     
-      },[controller,controller.status])
+      },[controller])
 
 
     return (
         <div>
         <h1 className='sticky-header'>
-         The End?
+         The End
          </h1>
 
     <div className= "pause-select">
