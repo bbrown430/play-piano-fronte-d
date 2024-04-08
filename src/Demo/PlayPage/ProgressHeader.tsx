@@ -32,6 +32,9 @@ export function ProgressHeader({progress}:progressProp){
       }, [controller]);
     
       useEffect(()=>{
+        if(!progress){
+          return
+        }
         let percent = "-1"
         if(controller.currentSong.end && progress <= controller.currentSong.end){
           percent = (progress * 100 /controller.currentSong.end).toFixed();

@@ -6,7 +6,7 @@ import logo from '../../assets/play-piano-logo.svg';
 import { usePause } from "../utils/utils";
 
 export interface progressProp {
-    progress: number
+    progress?: number
 }
 
 export function SheetMusic({progress} :progressProp) {
@@ -21,7 +21,7 @@ export function SheetMusic({progress} :progressProp) {
     //updates bounding box coordinates 
     // and ends game if we reached the end of the song
     useEffect(() => {
-        if(progress<0){
+        if(progress === undefined || progress<0){
             return
         }
 
@@ -83,7 +83,7 @@ export function SheetMusic({progress} :progressProp) {
                 src={imgsrc}
                 alt=""></img>}
 
-            {controller.status === 'inProgress' && controller.pianoMode === 'Learn' && boundingBox  ?
+            {controller.status === 'inProgress' && progress!==undefined && controller.pianoMode === 'Learn' && boundingBox  ?
                 <div className="note-overlay"
                     style={{
                         top: boundingBox.y + getoffsets().top,

@@ -185,6 +185,7 @@ export function useProgressFromServer() {
 }
 
 export function useStatusFromServer() {
+  const controllerStatus = useControllerStatus();
 
   const [status, setStatus ] = useState<PianoState>('Menus');
 
@@ -213,7 +214,7 @@ export function useStatusFromServer() {
     return () => {
       events.close();
     }
-  }, []);
+  }, [controllerStatus]);
 
   return status
 }

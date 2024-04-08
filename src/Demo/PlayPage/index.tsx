@@ -17,6 +17,8 @@ import { usePause } from "../utils/utils";
     const controller = usePlayPianoController();
     const progress = useProgressFromServer();
     usePause();
+
+    
     
     
     return ( 
