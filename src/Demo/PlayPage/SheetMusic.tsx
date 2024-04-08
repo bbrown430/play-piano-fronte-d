@@ -1,7 +1,7 @@
 import { usePlayPianoController } from "../../App";
 import { useEffect, useState } from "react";
 import { BoundingBox } from '../utils/types';
-import { EVENTENDPOINT } from "../utils/APIHooks";
+import { EVENTENDPOINT, useProgressFromServer } from "../utils/APIHooks";
 import logo from '../../assets/play-piano-logo.svg';
 import { usePause } from "../utils/utils";
 
@@ -13,38 +13,41 @@ export function SheetMusic() {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars 
     const [pagenum, setPagenum] = useState(1);
 
-    const [boundingBox, setBoundingbox] = useState<BoundingBox | undefined>(undefined);
-    const [progress, setProgress] = useState(0);
-    //updates progress
-    useEffect(() => {
-        const events = new EventSource(EVENTENDPOINT);
+    //const [boundingBox, setBoundingbox] = useState<BoundingBox | undefined>(undefined);
+   // const [progress, setProgress ] = useState(0);
 
-        events.onmessage = (event) => {
+    /*
+  useEffect( () => {
+      const events = new EventSource(EVENTENDPOINT);
 
-            const lastEvent = JSON.parse(event.data);
-            const progress: number = lastEvent.progress;
+      events.onmessage = (event) => {
 
-
-
-            if (progress < 0 || progress === undefined) {
-                console.log(`returing before setting progress because :  ${progress}`);
-
-                return;
-            }
-            console.log(`midi progress processed  ${progress}`);
-            setProgress((prev) => prev += 1);
-
-        };
+        const lastEvent = JSON.parse(event.data);
+        const apiprogress : number = lastEvent.progress
 
 
-        return () => {
-            events.close();
-        };
-    }, [controller.pianoMode, controller.status, controller.currentSong.title, controller]);
+
+        if(apiprogress < 0 || apiprogress === undefined){
+          console.log(`returing before setting progress because :${lastEvent}  ${apiprogress}`)
+
+          return;
+        }
+        console.log(`midi progress processed prev progress$  ${apiprogress}`);
+        setProgress(prev=> prev + 1);
+
+
+    }
+    
+
+    return () => {
+      events.close();
+      console.log('unmounting progress listener')
+    }
+  }, []);*/
 
     //updates bounding box coordinates 
     // and ends game if we reached the end of the song
-    useEffect(() => {
+  /*  useEffect(() => {
 
         if (controller.currentSong.boundingBoxes && controller.currentSong.boundingBoxes.length > progress) {
             setBoundingbox(controller.currentSong.boundingBoxes[progress]);
@@ -52,7 +55,7 @@ export function SheetMusic() {
         console.log(`${boundingBox?.x},${boundingBox?.y},${boundingBox?.width},${boundingBox?.height}`);
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [progress]);
+    }, [progress]);*/
 
 
     useEffect(() => {
@@ -104,7 +107,7 @@ export function SheetMusic() {
                 src={imgsrc}
                 alt=""></img>}
 
-            {controller.status === 'inProgress' &&controller.pianoMode === 'Learn' && boundingBox  ?
+            {/*{controller.status === 'inProgress' && controller.pianoMode === 'Learn' && boundingBox  ?
                 <div className="note-overlay"
                     style={{
                         top: boundingBox.y + getoffsets().top,
@@ -112,9 +115,9 @@ export function SheetMusic() {
                         width: boundingBox.width,
                         height: boundingBox.height
                     }} />
-                : <></>}
+                : <></>}*/}
 
         </div>
     );
 
-}
+                }
