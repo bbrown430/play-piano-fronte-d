@@ -1,7 +1,6 @@
 import { usePlayPianoController } from "../../App";
 import { useEffect, useState } from "react";
 import { BoundingBox } from '../utils/types';
-import { EVENTENDPOINT} from "../utils/APIHooks";
 import logo from '../../assets/play-piano-logo.svg';
 import { usePause } from "../utils/utils";
 
@@ -11,7 +10,7 @@ export interface progressProp {
 
 export function SheetMusic({progress} :progressProp) {
     usePause();
-    const [imgsrc, setImgSrc] = useState(undefined);
+    const [imgsrc, setImgSrc] = useState("");
     const controller = usePlayPianoController();
     //@todo one day have a list of page breaks, and incriment when appropriate
     // eslint-disable-next-line @typescript-eslint/no-unused-vars 
@@ -41,9 +40,9 @@ export function SheetMusic({progress} :progressProp) {
             const safeTitle = controller.currentSong.title.replace(/[?']/g, '');
 
             try {
-                imgtemp = require(`../../assets/SheetMusic/${controller.currentSong.artist} - ${safeTitle}/data-${pagenum}.png`);
+                imgtemp = `/public/data/${controller.currentSong.artist} - ${safeTitle}/data-${pagenum}.png`;
             } catch (error) {
-                console.log(`Failed to load sheet music, displaying logo: ../../../public/data/${controller.currentSong.artist} - ${safeTitle}/data-${pagenum}.jpg`);
+                console.log(`Failed to load sheet music, displaying logo: /public/data/${controller.currentSong.artist} - ${safeTitle}/data-${pagenum}.jpg`);
                 imgtemp = logo;
             }
 

@@ -8,6 +8,18 @@ import { ButtonColors } from '../utils/types';
 import { useEffect } from 'react';
 import { EVENTENDPOINT, KeyPress } from '../utils/APIHooks';
 
+const LEARNBUTTON = {
+  BUTTON:28,
+  COLOR: ButtonColors[0]
+}
+const PLAYBUTTON = {
+  BUTTON:31,
+  COLOR: ButtonColors[1]
+}
+const FREEBUTTON = {
+  BUTTON:35,
+  COLOR: ButtonColors[2]
+}
 //move to the page for modes, buttons select the mode function buttonAction = {}=>
 function ModeSelect() {
   const nav = useNavigate();
@@ -21,17 +33,14 @@ function ModeSelect() {
 
 
 
+  /** Registers Mode Select buttons 
+   *  sets up HTTP Event Listener for Pressing them with keys */
   useEffect( () => {
-
-
     const events = new EventSource(EVENTENDPOINT);
     const setupButtons = async ()=>{
-
-        await controller.registerKey(28,ButtonColors[0])
-       
-        await controller.registerKey(31,ButtonColors[1])
-        await controller.registerKey(35,ButtonColors[2])
-
+        await controller.registerKey(LEARNBUTTON.BUTTON,LEARNBUTTON.COLOR)
+        await controller.registerKey(PLAYBUTTON.BUTTON,PLAYBUTTON.COLOR)
+        await controller.registerKey(FREEBUTTON.BUTTON,FREEBUTTON.COLOR)
       }
 
     setupButtons();

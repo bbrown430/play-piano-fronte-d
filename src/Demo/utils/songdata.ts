@@ -6,7 +6,7 @@
 export async function getSongBoundingBoxes(artist:string, title:string) {
     let boundingBoxesJson
 
-   try{  boundingBoxesJson = await import(`../../assets/SheetMusic/${artist} - ${title}/bounding_boxes.json`);
+   try{  boundingBoxesJson = await import(`/public/data/${artist} - ${title}/bounding_boxes.json`);
    }
    catch (error){
     console.log(`clould not find bounding boxes ${`../../assets/SheetMusic/${artist} - ${title}/bounding_boxes.json`}`)
@@ -28,12 +28,13 @@ export async function getSongBoundingBoxes(artist:string, title:string) {
 }
 
 
-/**
+ /**
  * 
  * @param title name of song to fetch data from assets folder
  * @returns 
  */
-export async function getSongSheetMusic(artist:string, title:string) {
+/*
+ async function getSongSheetMusic(artist:string, title:string) {
     let image
     //const path = `../../assets/SheetMusic/${artist} - ${title}/sheet_music.jpg`
 
@@ -46,4 +47,4 @@ export async function getSongSheetMusic(artist:string, title:string) {
     return;
    }
         
-}
+} */
